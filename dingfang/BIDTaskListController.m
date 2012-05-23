@@ -14,7 +14,7 @@
 
 @implementation BIDTaskListController
 
-@synthesize tasks,areaButton;
+@synthesize tasks,tasks2,areaArrs,areaButton;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -31,16 +31,41 @@
     
     
     self.tasks = [NSArray arrayWithObjects:
-                  @"香港日航酒店位于闻名的维多利亚港旁，交通四通八达，设计以瑰丽高雅为主。酒店有七所不同风格的餐厅及酒吧，供应多元化国际美食。",
-                  @"新加坡史各士皇族酒店位于乌节路购物区， 步行1分钟即可抵达ORCHARD地铁站。从酒店乘车数十分钟便可抵达其它主要商务区",
-                  @"高端商务酒店品牌——和颐酒店（Yitel），旨在满足境内外中高级商务及休闲旅游人士的需要，以独特的平衡理念，带领宾客体验前所未有的旅行新乐趣。",
-                  @"经济型连锁酒店品牌——如家快捷酒店，提供标准化、干净、温馨、舒适、贴心的酒店住宿产品",
-                  @"莫泰在成功经营“MOTEL168”品牌的同时，设立了“MOTEL268——莫泰268”酒店细分市场品牌。",
-                  @"星程是由携程国际于2008年创立的中档连锁酒店，驻足中国重要商旅城市中心，专注于顾客需求与体验",
-                  @"URGENT: 上海丽悦酒店提前预订优惠",
+                  @"上海贝轩大公馆",
+                  @"上海虹桥迎宾馆",
+                  @"上海华亭宾馆",
+                  @"上海宝安大酒店",
+                  @"上海恒硕公寓酒店",
+                  @"陕西大厦商务酒店",
+                  @"上海星程南浦瑞峰酒店",
                   @"北京亚运村、奥运村商圈四星级酒店",
                   @"上海富豪环球东亚酒店",
                   nil];
+    
+    
+    self.tasks2 = [NSArray arrayWithObjects:
+                   @"h1.jpg",
+                   @"h2.jpg",
+                   @"h3.jpg",
+                   @"h4.jpg",
+                   @"h5.jpg",
+                   @"h6.jpg",
+                   @"h7.jpg",
+                   @"h8.jpg",
+                   @"LCEOpAjXO_wood.jpeg",
+                   nil];
+    
+    self.areaArrs = [NSArray arrayWithObjects:
+                   @"南京西路商业区，近西康路",
+                   @"虹桥地区，近虹古路",
+                   @"八万人体育场地区",
+                   @"浦东陆家嘴金融贸易区，近崂山东路",
+                   @"虹桥地区",
+                   @"南京西路商业区",
+                   @"南外滩地区",
+                   @"淮海路商业区",
+                   @"豫园地区",
+                   nil];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -54,6 +79,8 @@
 {
     [super viewDidUnload];
     self.tasks = nil;
+    self.tasks2 = nil;
+    self.areaArrs = nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -81,19 +108,55 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *identifier = nil;
-    NSString *task = [self.tasks objectAtIndex:indexPath.row];
-    NSRange urgentRange = [task rangeOfString:@"URGENT"];
-    if (urgentRange.location == NSNotFound) {
-        identifier = @"plainCell";
-    } else {
-        identifier = @"attentionCell";
-    }
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     // Configure the cell...
-    UILabel *cellLabel = (UILabel *)[cell viewWithTag:1];
+    NSString *identifier = nil;
+    identifier = @"plainCell";
+    UITableViewCell *cell;
+    
+    NSString *task2 = [self.tasks2 objectAtIndex:indexPath.row];
+    UIImageView *hotelImgView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 12, 65, 65)];
+    [hotelImgView setImage:[UIImage imageNamed:task2]];
+    
+    cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        
+    } else{ 
+        NSArray *subviews = [[NSArray alloc] initWithArray:cell.contentView.subviews]; 
+        for (UIView *subview in subviews) { 
+            [subview removeFromSuperview]; 
+        } 
+    } 
+    
+
+    NSString *task = [self.tasks objectAtIndex:indexPath.row];
+    
+    UILabel *cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 7, 180, 30)];
+    
     cellLabel.text = task;
+    cellLabel.font = [UIFont systemFontOfSize:14.0f];
+    
+    
+    NSString *areaArr = [self.areaArrs objectAtIndex:indexPath.row];
+    
+    UILabel *cellLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(100, 38, 130, 20)];
+    
+    cellLabel2.text = areaArr;
+    cellLabel2.font = [UIFont systemFontOfSize:10.0f];
+    cellLabel2.textColor = [UIColor grayColor];
+    
+    [cell.contentView addSubview:cellLabel];
+    [cell.contentView addSubview:cellLabel2];
+    [cell.contentView addSubview:hotelImgView];
+    
     return cell;
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100.0;
 }
 
 /*

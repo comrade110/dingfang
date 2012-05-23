@@ -12,6 +12,8 @@
 
 
 @property (strong, nonatomic) NSArray *tasks;
+@property (strong, nonatomic) NSArray *tasks2;
+@property (strong, nonatomic) NSArray *areaArrs;
 @property (strong, nonatomic) IBOutlet UIButton *areaButton;
 
 
