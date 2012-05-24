@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE774770156DD05D00BE3B05 /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE77476F156DD05D00BE3B05 /* loginViewController.m */; };
+		CE774780156E1FF900BE3B05 /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE77477F156E1FF900BE3B05 /* registerViewController.m */; };
 		CE7B29B3156A1E930055CCDD /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7B29B2156A1E930055CCDD /* IntroViewController.m */; };
 		CE7B29BA156A3A290055CCDD /* introImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7B29B9156A3A290055CCDD /* introImageViewController.m */; };
 		CE7C2B5C156CB83900B09B7F /* h1.Jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C2B54156CB83900B09B7F /* h1.Jpg */; };
@@ -37,6 +39,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE77476E156DD05D00BE3B05 /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginViewController.h; sourceTree = "<group>"; };
+		CE77476F156DD05D00BE3B05 /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
+		CE77477E156E1FF900BE3B05 /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = registerViewController.h; sourceTree = "<group>"; };
+		CE77477F156E1FF900BE3B05 /* registerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = registerViewController.m; sourceTree = "<group>"; };
 		CE7B29B1156A1E930055CCDD /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
 		CE7B29B2156A1E930055CCDD /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
 		CE7B29B8156A3A290055CCDD /* introImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = introImageViewController.h; sourceTree = "<group>"; };
@@ -131,6 +137,10 @@
 				CEEC378B15638A0400B888A0 /* BIDTaskListController.m */,
 				CE7B29B1156A1E930055CCDD /* IntroViewController.h */,
 				CE7B29B2156A1E930055CCDD /* IntroViewController.m */,
+				CE77476E156DD05D00BE3B05 /* loginViewController.h */,
+				CE77476F156DD05D00BE3B05 /* loginViewController.m */,
+				CE77477E156E1FF900BE3B05 /* registerViewController.h */,
+				CE77477F156E1FF900BE3B05 /* registerViewController.m */,
 			);
 			path = dingfang;
 			sourceTree = "<group>";
@@ -254,6 +264,8 @@
 				CEEC378C15638A0400B888A0 /* BIDTaskListController.m in Sources */,
 				CE7B29B3156A1E930055CCDD /* IntroViewController.m in Sources */,
 				CE7B29BA156A3A290055CCDD /* introImageViewController.m in Sources */,
+				CE774770156DD05D00BE3B05 /* loginViewController.m in Sources */,
+				CE774780156E1FF900BE3B05 /* registerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
