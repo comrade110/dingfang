@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		CE774770156DD05D00BE3B05 /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE77476F156DD05D00BE3B05 /* loginViewController.m */; };
 		CE774780156E1FF900BE3B05 /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE77477F156E1FF900BE3B05 /* registerViewController.m */; };
+		CE79124F156F1C7300EF29B8 /* button_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79124D156F1C7300EF29B8 /* button_nor.png */; };
+		CE791250156F1C7300EF29B8 /* button_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79124E156F1C7300EF29B8 /* button_pressed.png */; };
+		CE791258156F73DB00EF29B8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE791256156F73CC00EF29B8 /* QuartzCore.framework */; };
 		CE7B29B3156A1E930055CCDD /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7B29B2156A1E930055CCDD /* IntroViewController.m */; };
 		CE7B29BA156A3A290055CCDD /* introImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7B29B9156A3A290055CCDD /* introImageViewController.m */; };
 		CE7C2B5C156CB83900B09B7F /* h1.Jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C2B54156CB83900B09B7F /* h1.Jpg */; };
@@ -43,6 +46,9 @@
 		CE77476F156DD05D00BE3B05 /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
 		CE77477E156E1FF900BE3B05 /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = registerViewController.h; sourceTree = "<group>"; };
 		CE77477F156E1FF900BE3B05 /* registerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = registerViewController.m; sourceTree = "<group>"; };
+		CE79124D156F1C7300EF29B8 /* button_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_nor.png; sourceTree = "<group>"; };
+		CE79124E156F1C7300EF29B8 /* button_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_pressed.png; sourceTree = "<group>"; };
+		CE791256156F73CC00EF29B8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE7B29B1156A1E930055CCDD /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
 		CE7B29B2156A1E930055CCDD /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
 		CE7B29B8156A3A290055CCDD /* introImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = introImageViewController.h; sourceTree = "<group>"; };
@@ -85,9 +91,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE791258156F73DB00EF29B8 /* QuartzCore.framework in Frameworks */,
+				CE7F501D15625A18007AD4A5 /* CoreGraphics.framework in Frameworks */,
 				CE7F501915625A18007AD4A5 /* UIKit.framework in Frameworks */,
 				CE7F501B15625A18007AD4A5 /* Foundation.framework in Frameworks */,
-				CE7F501D15625A18007AD4A5 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +122,7 @@
 		CE7F501715625A18007AD4A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE791256156F73CC00EF29B8 /* QuartzCore.framework */,
 				CE7F501815625A18007AD4A5 /* UIKit.framework */,
 				CE7F501A15625A18007AD4A5 /* Foundation.framework */,
 				CE7F501C15625A18007AD4A5 /* CoreGraphics.framework */,
@@ -159,6 +167,8 @@
 		CEEC373A1563456000B888A0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE79124D156F1C7300EF29B8 /* button_nor.png */,
+				CE79124E156F1C7300EF29B8 /* button_pressed.png */,
 				CE7C2B54156CB83900B09B7F /* h1.Jpg */,
 				CE7C2B55156CB83900B09B7F /* h2.jpg */,
 				CE7C2B56156CB83900B09B7F /* h3.jpg */,
@@ -248,6 +258,8 @@
 				CE7C2B61156CB83900B09B7F /* h6.jpg in Resources */,
 				CE7C2B62156CB83900B09B7F /* h7.jpg in Resources */,
 				CE7C2B63156CB83900B09B7F /* h8.Jpg in Resources */,
+				CE79124F156F1C7300EF29B8 /* button_nor.png in Resources */,
+				CE791250156F1C7300EF29B8 /* button_pressed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

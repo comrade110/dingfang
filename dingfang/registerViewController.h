@@ -10,7 +10,5 @@
 
 @interface registerViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UITextField *userPhoneID;
-@property (strong, nonatomic) IBOutlet UITextField *userPW;
-@property (strong, nonatomic) IBOutlet UIButton *loginBtn;
+
 @end

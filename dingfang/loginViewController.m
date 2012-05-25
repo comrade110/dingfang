@@ -14,7 +14,7 @@
 
 @implementation loginViewController
 
-@synthesize userPhoneID, userPW,loginBtn;
+@synthesize userPhoneID, userPW,loginBtn,loginView,registerView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,7 +30,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     userPhoneID.delegate =self;
-    [userPhoneID becomeFirstResponder];
+//    [userPhoneID becomeFirstResponder];
+    [registerView removeFromSuperview];
     
 }
 
@@ -115,15 +116,36 @@
         return;
     }
     
-//    if ([userPhoneID.text length] != 11) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"手机号应为11位数字" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-//        [alert show];
-//        return;
-//    }
-
     
-}
+}	
 
+-(IBAction)regBtnPress:(id)sender
+{
+    
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:0.5];
+    [animation setType:kCATransitionPush];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    
+    [animation setSubtype:kCATransitionFromRight];
+    
+    [loginView removeFromSuperview];
+    [self.view addSubview:registerView];
+    [[self.view layer] addAnimation:animation forKey:@"switch"];
+}
+-(IBAction)regBackBtnPress:(id)sender
+{
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:0.5];
+    [animation setType:kCATransitionPush];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    
+    [animation setSubtype:kCATransitionFromLeft];
+    
+    [registerView removeFromSuperview];
+    [self.view addSubview:loginView];
+    [[self.view layer] addAnimation:animation forKey:@"switch"];
+}
 - (void)viewDidUnload
 {
     [super viewDidUnload];
