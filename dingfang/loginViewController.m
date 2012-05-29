@@ -14,7 +14,7 @@
 
 @implementation loginViewController
 
-@synthesize userPhoneID, userPW,loginBtn,loginView,registerView;
+@synthesize userPhoneID, userPW, ruserPhoneID, ruserPWCheck,ruserPW,loginBtn, registerBtn, loginView,registerView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,58 +35,7 @@
     
 }
 
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-//
-//    NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string]; 
-//    
-//
-//    
-//    if (userPhoneID == textField)  
-//        
-//    { 
-//        
-//        if ([toBeString length] > 11) { 
-//            
-//            textField.text = [toBeString substringToIndex:11]; 
-//            
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"手机号码为11位数字" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil]; 
-//            
-//            [alert show]; 
-//            
-//            return NO; 
-//            
-//        } 
-//
-//    } 
-//
-//    return YES;
-//}
-
-//-(BOOL) textFieldShouldEndEditing:(UITextField *)textField
-//{
-//    
-//    
-//    
-//    if (userPhoneID == textField)  
-//        
-//    { 
-//        
-//        if ([userPhoneID.text length] != 11) { 
-//            
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"手机号格式不正确，请重新输入" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil]; 
-//            
-//            [alert show];
-//            
-//            if ([self resignFirstResponder]) {
-//                [self becomeFirstResponder];
-//            }   
-//            return YES; 
-//            
-//        } 
-//        
-//    } 
-//
-//}
+// 登录按钮点击后事件
 -(IBAction)btnPress:(id)sender
 {
     
@@ -104,7 +53,7 @@
     NSRange foundRange2 = [userPW.text rangeOfCharacterFromSet:disallowedCharacters2];
     if (foundRange.location != NSNotFound || [userPhoneID.text length] != 11) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"手机号应为11位数字" 
-                                                         delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
+                                                       delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
         [alert show];
         return;
     }
@@ -114,14 +63,51 @@
                                                        delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
         [alert show];
         return;
+    }    
+    
+}
+// 注册提交按钮点击后事件
+-(IBAction)submitBtnPress:(id)sender
+{
+    
+	if ([ruserPW.text length] == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"密码不能为空" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
     }
     
+    NSCharacterSet *disallowedCharacters = [[NSCharacterSet
+                                             characterSetWithCharactersInString:@"0123456789"] invertedSet];
+    NSCharacterSet *disallowedCharacters2 = [[NSCharacterSet
+                                              characterSetWithCharactersInString:@"0123456789QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuioplkjhgfdsazxcvbnm"] invertedSet];
+    NSRange foundRange = [ruserPhoneID.text rangeOfCharacterFromSet:disallowedCharacters];
+    NSRange foundRange2 = [ruserPW.text rangeOfCharacterFromSet:disallowedCharacters2];
+    if (foundRange.location != NSNotFound || [ruserPhoneID.text length] != 11) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"手机号应为11位数字" 
+                                                       delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
+        [alert show];
+        return;
+    }
     
-}	
+    if (foundRange2.location != NSNotFound || ([ruserPW.text length] > 0 && [userPW.text length] < 5)) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"密码应为大于5位数的数字或字母组合" 
+                                                       delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
+        [alert show];
+        return;
+    }
+    if (ruserPW.text != ruserPWCheck.text) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"两次输入的密码不同" 
+                                                       delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
+        [alert show];
+    }
+    
+}
+
 
 -(IBAction)regBtnPress:(id)sender
 {
-    
+    [userPhoneID resignFirstResponder];
+    [userPW resignFirstResponder];
     CATransition *animation = [CATransition animation];
     [animation setDuration:0.5];
     [animation setType:kCATransitionPush];
@@ -133,6 +119,7 @@
     [self.view addSubview:registerView];
     [[self.view layer] addAnimation:animation forKey:@"switch"];
 }
+
 -(IBAction)regBackBtnPress:(id)sender
 {
     CATransition *animation = [CATransition animation];

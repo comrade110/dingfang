@@ -109,6 +109,17 @@ static NSUInteger kNumberOfPages = 3;
     // load the page on either side to avoid flashes when the user starts scrolling
     [self loadScrollViewWithPage:0];
     [self loadScrollViewWithPage:1];
+    
+    UIImageView *navlist = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"detailinfonavbg.png"]];
+    navlist.frame = CGRectMake(0, 110, 320, 30);
+    UILabel *navLable = [[UILabel alloc] initWithFrame:CGRectMake(10, 115, 80, 20)];
+    navLable.text = @"详细信息";
+    navLable.backgroundColor = [UIColor clearColor];
+    
+    [scrollView addSubview:navlist];
+    
+    [scrollView addSubview:navLable];
+    
     [scrollView sendSubviewToBack:imageScrollView];
     [scrollView setContentSize:CGSizeMake(320,1000)];
 }
@@ -118,6 +129,24 @@ static NSUInteger kNumberOfPages = 3;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

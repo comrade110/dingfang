@@ -17,7 +17,13 @@
 @property (strong, nonatomic) IBOutlet UIView *loginView;
 @property (strong, nonatomic) IBOutlet UIView *registerView;
 
+@property (strong, nonatomic) IBOutlet UITextField *ruserPhoneID;
+@property (strong, nonatomic) IBOutlet UITextField *ruserPW;
+@property (strong, nonatomic) IBOutlet UITextField *ruserPWCheck;
+@property (strong, nonatomic) IBOutlet UIButton *registerBtn;
+
 -(IBAction)btnPress:(id)sender;
+-(IBAction)submitBtnPress:(id)sender;
 -(IBAction)regBtnPress:(id)sender;
 -(IBAction)regBackBtnPress:(id)sender;
 

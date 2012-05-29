@@ -28,7 +28,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="apN-bf-sUm" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController modalTransitionStyle="crossDissolve" id="sC5-gV-PIc" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Z8m-pd-bhJ">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" id="x7n-qm-oyc">
@@ -59,12 +59,67 @@
                                     <segue destination="cFv-WV-8eS" kind="modal" id="05v-49-GLt"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gJx-fT-qt1">
+                                <rect key="frame" x="130" y="343" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="test">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="edn-4W-eK4" kind="modal" id="VHn-1a-fea"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="-119" y="-489"/>
+        </scene>
+        <!--Wsdltest-->
+        <scene sceneID="qmy-Vp-a2w">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PYs-lX-SmQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="edn-4W-eK4" customClass="wsdltest" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s9J-wu-Ccj">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4Ga-o4-rXK">
+                                <rect key="frame" x="136" y="47" width="72" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="test">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="edn-4W-eK4" eventType="touchUpInside" id="ecw-eR-LVR"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="r0b-75-cKl">
+                                <rect key="frame" x="98" y="121" width="148" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="field" destination="r0b-75-cKl" id="p6A-KN-5MW"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-52" y="118"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ZVk-X4-i1B">
@@ -91,7 +146,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7As-IQ-vUC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController modalTransitionStyle="flipHorizontal" id="Sqg-SW-3ai" customClass="loginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U9D-jL-0aH">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="LoS-ig-oYn">
@@ -157,7 +212,7 @@
                                             <navigationItem title="Title" id="doK-UN-r0Z">
                                                 <barButtonItem key="leftBarButtonItem" systemItem="reply" id="rn6-6a-iUU">
                                                     <connections>
-                                                        <action selector="regBackBtnPress:" destination="Sqg-SW-3ai" id="deH-b5-wr2"/>
+                                                        <action selector="regBackBtnPress:" destination="Sqg-SW-3ai" id="0va-rO-Usi"/>
                                                     </connections>
                                                 </barButtonItem>
                                             </navigationItem>
@@ -198,6 +253,9 @@
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="submitBtnPress:" destination="Sqg-SW-3ai" eventType="touchUpInside" id="Yhx-Td-CNN"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -297,13 +355,18 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="loginBtn" destination="W0q-jz-0fm" id="btr-fa-Vzy"/>
-                        <outlet property="registerView" destination="LoS-ig-oYn" id="yek-Bh-ApC"/>
+                        <outlet property="loginView" destination="c8U-31-bzt" id="NcP-wg-sAo"/>
+                        <outlet property="registerBtn" destination="UZ6-QQ-1bw" id="zHn-7A-URp"/>
+                        <outlet property="registerView" destination="LoS-ig-oYn" id="CdJ-H1-XVr"/>
+                        <outlet property="ruserPW" destination="636-Ft-cZd" id="ctL-65-IK8"/>
+                        <outlet property="ruserPWCheck" destination="nIW-Hn-8aE" id="htY-oU-64k"/>
+                        <outlet property="ruserPhoneID" destination="vcn-vl-GIQ" id="ksd-k3-ecR"/>
                         <outlet property="userPW" destination="Sq5-7T-CO7" id="FLi-Zp-fqP"/>
                         <outlet property="userPhoneID" destination="Tto-qz-d66" id="Jpm-GU-Fiv"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1507" y="38"/>
+            <point key="canvasLocation" x="1505" y="92"/>
         </scene>
         <!--Navigation Controller - 我的订单-->
         <scene sceneID="KOe-bg-4zf">
@@ -328,7 +391,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tcb-BV-Lo7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="0AG-YW-aZ9" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="glf-xy-MPa">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hUj-hb-g2u">
@@ -361,7 +424,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQh-gJ-rzG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController modalTransitionStyle="crossDissolve" id="5TF-qf-ICv" customClass="BIDTaskListController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="X6n-rj-cjo">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="oza-RB-HC8">
@@ -451,7 +514,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AVk-IP-V3d" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController modalTransitionStyle="flipHorizontal" id="vcF-XZ-ZWt" customClass="IntroViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dEK-Dh-O7S">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="0Ke-KH-H0m">
@@ -469,21 +532,16 @@
                                             <action selector="changePage:" destination="vcF-XZ-ZWt" eventType="valueChanged" id="YPf-oo-hYv"/>
                                         </connections>
                                     </pageControl>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" id="ghn-Od-JBd">
-                                        <rect key="frame" x="14" y="108" width="292" height="650"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" id="4b0-Wl-jzF">
+                                        <rect key="frame" x="20" y="156" width="280" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <string key="text">周边环境	恒隆、梅陇镇、中信泰富、上海展览中心 周边打折>>
-基本信息	2010年开业     25间房 电话021-62897878 传真021-62895777
-附加选择	
-自助早餐价 RMB 120          贝轩大公馆——文化与奢华的结合风华与历史的沉淀，一迳抱幽山，居然城市间。古典与现代交错、优雅与华丽并行，始建于1934年的贝轩大公馆带您领略历史与现实融合的经典神韵。时任中国银行行长的著名金融家贝祖诒先生曾居于此，贝轩大公馆因此得名。贝氏宗族声名显赫，贝祖诒之子——世界著名建筑设计大师贝聿铭、颜料大王”贝润生、美国美中经贸促进会会长贝聿恺均为贝氏后人。位于苏州的贝家的旧宅——狮子林，早已被誉为“苏州四大名园”。
-　　座落在上海繁华市区中心的贝轩大公馆花园依照苏州园林而建，宛若世外桃源。设计师把中国传统装饰图案加以变化融入到整体，将中西巧妙合璧，东侧入口处由101个“寿”字组成的图案就是鲜明的杰作之一。
-　　具有现代中国风格的精致客房，均以奢华的用料以及高贵的木饰装点。大理石浴室，双人按摩浴缸、热带雨林喷头、仿日式净身，能让您彻底放松身心，舒缓精神；精挑细选的高品质床垫及被褥，可让您在忙碌后享受高质量睡眠；客房的细节配备也尽显周到，我们为您准备了齐全的文具用品和多功能打印机，可处理文件传真、扫描和复印，让您处理公务更加迅速便捷。其他设施及服务还包括：小冰箱、免费高速无线网络、平板等离子电视机、卫星电视、保险箱、酒店豪华礼宾车服务、24小时洗衣、客房清洁及私人管家服务等。
-　　量睡眠；客房的细节配备也尽显周到，我们为您准备了齐全的文具用品和多功能打印机，可处理文件传真、扫描和复印，让您处理公务更加迅速便捷。其他设施及服务还包括：小冰箱、免费高速无线网络、平板等离子电视机、卫星电视、保险箱、酒店豪华礼宾车服务、24小时洗衣、客房清洁及私人管家服务等。
-　　</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                        <accessibility key="accessibilityConfiguration" label="阿萨德"/>
+                                        <string key="text">家的旧宅——狮子林，早已被誉为“苏州四大名园”。
+　　座落在上海繁华市区中心的贝轩大公馆花园依照苏州园林而建，宛若世外桃源。设计师把中国传统装饰图案加以变洁及私人管家服务等。</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -533,42 +591,6 @@
         <image name="coffee_cup.png" width="32" height="32"/>
         <image name="user.png" width="32" height="32"/>
     </resources>
-    <classes>
-        <class className="BIDTaskListController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BIDTaskListController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="areaButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="IntroViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IntroViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="changePage:"/>
-                <relationship kind="outlet" name="imageScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="introImageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/introImageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="loginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/loginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnPress:"/>
-                <relationship kind="action" name="regBackBtnPress:"/>
-                <relationship kind="action" name="regBtnPress:"/>
-                <relationship kind="outlet" name="loginBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="loginView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="registerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="userPW" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="userPhoneID" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

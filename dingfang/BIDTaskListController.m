@@ -14,7 +14,7 @@
 
 @implementation BIDTaskListController
 
-@synthesize tasks,tasks2,areaArrs,areaButton;
+@synthesize tasks,tasks2,areaArrs,areaButton, webData, soapResults, xmlParser;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -210,5 +210,7 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
 }
+
+
 
 @end
