@@ -14,7 +14,7 @@
 
 @implementation wsdltest
 
-@synthesize field,userID;
+@synthesize field,userSession;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,40 +28,43 @@
 - (void)viewDidLoad
 
 {
-    SDZUserService *userSession = [SDZUserService service];
+    SDZUserService *userService = [SDZUserService service];
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
-    userSession.logging = YES;
+    userService.logging = YES;
     service.logging = YES;
-     userID =(NSString *)[userSession createSession:self action:@selector(createSessionHandler:)];
+    [userService createSession:self action:@selector(createSessionHandler:)];
     
-    [service findAllCity:self action:@selector(handleFindAllCity:) sessionId:userID];
-    
-    
+    [service findAllCity:self action:@selector(handleFindAllCity:) sessionId:userSession];
+    [service findHotelByCity:self action:@selector(findHotelByCityHandler:) sessionId:userSession city:[cityArr objectAtIndex:0]];
+   
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
 
-- (void) createSessionHandler: (id) value {
+
+
+
+- (void) createSessionHandler:(id)value {
     
 	// Handle errors
 	if([value isKindOfClass:[NSError class]]) {
-		NSLog(@"%@", value);
+		NSLog(@"error:%@", value);
 		return;
 	}
     
 	// Handle faults
 	if([value isKindOfClass:[SoapFault class]]) {
-		NSLog(@"%@", value);
+		NSLog(@"fault:%@", value);
 		return;
-	}				
-    
+	}
+    userSession = value;
     
 	// Do something with the NSString* result
-    NSString* result = (NSString*)value;
-	NSLog(@"createSession returned the value: %@", result);
+	NSLog(@"createSession returned the Session: %@", userSession);
     
     
 }
+
 
 - (void)handleFindAllCity:(id)value
 {
@@ -73,11 +76,36 @@
         NSLog(@"Fault: %@", value);
         return;
     }
-    NSMutableArray *cityArr = value;
-    NSLog(@"we have %@ city",[NSNumber numberWithInt:cityArr.count]);     
+    cityArr = value;
+    NSLog(@"we have %@ city",[NSNumber numberWithInt:cityArr.count]);   
     
-         
+    for (SDZYuDingRoomService *city in cityArr) {
+        NSLog(@"- %@",city);
+    }
+    
+    
+    
+}
 
+
+- (void)findHotelByCityHandler:(id)value
+{
+    if ([value isKindOfClass:[NSError class]]) {
+        NSLog(@"Error: %@", value);
+        return;
+    }
+    if ([value isKindOfClass:[SoapFault class]]) {
+        NSLog(@"Fault: %@", value);
+        return;
+    }
+    NSMutableArray *hotelArr = value;
+    
+    for (SDZYuDingRoomService *hotel in hotelArr) {
+        NSLog(@"- %@",hotel);
+    }
+    
+    
+    
 }
 
 - (void)viewDidUnload

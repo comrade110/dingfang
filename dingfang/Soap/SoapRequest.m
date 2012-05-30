@@ -87,7 +87,8 @@
 		[request addValue: @"text/xml; charset=utf-8" forHTTPHeaderField: @"Content-Type"];
 		[request setHTTPBody: [postData dataUsingEncoding: NSUTF8StringEncoding]];
 		if(self.logging) {
-			NSLog(@"%@", postData);
+//        输出data
+//			NSLog(@"%@", postData);
 		}
 	}
 	

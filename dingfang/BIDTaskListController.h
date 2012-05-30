@@ -28,6 +28,6 @@
 @property(nonatomic, retain) NSMutableData *webData;
 @property(nonatomic, retain) NSMutableString *soapResults;
 @property(nonatomic, retain) NSXMLParser *xmlParser;
-- (void)getOffesetUTCTimeSOAP;
+
 
 @end
