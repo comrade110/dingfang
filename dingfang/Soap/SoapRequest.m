@@ -152,7 +152,8 @@
 	NSError* error;
 	if(self.logging == YES) {
 		NSString* response = [[NSString alloc] initWithData: self.receivedData encoding: NSUTF8StringEncoding];
-		NSLog(@"%@", response);
+//     输出
+//		NSLog(@"%@", response);
 	}
 	
 	CXMLDocument* doc = [[CXMLDocument alloc] initWithData: self.receivedData options: 0 error: &error];
@@ -175,7 +176,7 @@
 			}
 		}
 	} else {
-		CXMLNode* element = [[Soap getNode: [doc rootElement] withName: @"Body"] childAtIndex:0];
+		CXMLNode* element = [[Soap getNode: [doc rootElement] withName: @"soap:Body"] childAtIndex:0];
 		if(deserializeTo == nil) {
 			output = [Soap deserialize:element];
 		} else {

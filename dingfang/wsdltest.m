@@ -14,7 +14,7 @@
 
 @implementation wsdltest
 
-@synthesize field,userSession;
+@synthesize field,userSession,cityArr;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,19 +28,19 @@
 - (void)viewDidLoad
 
 {
+    
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
     SDZUserService *userService = [SDZUserService service];
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
     userService.logging = YES;
     service.logging = YES;
-    [userService createSession:self action:@selector(createSessionHandler:)];
     
-    [service findAllCity:self action:@selector(handleFindAllCity:) sessionId:userSession];
-    [service findHotelByCity:self action:@selector(findHotelByCityHandler:) sessionId:userSession city:[cityArr objectAtIndex:0]];
-   
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    [service findAllCity:self action:@selector(findAllCityHandle:) sessionId:userSession];
+//    [service findHotelByCity:self action:@selector(findHotelByCityHandler:) sessionId:userSession city:[cityArr objectAtIndex:0]];
+    [self performSelector:@selector(showAciotn) withObject:nil afterDelay:1.0];
+    
 }
-
 
 
 
@@ -51,7 +51,6 @@
 		NSLog(@"error:%@", value);
 		return;
 	}
-    
 	// Handle faults
 	if([value isKindOfClass:[SoapFault class]]) {
 		NSLog(@"fault:%@", value);
@@ -66,7 +65,7 @@
 }
 
 
-- (void)handleFindAllCity:(id)value
+- (void)findAllCityHandle:(id)value
 {
     if ([value isKindOfClass:[NSError class]]) {
         NSLog(@"Error: %@", value);
@@ -76,16 +75,15 @@
         NSLog(@"Fault: %@", value);
         return;
     }
-    cityArr = value;
-    NSLog(@"we have %@ city",[NSNumber numberWithInt:cityArr.count]);   
     
-    for (SDZYuDingRoomService *city in cityArr) {
-        NSLog(@"- %@",city);
+    self.cityArr = (NSMutableArray*)value;
+    NSLog(@"we have %@ city",[NSNumber numberWithInt:cityArr.count]); 
+    for (int i = 0; i < [cityArr count]; i++) {
+        NSLog(@"----%@------",[cityArr objectAtIndex:i]);
     }
     
-    
-    
 }
+
 
 
 - (void)findHotelByCityHandler:(id)value
@@ -98,14 +96,42 @@
         NSLog(@"Fault: %@", value);
         return;
     }
-    NSMutableArray *hotelArr = value;
+    hotelInfoArr = value;
     
-    for (SDZYuDingRoomService *hotel in hotelArr) {
-        NSLog(@"- %@",hotel);
+    for (SDZYuDingRoomService *hotel in hotelInfoArr) {
+//        NSLog(@"- %@",hotel);
+//        CXMLDocument *doc = [[CXMLDocument alloc] initWithXMLString:(NSString *)hotel options:0 error:nil];        
+//        NSArray *hotels = NULL;
+//        hotels = [doc nodesForXPath:@"//Hotel" error:nil];
+//        for(CXMLElement *element in hotels){
+//            if ([element isKindOfClass:[CXMLElement class]]){
+//                NSMutableDictionary *item = [[NSMutableDictionary alloc] init];
+//                for (int i = 0; i < [element childCount]; i++)
+//                {
+//                    if ([[[element children] objectAtIndex:i] isKindOfClass:[CXMLElement class]])
+//                    {
+//                        [item setObject:[[element childAtIndex:i] stringValue]
+//                                 forKey:[[element childAtIndex:i] name]
+//                         ];
+//                        NSLog(@"%@", [[element childAtIndex:i] stringValue]);
+//                    }
+//                }
+//            }
+//        }
+
     }
+}
+
+-(void)showAciotn
+{
     
-    
-    
+    for (int i= 0; i<3; i++) {
+        UILabel *la= [[UILabel alloc] initWithFrame:CGRectMake(10, 100*i+20, 100, 70)];
+        la.text = [cityArr objectAtIndex:i];
+        la.backgroundColor = [UIColor grayColor];
+        [self.view addSubview:la];
+    }
+
 }
 
 - (void)viewDidUnload

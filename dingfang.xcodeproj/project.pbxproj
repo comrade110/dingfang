@@ -59,6 +59,7 @@
 		CE7B29B3156A1E930055CCDD /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7B29B2156A1E930055CCDD /* IntroViewController.m */; };
 		CE7B29BA156A3A290055CCDD /* introImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7B29B9156A3A290055CCDD /* introImageViewController.m */; };
 		CE7B377B15738400001BC002 /* wsdltest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7B377A15738400001BC002 /* wsdltest.m */; };
+		CE7B713E15785F9F0059F635 /* cityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7B713D15785F9F0059F635 /* cityListViewController.m */; };
 		CE7C2B5C156CB83900B09B7F /* h1.Jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C2B54156CB83900B09B7F /* h1.Jpg */; };
 		CE7C2B5D156CB83900B09B7F /* h2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C2B55156CB83900B09B7F /* h2.jpg */; };
 		CE7C2B5E156CB83900B09B7F /* h3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C2B56156CB83900B09B7F /* h3.jpg */; };
@@ -189,6 +190,8 @@
 		CE7B29B9156A3A290055CCDD /* introImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = introImageViewController.m; sourceTree = "<group>"; };
 		CE7B3779157383FF001BC002 /* wsdltest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsdltest.h; sourceTree = "<group>"; };
 		CE7B377A15738400001BC002 /* wsdltest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wsdltest.m; sourceTree = "<group>"; };
+		CE7B713C15785F9F0059F635 /* cityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cityListViewController.h; sourceTree = "<group>"; };
+		CE7B713D15785F9F0059F635 /* cityListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cityListViewController.m; sourceTree = "<group>"; };
 		CE7C2B54156CB83900B09B7F /* h1.Jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = h1.Jpg; sourceTree = "<group>"; };
 		CE7C2B55156CB83900B09B7F /* h2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = h2.jpg; sourceTree = "<group>"; };
 		CE7C2B56156CB83900B09B7F /* h3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = h3.jpg; sourceTree = "<group>"; };
@@ -401,6 +404,8 @@
 				CE77477F156E1FF900BE3B05 /* registerViewController.m */,
 				CE7B3779157383FF001BC002 /* wsdltest.h */,
 				CE7B377A15738400001BC002 /* wsdltest.m */,
+				CE7B713C15785F9F0059F635 /* cityListViewController.h */,
+				CE7B713D15785F9F0059F635 /* cityListViewController.m */,
 			);
 			path = dingfang;
 			sourceTree = "<group>";
@@ -578,6 +583,7 @@
 				CE75270A157478580081CB7C /* CXMLNode_PrivateExtensions.m in Sources */,
 				CE75270B157478580081CB7C /* CXMLNode_XPathExtensions.m in Sources */,
 				CE7527121574A30A0081CB7C /* SDZUserService.m in Sources */,
+				CE7B713E15785F9F0059F635 /* cityListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

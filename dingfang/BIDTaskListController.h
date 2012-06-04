@@ -7,27 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "cityListViewController.h"
 
-@interface BIDTaskListController : UITableViewController<NSXMLParserDelegate> 
+
+@interface BIDTaskListController : UITableViewController <CityListViewControllerDelegate>
 {
-
-
-    
-	NSMutableData *webData;
-	NSMutableString *soapResults;
-	NSXMLParser *xmlParser;
-	BOOL recordResults;
+    NSMutableArray *cityArr;
+    NSString *cityV;
 }
 
 
-@property (strong, nonatomic) NSArray *tasks;
-@property (strong, nonatomic) NSArray *tasks2;
-@property (strong, nonatomic) NSArray *areaArrs;
 @property (strong, nonatomic) IBOutlet UIButton *areaButton;
+@property (strong, nonatomic) IBOutlet NSMutableArray *cityArr;
+@property (strong, nonatomic) IBOutlet NSString *cityV;
 
-@property(nonatomic, retain) NSMutableData *webData;
-@property(nonatomic, retain) NSMutableString *soapResults;
-@property(nonatomic, retain) NSXMLParser *xmlParser;
 
 
 @end

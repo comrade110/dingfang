@@ -103,6 +103,7 @@
                                 </state>
                                 <connections>
                                     <action selector="buttonPressed:" destination="edn-4W-eK4" eventType="touchUpInside" id="ecw-eR-LVR"/>
+                                    <segue destination="sC5-gV-PIc" kind="modal" id="IAQ-O7-KeB"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="r0b-75-cKl">
@@ -385,23 +386,31 @@
             </objects>
             <point key="canvasLocation" x="966" y="-291"/>
         </scene>
-        <!--View Controller-->
+        <!--City List View Controller-->
         <scene sceneID="V7C-fp-4RV">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tcb-BV-Lo7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="0AG-YW-aZ9" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="glf-xy-MPa">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hUj-hb-g2u">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
+                <viewController storyboardIdentifier="cityLisView" hidesBottomBarWhenPushed="YES" id="0AG-YW-aZ9" customClass="cityListViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ykl-B6-MmH">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="simulatedOrientationMetrics"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cityCell" id="dQB-6E-bet">
+                                <rect key="frame" x="0.0" y="22" width="480" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="460" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <segue destination="5TF-qf-ICv" kind="push" id="PgG-mL-OzO"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
                     <navigationItem key="navigationItem" id="4aH-lH-dfu"/>
                 </viewController>
             </objects>
@@ -447,11 +456,6 @@
                             </subviews>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         </view>
-                        <tableView key="tableFooterView" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="NFb-te-ZXm">
-                            <rect key="frame" x="0.0" y="148" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </tableView>
                         <prototypes>
                             <tableViewCell tag="1" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="plainCell" rowHeight="80" id="R5T-hI-MLA">
                                 <rect key="frame" x="0.0" y="68" width="320" height="80"/>
@@ -585,6 +589,8 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BIDTaskListController.h"/>
             <relationships>
                 <relationship kind="outlet" name="areaButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="cityArr" candidateClass="NSMutableArray"/>
+                <relationship kind="outlet" name="cityV" candidateClass="NSString"/>
             </relationships>
         </class>
         <class className="IntroViewController" superclassName="UIViewController">
@@ -595,6 +601,12 @@
                 <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
             </relationships>
+        </class>
+        <class className="NSMutableArray" superclassName="NSArray">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSMutableArray.h"/>
+        </class>
+        <class className="cityListViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/cityListViewController.h"/>
         </class>
         <class className="introImageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/introImageViewController.h"/>

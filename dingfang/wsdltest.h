@@ -14,9 +14,10 @@
     UITextField *field;
     NSString *userSession;
     NSMutableArray *cityArr;
+    NSMutableArray *hotelInfoArr;
 }
 @property (nonatomic, retain) IBOutlet UITextField *field;
 @property (nonatomic, strong) NSString *userSession;
+@property (nonatomic, strong) NSMutableArray *cityArr;
 - (IBAction)buttonPressed:(id)sender;
-- (void) createSessionHandler: (id) value;
 @end

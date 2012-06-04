@@ -1,19 +1,26 @@
 //
-//  BIDTaskListController.m
+//  cityListViewController.m
 //  dingfang
 //
-//  Created by user on 12-5-16.
+//  Created by user on 12-6-1.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "BIDTaskListController.h"
+#import "cityListViewController.h"
 #import "SDZYuDingRoomService.h"
 #import "SDZUserService.h"
 
+@interface cityListViewController ()
 
-@implementation BIDTaskListController
 
-@synthesize areaButton,cityArr,cityV;
+@end
+
+
+
+@implementation cityListViewController
+
+@synthesize delegate;
+@synthesize userSession,cityArr,citySelTag;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -23,6 +30,8 @@
     }
     return self;
 }
+
+
 
 - (void)viewDidLoad
 {
@@ -34,21 +43,25 @@
     [userService createSession:self action:@selector(createSessionHandler:)];
     
     
-
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
--(void)cityValue:(NSString*)fromValue
-{
-    cityV = fromValue;
-    
-    
-    NSLog(@"11111 %@ 11111",cityV);
-}
 
+
+
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    cityArr = nil;
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+    
+    
+}
 - (void) createSessionHandler:(id)value {
     
 	// Handle errors
@@ -61,7 +74,7 @@
 		NSLog(@"fault:%@", value);
 		return;
 	}
-    NSString *userSession = (NSString *)value;
+    self.userSession = (NSString *)value;
     
 	// Do something with the NSString* result
 	NSLog(@"createSession returned the Session: %@", userSession);
@@ -69,7 +82,6 @@
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
     service.logging = YES;        
     [service findAllCity:self action:@selector(findAllCityHandle:) sessionId:userSession];
-    
     
     
 }
@@ -83,30 +95,18 @@
         NSLog(@"Fault: %@", value);
         return;
     }
-    self.cityArr = (NSMutableArray*)value;
     
-    [areaButton setTitle:[cityArr objectAtIndex:0] forState:UIControlStateNormal];
+    self.cityArr = (NSMutableArray*)value;
+    NSLog(@"we have %@ city",[NSNumber numberWithInt:cityArr.count]); 
+    for (int i = 0; i < [cityArr count]; i++) {
+        NSLog(@"----%@------",[cityArr objectAtIndex:i]);
+    }  
+    
+    
     
     [self.tableView reloadData];
     
-    cityListViewController *cityLisView = [self.storyboard instantiateViewControllerWithIdentifier:@"cityLisView"];
-    
-    cityLisView.delegate = self;
-    
-    [self cityValue:cityV];
-    
-    NSLog(@"99999 %@ 99999",cityV);
-    
-    
 }
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
@@ -116,25 +116,22 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
     // Return the number of rows in the section.
-    return [cityArr count];
+    return [self.cityArr count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Configure the cell...
+{   
+
     NSString *identifier = nil;
-    identifier = @"plainCell";
+    identifier = @"cityCell";
     UITableViewCell *cell;
-    
     NSString *city = [self.cityArr objectAtIndex:indexPath.row];
     cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
@@ -156,11 +153,6 @@
     return cell;
 }
 
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 100.0;
-}
 
 /*
 // Override to support conditional editing of the table view.
@@ -205,15 +197,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    citySelTag = [cityArr objectAtIndex:indexPath.row];
+    [delegate cityValue:citySelTag];
+    
+    NSLog(@"cacaca  %@ cacaca",citySelTag);
 }
-
-
 
 @end
