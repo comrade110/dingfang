@@ -19,7 +19,6 @@
 
 @implementation cityListViewController
 
-@synthesize delegate;
 @synthesize userSession,cityArr,citySelTag;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -75,9 +74,9 @@
 		return;
 	}
     self.userSession = (NSString *)value;
-    
+
 	// Do something with the NSString* result
-	NSLog(@"createSession returned the Session: %@", userSession);
+//	NSLog(@"createSession returned the Session: %@", userSession);
     
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
     service.logging = YES;        
@@ -97,10 +96,10 @@
     }
     
     self.cityArr = (NSMutableArray*)value;
-    NSLog(@"we have %@ city",[NSNumber numberWithInt:cityArr.count]); 
-    for (int i = 0; i < [cityArr count]; i++) {
-        NSLog(@"----%@------",[cityArr objectAtIndex:i]);
-    }  
+//    NSLog(@"we have %@ city",[NSNumber numberWithInt:cityArr.count]); 
+//    for (int i = 0; i < [cityArr count]; i++) {
+//        NSLog(@"----%@------",[cityArr objectAtIndex:i]);
+//    }  
     
     
     
@@ -198,9 +197,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     citySelTag = [cityArr objectAtIndex:indexPath.row];
-    [delegate cityValue:citySelTag];
     
-    NSLog(@"cacaca  %@ cacaca",citySelTag);
+    NSUserDefaults *SaveDefaults = [NSUserDefaults standardUserDefaults];
+    [SaveDefaults setObject: citySelTag forKey:@"citySelKey"];
+    
+//    NSLog(@"cacaca  %@ cacaca",citySelTag);
 }
 
 @end

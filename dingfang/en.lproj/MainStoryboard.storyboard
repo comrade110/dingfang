@@ -20,7 +20,7 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="840" y="-913"/>
+            <point key="canvasLocation" x="782" y="-729"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Yfb-8X-RaW">
@@ -139,7 +139,7 @@
                     </connections>
                 </tabBarController>
             </objects>
-            <point key="canvasLocation" x="345" y="-241"/>
+            <point key="canvasLocation" x="329" y="-269"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="fR6-nZ-VHx">
@@ -384,13 +384,13 @@
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="966" y="-291"/>
+            <point key="canvasLocation" x="966" y="-207"/>
         </scene>
         <!--City List View Controller-->
         <scene sceneID="V7C-fp-4RV">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tcb-BV-Lo7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="cityLisView" hidesBottomBarWhenPushed="YES" id="0AG-YW-aZ9" customClass="cityListViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="cityListView" hidesBottomBarWhenPushed="YES" id="0AG-YW-aZ9" customClass="cityListViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Ykl-B6-MmH">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -414,9 +414,9 @@
                     <navigationItem key="navigationItem" id="4aH-lH-dfu"/>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1364" y="-1499"/>
+            <point key="canvasLocation" x="1284" y="-1455"/>
         </scene>
-        <!--Task List Controller - 上海酒店-->
+        <!--Task List Controller-->
         <scene sceneID="9mC-hy-0ir">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FQh-gJ-rzG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -445,14 +445,36 @@
                                         <segue destination="0AG-YW-aZ9" kind="push" id="zRw-oh-W4E"/>
                                     </connections>
                                 </button>
-                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="YwE-FV-8b6">
-                                    <rect key="frame" x="194" y="8" width="106" height="30"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tub-iy-1Ut">
+                                    <rect key="frame" x="183" y="9" width="52" height="27"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <segments>
-                                        <segment title="价格"/>
-                                        <segment title="日期"/>
-                                    </segments>
-                                </segmentedControl>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                    <state key="normal" title="按价格">
+                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="orderByPrice:" destination="5TF-qf-ICv" eventType="touchUpInside" id="vfx-Mw-Hm6"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yhA-O2-1cP">
+                                    <rect key="frame" x="248" y="9" width="52" height="27"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                    <state key="normal" title="按时间">
+                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="orderByTime:" destination="5TF-qf-ICv" eventType="touchUpInside" id="Z12-zv-Cc9"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         </view>
@@ -475,13 +497,6 @@
                                             <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="998元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Htg-I9-7BI">
-                                            <rect key="frame" x="232" y="34" width="58" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -491,7 +506,7 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="上海酒店" id="gT3-9V-L0I">
+                    <navigationItem key="navigationItem" id="gT3-9V-L0I">
                         <barButtonItem key="leftBarButtonItem" systemItem="reply" id="07l-db-ph4"/>
                     </navigationItem>
                     <connections>
@@ -499,7 +514,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1364" y="-913"/>
+            <point key="canvasLocation" x="1412" y="-869"/>
         </scene>
         <!--Intro View Controller-->
         <scene sceneID="8FN-JS-dOk">
@@ -552,7 +567,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1807" y="-448"/>
+            <point key="canvasLocation" x="2007" y="-889"/>
         </scene>
         <!--Intro Image View Controller-->
         <scene sceneID="uQY-mV-fXe">
@@ -575,7 +590,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2201" y="-448"/>
+            <point key="canvasLocation" x="2305" y="-436"/>
         </scene>
     </scenes>
     <resources>
@@ -588,9 +603,9 @@
         <class className="BIDTaskListController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BIDTaskListController.h"/>
             <relationships>
+                <relationship kind="action" name="orderByPrice:"/>
+                <relationship kind="action" name="orderByTime:"/>
                 <relationship kind="outlet" name="areaButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="cityArr" candidateClass="NSMutableArray"/>
-                <relationship kind="outlet" name="cityV" candidateClass="NSString"/>
             </relationships>
         </class>
         <class className="IntroViewController" superclassName="UIViewController">
@@ -601,9 +616,6 @@
                 <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
             </relationships>
-        </class>
-        <class className="NSMutableArray" superclassName="NSArray">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSMutableArray.h"/>
         </class>
         <class className="cityListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/cityListViewController.h"/>

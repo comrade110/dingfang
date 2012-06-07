@@ -13,7 +13,7 @@
 
 @implementation BIDTaskListController
 
-@synthesize areaButton,cityArr,cityV;
+@synthesize areaButton,cityArr,cityV,hotelArr,item,item2,orderParameter;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,19 +34,40 @@
     [userService createSession:self action:@selector(createSessionHandler:)];
     
     
-
+    
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    
+    self.tableView.contentSize =CGSizeMake(320, 1000);
+    
+    
+	_refreshHeaderView=[[EGORefreshTableHeaderView alloc] initWithFrame:
+						CGRectMake(0, self.tableView.contentSize.height, 320, 480)];
+	_refreshHeaderView.delegate=self;
+	[self.tableView addSubview:_refreshHeaderView];
+	
+	[_refreshHeaderView refreshLastUpdatedDate];
+    
+    NSInteger initCount = 1;
+    
+    NSUserDefaults *SaveDefaults = [NSUserDefaults standardUserDefaults];
+    [SaveDefaults setInteger:initCount forKey:@"initCount"];
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
--(void)cityValue:(NSString*)fromValue
+
+- (void)viewDidUnload
 {
-    cityV = fromValue;
-    
-    
-    NSLog(@"11111 %@ 11111",cityV);
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
 }
 
 - (void) createSessionHandler:(id)value {
@@ -63,16 +84,27 @@
 	}
     NSString *userSession = (NSString *)value;
     
+    NSUserDefaults *SaveDefaults = [NSUserDefaults standardUserDefaults];
+    [SaveDefaults setObject: userSession forKey:@"userSessionKey"];
+    
 	// Do something with the NSString* result
 	NSLog(@"createSession returned the Session: %@", userSession);
     
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
     service.logging = YES;        
-    [service findAllCity:self action:@selector(findAllCityHandle:) sessionId:userSession];
+    [service findAllCity:self action:@selector(findAllCityHandle:) sessionId:userSession];    
+        
+    [self getCityName];
     
+    orderParameter = nil;
+    
+    [service findYuDingRoomByCondition:self action:@selector(findYuDingRoomByConditionHandle:) sessionId:userSession hotelId:nil hotelName:nil cityName:cityV hotelDengJi:nil minPrice:nil maxPrice:nil orderByCondition:orderParameter pageNo:1 perPageNum:2];
     
     
 }
+
+//    获取城市列表
+
 - (void)findAllCityHandle:(id)value
 {
     if ([value isKindOfClass:[NSError class]]) {
@@ -85,27 +117,274 @@
     }
     self.cityArr = (NSMutableArray*)value;
     
-    [areaButton setTitle:[cityArr objectAtIndex:0] forState:UIControlStateNormal];
+    [areaButton setTitle:[self getCityName] forState:UIControlStateNormal];
     
     [self.tableView reloadData];
     
-    cityListViewController *cityLisView = [self.storyboard instantiateViewControllerWithIdentifier:@"cityLisView"];
+}
+
+//   按城市获取该城市的酒店列表
+
+-(void)findYuDingRoomByConditionHandle:(id)value
+{
+    if ([value isKindOfClass:[NSError class]]) {
+        NSLog(@"Error: %@", value);
+        return;
+    }
+    if ([value isKindOfClass:[SoapFault class]]) {
+        NSLog(@"Fault: %@", value);
+        return;
+    }
+    NSMutableArray *result = (NSMutableArray *)value;
     
-    cityLisView.delegate = self;
     
-    [self cityValue:cityV];
+    self.hotelArr = [[NSMutableArray alloc] init];
     
-    NSLog(@"99999 %@ 99999",cityV);
+    for (int i = 0; i <((NSMutableArray *)result).count; i++) {
+        
+        SDZYuDingRoom *myObj = [result objectAtIndex:i];
+        
+        [hotelArr addObject:[myObj serialize]];   // [myObj serialize]序列化数组元素，否则不能解析
+    }
+    
+    [self.tableView reloadData];
     
     
 }
 
-- (void)viewDidUnload
+-(void)findYuDingRoomByConditionContinueHandle:(id)value
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    
+    if ([value isKindOfClass:[NSError class]]) {
+        NSLog(@"Error: %@", value);
+        return;
+    }
+    if ([value isKindOfClass:[SoapFault class]]) {
+        NSLog(@"Fault: %@", value);
+        return;
+    }
+    
+    NSMutableArray *result = (NSMutableArray *)value;
+    
+    for (int i = 0; i <((NSMutableArray *)result).count; i++) {
+        
+        SDZYuDingRoom *myObj = [result objectAtIndex:i];
+        
+        [self.hotelArr addObject:[myObj serialize]];   // [myObj serialize]序列化数组元素，否则不能解析
+    }
+    
+    [self.tableView reloadData];
 }
+
+//方式二:按节点查找
+- (void) parseDire:(CXMLDocument *) document
+{
+    NSArray *YuDingRoom = NULL;
+    YuDingRoom = [document nodesForXPath:@"//YuDingRoom" error:nil];
+    for (CXMLElement *element in YuDingRoom)
+    {
+        if ([element isKindOfClass:[CXMLElement class]])
+        {
+            item = [[NSMutableDictionary alloc] init];
+            for (int i = 0; i < [element childCount]; i++)
+            {
+                if ([[[element children] objectAtIndex:i] isKindOfClass:[CXMLElement class]])
+                {
+                    [item setObject:[[element childAtIndex:i] stringValue]
+                             forKey:[[element childAtIndex:i] name]
+                     ];
+                    //                    NSLog(@"%@", [[element childAtIndex:i] stringValue]);
+                }
+            }
+            //NSLog(@"%@", item);
+        }
+    }
+}
+- (void) parseDire2:(CXMLDocument *) document
+{
+    NSArray *YuDingRoom = NULL;
+    YuDingRoom = [document nodesForXPath:@"//hotel" error:nil];
+    for (CXMLElement *element in YuDingRoom)
+    {
+        if ([element isKindOfClass:[CXMLElement class]])
+        {
+            item2 = [[NSMutableDictionary alloc] init];
+            for (int i = 0; i < [element childCount]; i++)
+            {
+                if ([[[element children] objectAtIndex:i] isKindOfClass:[CXMLElement class]])
+                {
+                    [item2 setObject:[[element childAtIndex:i] stringValue]
+                             forKey:[[element childAtIndex:i] name]
+                     ];
+                    //                    NSLog(@"%@", [[element childAtIndex:i] stringValue]);
+                }
+            }
+            //NSLog(@"%@", item);
+        }
+    }
+}
+
+
+-(NSString *)getCityName
+{
+    if (cityV == NULL) {
+        cityV = @"上海";
+    }
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    cityV = [userDefaults objectForKey:@"citySelKey"];
+    [userDefaults synchronize];
+    
+    
+    return cityV;
+    
+    
+}
+#pragma mark - IBAction
+
+//       点击后按价格排序
+- (IBAction)orderByPrice:(id)sender
+{
+    
+    if (orderParameter == nil) {
+        orderParameter = @"1|true";
+    }else if (orderParameter != @"1|true") {
+        orderParameter = @"1|true";
+    }else if(orderParameter != @"1|false"){
+        orderParameter = @"1|false";
+    }
+    
+    
+    SDZYuDingRoomService *service = [SDZYuDingRoomService service];
+    service.logging = YES; 
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString* mySession = [userDefaults objectForKey:@"userSessionKey"];
+    
+    [service findYuDingRoomByCondition:self action:@selector(findYuDingRoomByConditionHandle:) sessionId:mySession hotelId:nil hotelName:nil cityName:cityV hotelDengJi:nil minPrice:nil maxPrice:nil orderByCondition:orderParameter pageNo:1 perPageNum:10];
+    
+    [self.tableView reloadData];
+}
+//       点击后按发布时间排序
+- (IBAction)orderByTime:(id)sender
+{
+    
+    if (orderParameter == nil) {
+        orderParameter = @"2|true";
+    }else if (orderParameter != @"2|true") {
+        orderParameter = @"2|true";
+    }else if(orderParameter != @"2|false"){
+        orderParameter = @"2|false";
+    }
+    
+    
+    SDZYuDingRoomService *service = [SDZYuDingRoomService service];
+    service.logging = YES; 
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString* mySession = [userDefaults objectForKey:@"userSessionKey"];
+    
+    [service findYuDingRoomByCondition:self action:@selector(findYuDingRoomByConditionHandle:) sessionId:mySession hotelId:nil hotelName:nil cityName:cityV hotelDengJi:nil minPrice:nil maxPrice:nil orderByCondition:orderParameter pageNo:1 perPageNum:10];
+    
+    [self.tableView reloadData];
+}
+#pragma mark - 上拉刷新
+
+-(void)requestImage{
+		
+	//回到主线程跟新界面
+	[self performSelectorOnMainThread:@selector(dosomething) withObject:nil waitUntilDone:YES];
+    
+}
+
+//此方法是开始读取数据
+- (void)reloadTableViewDataSource{
+	
+	//should be calling your tableviews data source model to reload
+	//put here just for demo
+	_reloading = YES;
+	NSLog(@"star");
+    
+    SDZYuDingRoomService *service = [SDZYuDingRoomService service];
+    service.logging = YES; 
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString* mySession = [userDefaults objectForKey:@"userSessionKey"];
+    NSInteger curCount = [userDefaults integerForKey:@"initCount"];
+    
+    curCount+=1;
+    
+    [userDefaults setInteger:curCount forKey:@"initCount"];
+    
+    [service findYuDingRoomByCondition:self action:@selector(findYuDingRoomByConditionContinueHandle:) sessionId:mySession hotelId:nil hotelName:nil cityName:cityV hotelDengJi:nil minPrice:nil maxPrice:nil orderByCondition:orderParameter pageNo:curCount perPageNum:2];
+    
+    NSLog(@"当前数组元素个数为：%d",[hotelArr count]);
+	//打开线程，读取网络图片
+	[NSThread detachNewThreadSelector:@selector(requestImage) toTarget:self withObject:nil];
+    
+}
+
+-(void)dosomething
+{
+	
+	int count=[hotelArr count];
+	
+	if(52*count>1000)
+	{
+		self.tableView.contentSize=CGSizeMake(320, 100*count);
+		_refreshHeaderView.frame=CGRectMake(0, self.tableView.contentSize.height, 320, 480);
+		
+	}
+	[self.tableView reloadData];
+    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
+}
+
+
+//此方法是结束读取数据
+- (void)doneLoadingTableViewData{
+	
+	//  model should call this when its done loading
+	_reloading = NO;
+	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+	NSLog(@"end");
+	
+}
+
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{	
+	
+	[_refreshHeaderView egoRefreshScrollViewDidScroll:self.tableView];
+	
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	
+	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:self.tableView];
+	
+}
+
+
+#pragma mark -
+#pragma mark EGORefreshTableHeaderDelegate Methods
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
+	
+	[self reloadTableViewDataSource];
+	//[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
+	
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
+	
+	return _reloading; // should return if data source model is reloading
+	
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
+	
+	return [NSDate date]; // should return date data source was last changed
+	
+}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -125,17 +404,31 @@
 {
 
     // Return the number of rows in the section.
-    return [cityArr count];
+    return [hotelArr count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    if (hotelArr != NULL) {
+        
+        CXMLDocument *document = [[CXMLDocument alloc] initWithXMLString:[hotelArr objectAtIndex:indexPath.row] options:0 error:nil];
+        CXMLDocument *document2 = [[CXMLDocument alloc] initWithXMLString:[hotelArr objectAtIndex:indexPath.row] options:0 error:nil];
+        
+        [self parseDire:document]; 
+        [self parseDire2:document2]; 
+        
+    }  
+    
+    
     // Configure the cell...
     NSString *identifier = nil;
     identifier = @"plainCell";
     UITableViewCell *cell;
     
-    NSString *city = [self.cityArr objectAtIndex:indexPath.row];
+    NSString *hotelname = [item2 valueForKey:@"name"];
+    NSString *roomType = [item valueForKey:@"roomType"];
+    NSString *releaseTime = [item valueForKey:@"releaseTime"];
     cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (cell == nil) {
@@ -147,11 +440,25 @@
             [subview removeFromSuperview]; 
         } 
     } 
-    UILabel *cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, 180, 30)];
     
-    cellLabel.text = city;
-    cellLabel.font = [UIFont systemFontOfSize:16.0f];
+    UILabel *cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 220, 30)];
+    
+    cellLabel.text = [NSString stringWithFormat:@"%@%@%@",hotelname,roomType,releaseTime];
+    cellLabel.font = [UIFont systemFontOfSize:12.0f];
+    
+    UILabel *priceLable = [[UILabel alloc] initWithFrame:CGRectMake(220, 10, 140, 30)];
+    
+    float pricefloat = [[item valueForKey:@"price"] floatValue];
+    
+    NSString *price = [NSString stringWithFormat:@"%.3f元",pricefloat];
+    
+    priceLable.text = price;
+    
+    cellLabel.font = [UIFont systemFontOfSize:12.0f];
+    priceLable.textColor = [UIColor orangeColor];
+    
     [cell.contentView addSubview:cellLabel];
+    [cell.contentView addSubview:priceLable];
     
     return cell;
 }
@@ -159,7 +466,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100.0;
+    return 52.0;
 }
 
 /*

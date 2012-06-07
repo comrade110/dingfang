@@ -8,25 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol CityListViewControllerDelegate<NSObject>
-
--(void)cityValue:(NSString*)fromValue;
-
-@end
-
 @interface cityListViewController : UITableViewController{
     
     NSString *userSession;
     NSMutableArray *cityArr;
-    id<CityListViewControllerDelegate> delegate;
     NSString *citySelTag;
     
 }
 
-@property (nonatomic, retain) id delegate; 
 @property (nonatomic, strong) NSString *userSession;
 @property (nonatomic, strong) NSMutableArray *cityArr;
-@property (nonatomic, strong) NSString *citySelTag;
+@property (nonatomic, copy) NSString *citySelTag;
 
 
 @end
