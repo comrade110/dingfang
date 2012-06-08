@@ -61,6 +61,7 @@
 		CE76C07C158048D5006C5320 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE76C07B158048D5006C5320 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE774770156DD05D00BE3B05 /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE77476F156DD05D00BE3B05 /* loginViewController.m */; };
 		CE774780156E1FF900BE3B05 /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE77477F156E1FF900BE3B05 /* registerViewController.m */; };
+		CE774E8E15819C9500D46012 /* IntroTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE774E8D15819C9500D46012 /* IntroTabViewController.m */; };
 		CE79124F156F1C7300EF29B8 /* button_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79124D156F1C7300EF29B8 /* button_nor.png */; };
 		CE791250156F1C7300EF29B8 /* button_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79124E156F1C7300EF29B8 /* button_pressed.png */; };
 		CE791258156F73DB00EF29B8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE791256156F73CC00EF29B8 /* QuartzCore.framework */; };
@@ -199,6 +200,8 @@
 		CE77476F156DD05D00BE3B05 /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
 		CE77477E156E1FF900BE3B05 /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = registerViewController.h; sourceTree = "<group>"; };
 		CE77477F156E1FF900BE3B05 /* registerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = registerViewController.m; sourceTree = "<group>"; };
+		CE774E8C15819C9500D46012 /* IntroTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroTabViewController.h; path = ../IntroTabViewController.h; sourceTree = "<group>"; };
+		CE774E8D15819C9500D46012 /* IntroTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroTabViewController.m; path = ../IntroTabViewController.m; sourceTree = "<group>"; };
 		CE79124D156F1C7300EF29B8 /* button_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_nor.png; sourceTree = "<group>"; };
 		CE79124E156F1C7300EF29B8 /* button_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_pressed.png; sourceTree = "<group>"; };
 		CE791256156F73CC00EF29B8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -417,6 +420,8 @@
 				CEEC378B15638A0400B888A0 /* BIDTaskListController.m */,
 				CE76C07A158048D5006C5320 /* EGORefreshTableHeaderView.h */,
 				CE76C07B158048D5006C5320 /* EGORefreshTableHeaderView.m */,
+				CE774E8C15819C9500D46012 /* IntroTabViewController.h */,
+				CE774E8D15819C9500D46012 /* IntroTabViewController.m */,
 				CE7B29B1156A1E930055CCDD /* IntroViewController.h */,
 				CE7B29B2156A1E930055CCDD /* IntroViewController.m */,
 				CE77476E156DD05D00BE3B05 /* loginViewController.h */,
@@ -622,6 +627,7 @@
 				CE7527121574A30A0081CB7C /* SDZUserService.m in Sources */,
 				CE7B713E15785F9F0059F635 /* cityListViewController.m in Sources */,
 				CE76C07C158048D5006C5320 /* EGORefreshTableHeaderView.m in Sources */,
+				CE774E8E15819C9500D46012 /* IntroTabViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,15 +13,23 @@
 
 @implementation BIDTaskListController
 
-@synthesize areaButton,cityArr,cityV,hotelArr,item,item2,orderParameter;
+@synthesize listView,areaButton,cityArr,cityV,hotelArr,orderParameter;
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
     return self;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void)viewDidLoad
@@ -35,20 +43,20 @@
     
     
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+    listView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, 320, 340) style:UITableViewStylePlain];
+    listView.delegate = self;
+    listView.dataSource = self;
+    [self.view addSubview:listView];
     
     
-    self.tableView.contentSize =CGSizeMake(320, 1000);
+    listView.contentSize =CGSizeMake(320, 364);
     
     
 	_refreshHeaderView=[[EGORefreshTableHeaderView alloc] initWithFrame:
-						CGRectMake(0, self.tableView.contentSize.height, 320, 480)];
+						CGRectMake(0, listView.contentSize.height, 320, 480)];
 	_refreshHeaderView.delegate=self;
-	[self.tableView addSubview:_refreshHeaderView];
+	[listView addSubview:_refreshHeaderView];
 	
-	[_refreshHeaderView refreshLastUpdatedDate];
     
     NSInteger initCount = 1;
     
@@ -98,7 +106,7 @@
     
     orderParameter = nil;
     
-    [service findYuDingRoomByCondition:self action:@selector(findYuDingRoomByConditionHandle:) sessionId:userSession hotelId:nil hotelName:nil cityName:cityV hotelDengJi:nil minPrice:nil maxPrice:nil orderByCondition:orderParameter pageNo:1 perPageNum:2];
+    [service findYuDingRoomByCondition:self action:@selector(findYuDingRoomByConditionHandle:) sessionId:userSession hotelId:nil hotelName:nil cityName:cityV hotelDengJi:nil minPrice:nil maxPrice:nil orderByCondition:orderParameter pageNo:1 perPageNum:7];
     
     
 }
@@ -119,7 +127,7 @@
     
     [areaButton setTitle:[self getCityName] forState:UIControlStateNormal];
     
-    [self.tableView reloadData];
+    [self.listView reloadData];
     
 }
 
@@ -137,7 +145,6 @@
     }
     NSMutableArray *result = (NSMutableArray *)value;
     
-    
     self.hotelArr = [[NSMutableArray alloc] init];
     
     for (int i = 0; i <((NSMutableArray *)result).count; i++) {
@@ -147,7 +154,7 @@
         [hotelArr addObject:[myObj serialize]];   // [myObj serialize]序列化数组元素，否则不能解析
     }
     
-    [self.tableView reloadData];
+    [self.listView reloadData];
     
     
 }
@@ -170,10 +177,22 @@
         
         SDZYuDingRoom *myObj = [result objectAtIndex:i];
         
-        [self.hotelArr addObject:[myObj serialize]];   // [myObj serialize]序列化数组元素，否则不能解析
+        [hotelArr addObject:[myObj serialize]];   // [myObj serialize]序列化数组元素，否则不能解析
     }
     
-    [self.tableView reloadData];
+    NSLog(@"--%d==",[hotelArr count]);
+    
+	int count=[hotelArr count];
+    
+	
+	if(52*count>364)
+	{
+		listView.contentSize=CGSizeMake(320, 52*count);
+		_refreshHeaderView.frame=CGRectMake(0, listView.contentSize.height, 320, 480);
+		
+	}
+    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
+    [self.listView reloadData];
 }
 
 //方式二:按节点查找
@@ -244,6 +263,7 @@
 //       点击后按价格排序
 - (IBAction)orderByPrice:(id)sender
 {
+    hotelArr = nil;
     
     if (orderParameter == nil) {
         orderParameter = @"1|true";
@@ -259,13 +279,30 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString* mySession = [userDefaults objectForKey:@"userSessionKey"];
     
-    [service findYuDingRoomByCondition:self action:@selector(findYuDingRoomByConditionHandle:) sessionId:mySession hotelId:nil hotelName:nil cityName:cityV hotelDengJi:nil minPrice:nil maxPrice:nil orderByCondition:orderParameter pageNo:1 perPageNum:10];
+    NSInteger curCount = [userDefaults integerForKey:@"initCount"];
+    curCount = 1;
+    [userDefaults setInteger:curCount forKey:@"initCount"];
     
-    [self.tableView reloadData];
+    [service findYuDingRoomByCondition:self action:@selector(findYuDingRoomByConditionHandle:) sessionId:mySession hotelId:nil hotelName:nil cityName:cityV hotelDengJi:nil minPrice:nil maxPrice:nil orderByCondition:orderParameter pageNo:1 perPageNum:7];
+    listView.frame = CGRectMake(0, 40, 320, 340);
+    listView.contentSize =CGSizeMake(320, 364);
+    
+    [_refreshHeaderView removeFromSuperview];
+	_refreshHeaderView=[[EGORefreshTableHeaderView alloc] initWithFrame:
+						CGRectMake(0, listView.contentSize.height, 320, 480)];
+	_refreshHeaderView.delegate=self;
+	[listView addSubview:_refreshHeaderView];
+	
+	[_refreshHeaderView refreshLastUpdatedDate];   
+    
+    
+    
+    [listView reloadData];
 }
 //       点击后按发布时间排序
 - (IBAction)orderByTime:(id)sender
 {
+    hotelArr = nil;
     
     if (orderParameter == nil) {
         orderParameter = @"2|true";
@@ -281,18 +318,33 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString* mySession = [userDefaults objectForKey:@"userSessionKey"];
     
-    [service findYuDingRoomByCondition:self action:@selector(findYuDingRoomByConditionHandle:) sessionId:mySession hotelId:nil hotelName:nil cityName:cityV hotelDengJi:nil minPrice:nil maxPrice:nil orderByCondition:orderParameter pageNo:1 perPageNum:10];
+    NSInteger curCount = [userDefaults integerForKey:@"initCount"];
+    curCount = 1;
+    [userDefaults setInteger:curCount forKey:@"initCount"];
     
-    [self.tableView reloadData];
+    [service findYuDingRoomByCondition:self action:@selector(findYuDingRoomByConditionHandle:) sessionId:mySession hotelId:nil hotelName:nil cityName:cityV hotelDengJi:nil minPrice:nil maxPrice:nil orderByCondition:orderParameter pageNo:1 perPageNum:7];
+    
+    listView.frame = CGRectMake(0, 40, 320, 340);
+    listView.contentSize =CGSizeMake(320, 364);
+    
+    [_refreshHeaderView removeFromSuperview];
+	_refreshHeaderView=[[EGORefreshTableHeaderView alloc] initWithFrame:
+						CGRectMake(0, listView.contentSize.height, 320, 480)];
+	_refreshHeaderView.delegate=self;
+	[listView addSubview:_refreshHeaderView];
+	
+	[_refreshHeaderView refreshLastUpdatedDate];  
+    
+    [listView reloadData];
 }
 #pragma mark - 上拉刷新
 
--(void)requestImage{
-		
-	//回到主线程跟新界面
-	[self performSelectorOnMainThread:@selector(dosomething) withObject:nil waitUntilDone:YES];
-    
-}
+//-(void)requestImage{
+//		
+//	//回到主线程跟新界面
+//	[self performSelectorOnMainThread:@selector(dosomething) withObject:nil waitUntilDone:YES];
+//    
+//}
 
 //此方法是开始读取数据
 - (void)reloadTableViewDataSource{
@@ -310,30 +362,23 @@
     
     curCount+=1;
     
+    NSLog(@"当前curcount = %d",curCount);
     [userDefaults setInteger:curCount forKey:@"initCount"];
     
-    [service findYuDingRoomByCondition:self action:@selector(findYuDingRoomByConditionContinueHandle:) sessionId:mySession hotelId:nil hotelName:nil cityName:cityV hotelDengJi:nil minPrice:nil maxPrice:nil orderByCondition:orderParameter pageNo:curCount perPageNum:2];
+    [service findYuDingRoomByCondition:self action:@selector(findYuDingRoomByConditionContinueHandle:) sessionId:mySession hotelId:nil hotelName:nil cityName:cityV hotelDengJi:nil minPrice:nil maxPrice:nil orderByCondition:orderParameter pageNo:curCount perPageNum:7];
+    
     
     NSLog(@"当前数组元素个数为：%d",[hotelArr count]);
 	//打开线程，读取网络图片
-	[NSThread detachNewThreadSelector:@selector(requestImage) toTarget:self withObject:nil];
+//        [NSThread detachNewThreadSelector:@selector(requestImage) toTarget:self withObject:nil];
+    
     
 }
 
--(void)dosomething
-{
-	
-	int count=[hotelArr count];
-	
-	if(52*count>1000)
-	{
-		self.tableView.contentSize=CGSizeMake(320, 100*count);
-		_refreshHeaderView.frame=CGRectMake(0, self.tableView.contentSize.height, 320, 480);
-		
-	}
-	[self.tableView reloadData];
-    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0];
-}
+//-(void)dosomething
+//{
+//	
+//}
 
 
 //此方法是结束读取数据
@@ -341,7 +386,7 @@
 	
 	//  model should call this when its done loading
 	_reloading = NO;
-	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:listView];
 	NSLog(@"end");
 	
 }
@@ -352,13 +397,13 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{	
 	
-	[_refreshHeaderView egoRefreshScrollViewDidScroll:self.tableView];
+	[_refreshHeaderView egoRefreshScrollViewDidScroll:listView];
 	
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
 	
-	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:self.tableView];
+	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:listView];
 	
 }
 
@@ -429,7 +474,7 @@
     NSString *hotelname = [item2 valueForKey:@"name"];
     NSString *roomType = [item valueForKey:@"roomType"];
     NSString *releaseTime = [item valueForKey:@"releaseTime"];
-    cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    cell = [listView dequeueReusableCellWithIdentifier:identifier];
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
@@ -512,13 +557,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+   
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *hotelDesc = [hotelArr objectAtIndex:indexPath.row];
+    
+    [userDefaults setObject:hotelDesc forKey:@"descKey"];
+    
+    
+    
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"MainStoryboard"
+                                                  bundle:nil];
+        IntroTabViewController *introTabViewController = [sb instantiateViewControllerWithIdentifier:@"IntroTabViewController"];
      // ...
      // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+     [self.navigationController pushViewController:introTabViewController animated:YES];
+
 }
 
 
