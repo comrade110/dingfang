@@ -96,10 +96,9 @@ static NSUInteger kNumberOfPages = 3;
     NSString *myHotelArr = [userDefaults objectForKey:@"descKey"];
     
     CXMLDocument *document = [[CXMLDocument alloc] initWithXMLString:myHotelArr options:0 error:nil];
-    CXMLDocument *document2 = [[CXMLDocument alloc] initWithXMLString:myHotelArr options:0 error:nil];
     
     [self parseDire:document];
-    [self parseDire:document2];
+    [self parseDire2:document];
     
     NSString *myDesc = [item valueForKey:@"desc"];
     
@@ -111,7 +110,9 @@ static NSUInteger kNumberOfPages = 3;
     
     NSString *myPrice = [item valueForKey:@"price"];
     
+    NSString *myHotelID = [item2 valueForKey:@"id"];
     
+    [userDefaults setObject:myHotelID forKey:@"hotelID"];
     
     NSString *myContact = [NSString stringWithFormat:@"酒店地址：%@\n传真：%@\n电话：%@",myAddress,myFax,myPhone];
     
@@ -149,6 +150,8 @@ static NSUInteger kNumberOfPages = 3;
     UITextField *nav = [[UITextField alloc] initWithFrame:CGRectMake(0, 145, 320, 30)];
         nav.background = [UIImage imageNamed:@"detailinfonavbg.png"];
     
+    
+    //       商家描述
     
     nav.text = @"    商家描述";
     nav.font = [UIFont systemFontOfSize:12];

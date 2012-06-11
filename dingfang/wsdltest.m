@@ -7,6 +7,7 @@
 //
 
 #import "wsdltest.h"
+#import "UIImageView+WebCache.h"
 
 @interface wsdltest ()
 
@@ -39,6 +40,11 @@
     [service findAllCity:self action:@selector(findAllCityHandle:) sessionId:userSession];
 //    [service findHotelByCity:self action:@selector(findHotelByCityHandler:) sessionId:userSession city:[cityArr objectAtIndex:0]];
     [self performSelector:@selector(showAciotn) withObject:nil afterDelay:1.0];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 10, 300, 200) ];
+        [imageView setImageWithURL:[NSURL URLWithString:@"http://list.image.baidu.com/t/image_category/galleryimg/cartoon/china/jiu_sl.jpg"]];
+    
+    [self.view addSubview:imageView];
     
 }
 

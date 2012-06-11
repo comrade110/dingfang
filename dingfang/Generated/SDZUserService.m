@@ -18,7 +18,7 @@
 {
     if(self = [super init])
     {
-        self.serviceUrl = @"http://192.168.3.1:9001/idc/services/UserService";
+        self.serviceUrl = @"http://192.168.3.2:9001/idc/services/UserService";
         self.namespace = @"http://soap.user/";
         self.headers = nil;
         self.logging = NO;

@@ -63,7 +63,7 @@
     NSUserDefaults *SaveDefaults = [NSUserDefaults standardUserDefaults];
     [SaveDefaults setInteger:initCount forKey:@"initCount"];
     
-    
+    self.view.frame=CGRectMake(0,0, 320, 460);
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -152,6 +152,7 @@
         SDZYuDingRoom *myObj = [result objectAtIndex:i];
         
         [hotelArr addObject:[myObj serialize]];   // [myObj serialize]序列化数组元素，否则不能解析
+        
     }
     
     [self.listView reloadData];
