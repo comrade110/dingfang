@@ -93,16 +93,6 @@ static NSUInteger kNumberOfPages = 3;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     mySession = [userDefaults objectForKey:@"userSessionKey"];
     
-    NSString *myHotelIDString = [userDefaults objectForKey:@"hotelID"];
-    
-    SDZYuDingRoomService *service = [SDZYuDingRoomService service];
-    service.logging = YES; 
-    
-    long myHotelID = [myHotelIDString longLongValue];
-    
-    [service findHotelInfo:self action:@selector(findHotelInfoHandle:) sessionId:mySession hotelId:myHotelID];
-    
-    
     
     NSMutableArray *controllers = [[NSMutableArray alloc] init];
     for (unsigned i = 0; i < kNumberOfPages; i++) {
@@ -132,23 +122,7 @@ static NSUInteger kNumberOfPages = 3;
     
 }
 
-- (void)findHotelInfoHandle:(id)value
-{
-    
-    // Handle errors
-	if([value isKindOfClass:[NSError class]]) {
-		NSLog(@"error:%@", value);
-		return;
-	}
-	// Handle faults
-	if([value isKindOfClass:[SoapFault class]]) {
-		NSLog(@"fault:%@", value);
-		return;
-	}
-    
-    NSString *hotelInfo = (NSString*)value;
 
-}
 
 
 

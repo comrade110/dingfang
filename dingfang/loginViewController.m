@@ -14,7 +14,7 @@
 
 @implementation loginViewController
 
-@synthesize userPhoneID, userPW, ruserPhoneID, ruserPWCheck,ruserPW,loginBtn, registerBtn, loginView,registerView;
+@synthesize userPhoneID, userPW, ruserPhoneID, ruserID, ruserPWCheck,ruserPW,loginBtn, registerBtn, loginView,registerView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,7 +32,21 @@
     userPhoneID.delegate =self;
 //    [userPhoneID becomeFirstResponder];
     [registerView removeFromSuperview];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard:)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer: tapGestureRecognizer]; 
+    [tapGestureRecognizer setCancelsTouchesInView:NO];   // avoid UITapGestureRecognizer in button
     
+}
+
+- (void)hideKeyBoard:(id)sender
+{
+    [userPhoneID  resignFirstResponder];
+    [userPW  resignFirstResponder];
+    [ruserPhoneID  resignFirstResponder];
+    [ruserID  resignFirstResponder];
+    [ruserPW  resignFirstResponder];
+    [ruserPWCheck  resignFirstResponder];
 }
 
 // 登录按钮点击后事件
@@ -52,7 +66,7 @@
     NSRange foundRange = [userPhoneID.text rangeOfCharacterFromSet:disallowedCharacters];
     NSRange foundRange2 = [userPW.text rangeOfCharacterFromSet:disallowedCharacters2];
     if (foundRange.location != NSNotFound || [userPhoneID.text length] != 11) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"手机号应为11位数字" 
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"请填写正确的手机号码。" 
                                                        delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
         [alert show];
         return;
@@ -82,8 +96,9 @@
                                               characterSetWithCharactersInString:@"0123456789QWERTYUIOPLKJHGFDSAZXCVBNMqwertyuioplkjhgfdsazxcvbnm"] invertedSet];
     NSRange foundRange = [ruserPhoneID.text rangeOfCharacterFromSet:disallowedCharacters];
     NSRange foundRange2 = [ruserPW.text rangeOfCharacterFromSet:disallowedCharacters2];
+    NSRange foundRange3 = [ruserID.text rangeOfCharacterFromSet:disallowedCharacters2];
     if (foundRange.location != NSNotFound || [ruserPhoneID.text length] != 11) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"手机号应为11位数字" 
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"请填写正确的手机号码。" 
                                                        delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
         [alert show];
         return;
@@ -99,6 +114,13 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"两次输入的密码不同" 
                                                        delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
         [alert show];
+    }
+    
+    if (foundRange3.location != NSNotFound || ([ruserID.text length] > 0 && [userPW.text length] < 30)) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"用户名长度应为0-30个字符。" 
+                                                       delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
+        [alert show];
+        return;
     }
     
 }

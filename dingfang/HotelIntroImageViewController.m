@@ -8,6 +8,7 @@
 
 #import "HotelIntroImageViewController.h"
 #import "UIImageView+WebCache.h"
+#import "SDZYuDingRoomService.h"
 
 
 static NSArray *__pageControlImageList = nil;
@@ -25,7 +26,7 @@ static NSArray *__pageControlImageList = nil;
 }
 
 +(NSString *)pageControlImageWithIndex:(NSUInteger)index
-{
+{   
 
 	if (__pageControlImageList==nil) {
 		__pageControlImageList = [[NSArray alloc] initWithObjects:
@@ -36,11 +37,43 @@ static NSArray *__pageControlImageList = nil;
 	return [__pageControlImageList objectAtIndex:index %[__pageControlImageList count]];
 }
 
-
+- (void)findHotelInfoHandle:(id)value
+{
+    
+    // Handle errors
+	if([value isKindOfClass:[NSError class]]) {
+		NSLog(@"error:%@", value);
+		return;
+	}
+	// Handle faults
+	if([value isKindOfClass:[SoapFault class]]) {
+		NSLog(@"fault:%@", value);
+		return;
+	}
+    
+    NSString *hotelInfo = (NSString*)value;
+    
+    
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *mySession = [userDefaults objectForKey:@"userSessionKey"];
+    
+    NSString *myHotelIDString = [userDefaults objectForKey:@"hotelID"];
+    
+    SDZYuDingRoomService *service = [SDZYuDingRoomService service];
+    service.logging = YES; 
+    
+    long myHotelID = [myHotelIDString longLongValue];
+    
+    [service findHotelInfo:self action:@selector(findHotelInfoHandle:) sessionId:mySession hotelId:myHotelID];
+    
+    
     [imageView setImageWithURL:[NSURL URLWithString:[HotelIntroImageViewController pageControlImageWithIndex:pageNumber]]];
 	// Do any additional setup after loading the view.
 }

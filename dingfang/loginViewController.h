@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UIView *registerView;
 
 @property (strong, nonatomic) IBOutlet UITextField *ruserPhoneID;
+@property (strong, nonatomic) IBOutlet UITextField *ruserID;
 @property (strong, nonatomic) IBOutlet UITextField *ruserPW;
 @property (strong, nonatomic) IBOutlet UITextField *ruserPWCheck;
 @property (strong, nonatomic) IBOutlet UIButton *registerBtn;

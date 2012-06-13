@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE1878A9158857C80002DDB5 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1878A8158857C80002DDB5 /* CommentViewController.m */; };
 		CE3DF69C1585D9F4008A638A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3DF69B1585D9F4008A638A /* ImageIO.framework */; };
 		CE3DF6CF1585EF62008A638A /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF6BD1585EF62008A638A /* SDImageCache.m */; };
 		CE3DF6D01585EF62008A638A /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF6C11585EF62008A638A /* SDWebImageDecoder.m */; };
@@ -70,6 +71,19 @@
 		CE774770156DD05D00BE3B05 /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE77476F156DD05D00BE3B05 /* loginViewController.m */; };
 		CE774780156E1FF900BE3B05 /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE77477F156E1FF900BE3B05 /* registerViewController.m */; };
 		CE774E8E15819C9500D46012 /* IntroTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE774E8D15819C9500D46012 /* IntroTabViewController.m */; };
+		CE77DA8F1586DA1F00D7D3A5 /* pay1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE77DA861586DA1F00D7D3A5 /* pay1.png */; };
+		CE77DA901586DA1F00D7D3A5 /* pay1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE77DA871586DA1F00D7D3A5 /* pay1@2x.png */; };
+		CE77DA911586DA1F00D7D3A5 /* pay2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE77DA881586DA1F00D7D3A5 /* pay2.png */; };
+		CE77DA921586DA1F00D7D3A5 /* pay2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE77DA891586DA1F00D7D3A5 /* pay2@2x.png */; };
+		CE77DA931586DA1F00D7D3A5 /* commentScore1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE77DA8A1586DA1F00D7D3A5 /* commentScore1.png */; };
+		CE77DA941586DA1F00D7D3A5 /* commentScore2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE77DA8B1586DA1F00D7D3A5 /* commentScore2.png */; };
+		CE77DA951586DA1F00D7D3A5 /* commentScore3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE77DA8C1586DA1F00D7D3A5 /* commentScore3.png */; };
+		CE77DA961586DA1F00D7D3A5 /* commentScore4.png in Resources */ = {isa = PBXBuildFile; fileRef = CE77DA8D1586DA1F00D7D3A5 /* commentScore4.png */; };
+		CE77DA971586DA1F00D7D3A5 /* commentScore5.png in Resources */ = {isa = PBXBuildFile; fileRef = CE77DA8E1586DA1F00D7D3A5 /* commentScore5.png */; };
+		CE77DAC415872E9100D7D3A5 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE77DAC115872E9100D7D3A5 /* 2.png */; };
+		CE77DAC515872E9100D7D3A5 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE77DAC215872E9100D7D3A5 /* 1.png */; };
+		CE77DAC615872E9100D7D3A5 /* 0.png in Resources */ = {isa = PBXBuildFile; fileRef = CE77DAC315872E9100D7D3A5 /* 0.png */; };
+		CE77DAC915872EF900D7D3A5 /* RatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE77DAC815872EF900D7D3A5 /* RatingView.m */; };
 		CE79124F156F1C7300EF29B8 /* button_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79124D156F1C7300EF29B8 /* button_nor.png */; };
 		CE791250156F1C7300EF29B8 /* button_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79124E156F1C7300EF29B8 /* button_pressed.png */; };
 		CE791258156F73DB00EF29B8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE791256156F73CC00EF29B8 /* QuartzCore.framework */; };
@@ -110,6 +124,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE1878A8158857C80002DDB5 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		CE3DF69B1585D9F4008A638A /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		CE3DF6BC1585EF62008A638A /* SDImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCache.h; sourceTree = "<group>"; };
 		CE3DF6BD1585EF62008A638A /* SDImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDImageCache.m; sourceTree = "<group>"; };
@@ -231,6 +246,21 @@
 		CE77477F156E1FF900BE3B05 /* registerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = registerViewController.m; sourceTree = "<group>"; };
 		CE774E8C15819C9500D46012 /* IntroTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroTabViewController.h; path = ../IntroTabViewController.h; sourceTree = "<group>"; };
 		CE774E8D15819C9500D46012 /* IntroTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroTabViewController.m; path = ../IntroTabViewController.m; sourceTree = "<group>"; };
+		CE77DA861586DA1F00D7D3A5 /* pay1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pay1.png; sourceTree = "<group>"; };
+		CE77DA871586DA1F00D7D3A5 /* pay1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pay1@2x.png"; sourceTree = "<group>"; };
+		CE77DA881586DA1F00D7D3A5 /* pay2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pay2.png; sourceTree = "<group>"; };
+		CE77DA891586DA1F00D7D3A5 /* pay2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pay2@2x.png"; sourceTree = "<group>"; };
+		CE77DA8A1586DA1F00D7D3A5 /* commentScore1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commentScore1.png; sourceTree = "<group>"; };
+		CE77DA8B1586DA1F00D7D3A5 /* commentScore2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commentScore2.png; sourceTree = "<group>"; };
+		CE77DA8C1586DA1F00D7D3A5 /* commentScore3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commentScore3.png; sourceTree = "<group>"; };
+		CE77DA8D1586DA1F00D7D3A5 /* commentScore4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commentScore4.png; sourceTree = "<group>"; };
+		CE77DA8E1586DA1F00D7D3A5 /* commentScore5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commentScore5.png; sourceTree = "<group>"; };
+		CE77DA991586DA6300D7D3A5 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		CE77DAC115872E9100D7D3A5 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		CE77DAC215872E9100D7D3A5 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		CE77DAC315872E9100D7D3A5 /* 0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0.png; sourceTree = "<group>"; };
+		CE77DAC715872EF900D7D3A5 /* RatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingView.h; sourceTree = "<group>"; };
+		CE77DAC815872EF900D7D3A5 /* RatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingView.m; sourceTree = "<group>"; };
 		CE79124D156F1C7300EF29B8 /* button_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_nor.png; sourceTree = "<group>"; };
 		CE79124E156F1C7300EF29B8 /* button_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_pressed.png; sourceTree = "<group>"; };
 		CE791256156F73CC00EF29B8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -465,6 +495,8 @@
 		CE7F501E15625A18007AD4A5 /* dingfang */ = {
 			isa = PBXGroup;
 			children = (
+				CE77DAC715872EF900D7D3A5 /* RatingView.h */,
+				CE77DAC815872EF900D7D3A5 /* RatingView.m */,
 				CE3DF6B91585EF62008A638A /* SDWebImage */,
 				CE75268F157478570081CB7C /* Generated */,
 				CE7526AC157478570081CB7C /* Soap */,
@@ -480,6 +512,8 @@
 				CE7F502E15625A18007AD4A5 /* dfViewController.m */,
 				CEEC378A15638A0400B888A0 /* BIDTaskListController.h */,
 				CEEC378B15638A0400B888A0 /* BIDTaskListController.m */,
+				CE77DA991586DA6300D7D3A5 /* CommentViewController.h */,
+				CE1878A8158857C80002DDB5 /* CommentViewController.m */,
 				CE76C07A158048D5006C5320 /* EGORefreshTableHeaderView.h */,
 				CE76C07B158048D5006C5320 /* EGORefreshTableHeaderView.m */,
 				CE774E8C15819C9500D46012 /* IntroTabViewController.h */,
@@ -515,6 +549,18 @@
 		CEEC373A1563456000B888A0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE77DAC115872E9100D7D3A5 /* 2.png */,
+				CE77DAC215872E9100D7D3A5 /* 1.png */,
+				CE77DAC315872E9100D7D3A5 /* 0.png */,
+				CE77DA861586DA1F00D7D3A5 /* pay1.png */,
+				CE77DA871586DA1F00D7D3A5 /* pay1@2x.png */,
+				CE77DA881586DA1F00D7D3A5 /* pay2.png */,
+				CE77DA891586DA1F00D7D3A5 /* pay2@2x.png */,
+				CE77DA8A1586DA1F00D7D3A5 /* commentScore1.png */,
+				CE77DA8B1586DA1F00D7D3A5 /* commentScore2.png */,
+				CE77DA8C1586DA1F00D7D3A5 /* commentScore3.png */,
+				CE77DA8D1586DA1F00D7D3A5 /* commentScore4.png */,
+				CE77DA8E1586DA1F00D7D3A5 /* commentScore5.png */,
 				CE76C06615803DB2006C5320 /* whiteArrow.png */,
 				CE76C06715803DB2006C5320 /* whiteArrow@2x.png */,
 				CE76C06815803DB2006C5320 /* grayArrow.png */,
@@ -630,6 +676,18 @@
 				CE76C07315803DB2006C5320 /* blackArrow@2x.png in Resources */,
 				CE76C07415803DB2006C5320 /* blueArrow.png in Resources */,
 				CE76C07515803DB2006C5320 /* blueArrow@2x.png in Resources */,
+				CE77DA8F1586DA1F00D7D3A5 /* pay1.png in Resources */,
+				CE77DA901586DA1F00D7D3A5 /* pay1@2x.png in Resources */,
+				CE77DA911586DA1F00D7D3A5 /* pay2.png in Resources */,
+				CE77DA921586DA1F00D7D3A5 /* pay2@2x.png in Resources */,
+				CE77DA931586DA1F00D7D3A5 /* commentScore1.png in Resources */,
+				CE77DA941586DA1F00D7D3A5 /* commentScore2.png in Resources */,
+				CE77DA951586DA1F00D7D3A5 /* commentScore3.png in Resources */,
+				CE77DA961586DA1F00D7D3A5 /* commentScore4.png in Resources */,
+				CE77DA971586DA1F00D7D3A5 /* commentScore5.png in Resources */,
+				CE77DAC415872E9100D7D3A5 /* 2.png in Resources */,
+				CE77DAC515872E9100D7D3A5 /* 1.png in Resources */,
+				CE77DAC615872E9100D7D3A5 /* 0.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,6 +760,8 @@
 				CE3DF6D31585EF62008A638A /* SDWebImagePrefetcher.m in Sources */,
 				CE3DF6D41585EF62008A638A /* UIButton+WebCache.m in Sources */,
 				CE3DF6D51585EF62008A638A /* UIImageView+WebCache.m in Sources */,
+				CE77DAC915872EF900D7D3A5 /* RatingView.m in Sources */,
+				CE1878A9158857C80002DDB5 /* CommentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
