@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "SDZUserService.h"
 
 @interface loginViewController : UIViewController<UITextFieldDelegate>
+{
+    NSString *mySession;
+    SDZUserService *userService;
+
+}
 
 @property (strong, nonatomic) IBOutlet UITextField *userPhoneID;
 @property (strong, nonatomic) IBOutlet UITextField *userPW;
@@ -21,11 +27,13 @@
 @property (strong, nonatomic) IBOutlet UITextField *ruserID;
 @property (strong, nonatomic) IBOutlet UITextField *ruserPW;
 @property (strong, nonatomic) IBOutlet UITextField *ruserPWCheck;
+@property (strong, nonatomic) IBOutlet UITextField *mobileVerify;
 @property (strong, nonatomic) IBOutlet UIButton *registerBtn;
 
 -(IBAction)btnPress:(id)sender;
 -(IBAction)submitBtnPress:(id)sender;
 -(IBAction)regBtnPress:(id)sender;
 -(IBAction)regBackBtnPress:(id)sender;
+-(IBAction)regValidatekBtnPress:(id)sender;
 
 @end

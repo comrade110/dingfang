@@ -37,12 +37,6 @@
     [super viewDidLoad];
     
     
-    SDZUserService *userService = [SDZUserService service];
-    userService.logging = YES;
-    [userService createSession:self action:@selector(createSessionHandler:)];
-    
-    
-    
     listView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, 320, 340) style:UITableViewStylePlain];
     listView.delegate = self;
     listView.dataSource = self;
@@ -64,6 +58,14 @@
     [SaveDefaults setInteger:initCount forKey:@"initCount"];
     
     self.view.frame=CGRectMake(0,0, 320, 460);
+    
+    
+    
+    mySession = [SaveDefaults objectForKey:@"userSessionKey"];
+    
+    SDZYuDingRoomService *service = [SDZYuDingRoomService service];
+    service.logging = YES;        
+    [service findAllCity:self action:@selector(findAllCityHandle:) sessionId:mySession];  
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -78,38 +80,6 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void) createSessionHandler:(id)value {
-    
-	// Handle errors
-	if([value isKindOfClass:[NSError class]]) {
-		NSLog(@"error:%@", value);
-		return;
-	}
-	// Handle faults
-	if([value isKindOfClass:[SoapFault class]]) {
-		NSLog(@"fault:%@", value);
-		return;
-	}
-    NSString *userSession = (NSString *)value;
-    
-    NSUserDefaults *SaveDefaults = [NSUserDefaults standardUserDefaults];
-    [SaveDefaults setObject: userSession forKey:@"userSessionKey"];
-    
-	// Do something with the NSString* result
-	NSLog(@"createSession returned the Session: %@", userSession);
-    
-    SDZYuDingRoomService *service = [SDZYuDingRoomService service];
-    service.logging = YES;        
-    [service findAllCity:self action:@selector(findAllCityHandle:) sessionId:userSession];    
-        
-    [self getCityName];
-    
-    orderParameter = nil;
-    
-    [service findYuDingRoomByCondition:self action:@selector(findYuDingRoomByConditionHandle:) sessionId:userSession hotelId:nil hotelName:nil cityName:cityV hotelDengJi:nil minPrice:nil maxPrice:nil orderByCondition:orderParameter pageNo:1 perPageNum:7];
-    
-    
-}
 
 //    获取城市列表
 
@@ -126,6 +96,13 @@
     self.cityArr = (NSMutableArray*)value;
     
     [areaButton setTitle:[self getCityName] forState:UIControlStateNormal];
+    
+    
+    orderParameter = nil;
+    
+    SDZYuDingRoomService *service = [SDZYuDingRoomService service];
+    service.logging = YES;        
+    [service findYuDingRoomByCondition:self action:@selector(findYuDingRoomByConditionHandle:) sessionId:mySession hotelId:nil hotelName:nil cityName:cityV hotelDengJi:nil minPrice:nil maxPrice:nil orderByCondition:orderParameter pageNo:1 perPageNum:7];
     
     [self.listView reloadData];
     
@@ -278,7 +255,6 @@
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
     service.logging = YES; 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString* mySession = [userDefaults objectForKey:@"userSessionKey"];
     
     NSInteger curCount = [userDefaults integerForKey:@"initCount"];
     curCount = 1;
@@ -317,7 +293,6 @@
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
     service.logging = YES; 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString* mySession = [userDefaults objectForKey:@"userSessionKey"];
     
     NSInteger curCount = [userDefaults integerForKey:@"initCount"];
     curCount = 1;
@@ -358,7 +333,6 @@
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
     service.logging = YES; 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString* mySession = [userDefaults objectForKey:@"userSessionKey"];
     NSInteger curCount = [userDefaults integerForKey:@"initCount"];
     
     curCount+=1;

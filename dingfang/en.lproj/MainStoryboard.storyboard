@@ -22,11 +22,11 @@
             </objects>
             <point key="canvasLocation" x="1086" y="-822"/>
         </scene>
-        <!--View Controller-->
+        <!--Df View Controller-->
         <scene sceneID="Yfb-8X-RaW">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="apN-bf-sUm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController modalTransitionStyle="crossDissolve" id="sC5-gV-PIc" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="sC5-gV-PIc" customClass="dfViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Z8m-pd-bhJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -205,7 +205,7 @@
                                         <rect key="frame" x="102" y="250" width="81" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IbU-5T-jcS">
                                         <rect key="frame" x="102" y="299" width="152" height="29"/>
@@ -230,6 +230,9 @@
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="regValidatekBtnPress:" destination="Sqg-SW-3ai" eventType="touchUpInside" id="3f1-Bm-5Hq"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UZ6-QQ-1bw">
                                         <rect key="frame" x="111" y="353" width="98" height="37"/>
@@ -371,6 +374,7 @@
                     <connections>
                         <outlet property="loginBtn" destination="W0q-jz-0fm" id="btr-fa-Vzy"/>
                         <outlet property="loginView" destination="c8U-31-bzt" id="NcP-wg-sAo"/>
+                        <outlet property="mobileVerify" destination="ZRy-CG-wp7" id="iCQ-gw-Svy"/>
                         <outlet property="registerBtn" destination="UZ6-QQ-1bw" id="zHn-7A-URp"/>
                         <outlet property="registerView" destination="LoS-ig-oYn" id="CdJ-H1-XVr"/>
                         <outlet property="ruserID" destination="7tr-DF-n5c" id="07q-De-bv0"/>
@@ -803,6 +807,13 @@
         <class className="cityListViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/cityListViewController.h"/>
         </class>
+        <class className="dfViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/dfViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="hotelOrderBtn" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="loginBtn" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
         <class className="introImageViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/introImageViewController.h"/>
             <relationships>
@@ -815,9 +826,11 @@
                 <relationship kind="action" name="btnPress:"/>
                 <relationship kind="action" name="regBackBtnPress:"/>
                 <relationship kind="action" name="regBtnPress:"/>
+                <relationship kind="action" name="regValidatekBtnPress:"/>
                 <relationship kind="action" name="submitBtnPress:"/>
                 <relationship kind="outlet" name="loginBtn" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="loginView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="mobileVerify" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="registerBtn" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="registerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="ruserID" candidateClass="UITextField"/>

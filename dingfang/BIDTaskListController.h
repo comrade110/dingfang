@@ -19,6 +19,7 @@
     NSMutableDictionary *item;
     NSMutableDictionary *item2;
     NSString *orderParameter;
+    NSString *mySession;
     
     EGORefreshTableHeaderView *_refreshHeaderView;
 	BOOL _reloading;

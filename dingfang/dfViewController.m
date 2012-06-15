@@ -21,7 +21,30 @@
     [super viewDidLoad];
     
     
-	// Do any additional setup after loading the view, typically from a nib.
+    SDZUserService *userService = [SDZUserService service];
+    userService.logging = YES;
+    [userService createSession:self action:@selector(createSessionHandler:)];
+}
+
+- (void) createSessionHandler:(id)value {
+    
+	// Handle errors
+	if([value isKindOfClass:[NSError class]]) {
+		NSLog(@"error:%@", value);
+		return;
+	}
+	// Handle faults
+	if([value isKindOfClass:[SoapFault class]]) {
+		NSLog(@"fault:%@", value);
+		return;
+	}
+    NSString *userSession = (NSString *)value;
+    
+    NSLog(@"%@",userSession);
+    
+    NSUserDefaults *SaveDefaults = [NSUserDefaults standardUserDefaults];
+    [SaveDefaults setObject:userSession forKey:@"userSessionKey"];
+    
 }
 
 - (void)viewDidUnload

@@ -36,10 +36,12 @@
 {
     [super viewDidLoad];
     
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    mySession = [userDefaults objectForKey:@"mySessionKey"];
     
-    SDZUserService *userService = [SDZUserService service];
-    userService.logging = YES;
-    [userService createSession:self action:@selector(createSessionHandler:)];
+    SDZYuDingRoomService *service = [SDZYuDingRoomService service];
+    service.logging = YES;        
+    [service findAllCity:self action:@selector(findAllCityHandle:) sessionId:mySession];
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -61,29 +63,7 @@
     
     
 }
-- (void) createSessionHandler:(id)value {
-    
-	// Handle errors
-	if([value isKindOfClass:[NSError class]]) {
-		NSLog(@"error:%@", value);
-		return;
-	}
-	// Handle faults
-	if([value isKindOfClass:[SoapFault class]]) {
-		NSLog(@"fault:%@", value);
-		return;
-	}
-    self.userSession = (NSString *)value;
 
-	// Do something with the NSString* result
-//	NSLog(@"createSession returned the Session: %@", userSession);
-    
-    SDZYuDingRoomService *service = [SDZYuDingRoomService service];
-    service.logging = YES;        
-    [service findAllCity:self action:@selector(findAllCityHandle:) sessionId:userSession];
-    
-    
-}
 - (void)findAllCityHandle:(id)value
 {
     if ([value isKindOfClass:[NSError class]]) {

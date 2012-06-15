@@ -13,6 +13,7 @@
     NSString *userSession;
     NSMutableArray *cityArr;
     NSString *citySelTag;
+    NSString *mySession;
     
 }
 

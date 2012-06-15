@@ -24,8 +24,6 @@
 		CE7526E7157478580081CB7C /* SDZHotel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE752697157478570081CB7C /* SDZHotel.m */; };
 		CE7526E8157478580081CB7C /* SDZhotelDengJiList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE752699157478570081CB7C /* SDZhotelDengJiList.m */; };
 		CE7526E9157478580081CB7C /* SDZServices.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75269B157478570081CB7C /* SDZServices.m */; };
-		CE7526EA157478580081CB7C /* SDZstring2ArrayOfHotelMap.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75269D157478570081CB7C /* SDZstring2ArrayOfHotelMap.m */; };
-		CE7526EB157478580081CB7C /* SDZUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75269F157478570081CB7C /* SDZUser.m */; };
 		CE7526EC157478580081CB7C /* SDZYuDingComment.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7526A1157478570081CB7C /* SDZYuDingComment.m */; };
 		CE7526ED157478580081CB7C /* SDZYuDingCommentList.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7526A3157478570081CB7C /* SDZYuDingCommentList.m */; };
 		CE7526EE157478580081CB7C /* SDZYuDingRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7526A5157478570081CB7C /* SDZYuDingRoom.m */; };
@@ -58,7 +56,6 @@
 		CE752709157478580081CB7C /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7526DE157478570081CB7C /* CXMLNode_CreationExtensions.m */; };
 		CE75270A157478580081CB7C /* CXMLNode_PrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7526E0157478570081CB7C /* CXMLNode_PrivateExtensions.m */; };
 		CE75270B157478580081CB7C /* CXMLNode_XPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7526E2157478570081CB7C /* CXMLNode_XPathExtensions.m */; };
-		CE7527121574A30A0081CB7C /* SDZUserService.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7527111574A30A0081CB7C /* SDZUserService.m */; };
 		CE76C06E15803DB2006C5320 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE76C06615803DB2006C5320 /* whiteArrow.png */; };
 		CE76C06F15803DB2006C5320 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE76C06715803DB2006C5320 /* whiteArrow@2x.png */; };
 		CE76C07015803DB2006C5320 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE76C06815803DB2006C5320 /* grayArrow.png */; };
@@ -84,6 +81,10 @@
 		CE77DAC515872E9100D7D3A5 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE77DAC215872E9100D7D3A5 /* 1.png */; };
 		CE77DAC615872E9100D7D3A5 /* 0.png in Resources */ = {isa = PBXBuildFile; fileRef = CE77DAC315872E9100D7D3A5 /* 0.png */; };
 		CE77DAC915872EF900D7D3A5 /* RatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE77DAC815872EF900D7D3A5 /* RatingView.m */; };
+		CE78C0FF1589EDFB00D6C267 /* SDZstring2UserMap.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78C0FA1589EDFB00D6C267 /* SDZstring2UserMap.m */; };
+		CE78C1001589EDFB00D6C267 /* SDZUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78C0FC1589EDFB00D6C267 /* SDZUser.m */; };
+		CE78C1011589EDFB00D6C267 /* SDZUserService.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78C0FE1589EDFB00D6C267 /* SDZUserService.m */; };
+		CE78C1081589EEC000D6C267 /* SDZstring2ArrayOfHotelMap.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78C1071589EEC000D6C267 /* SDZstring2ArrayOfHotelMap.m */; };
 		CE79124F156F1C7300EF29B8 /* button_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79124D156F1C7300EF29B8 /* button_nor.png */; };
 		CE791250156F1C7300EF29B8 /* button_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79124E156F1C7300EF29B8 /* button_pressed.png */; };
 		CE791258156F73DB00EF29B8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE791256156F73CC00EF29B8 /* QuartzCore.framework */; };
@@ -158,10 +159,6 @@
 		CE752699157478570081CB7C /* SDZhotelDengJiList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZhotelDengJiList.m; sourceTree = "<group>"; };
 		CE75269A157478570081CB7C /* SDZServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDZServices.h; sourceTree = "<group>"; };
 		CE75269B157478570081CB7C /* SDZServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZServices.m; sourceTree = "<group>"; };
-		CE75269C157478570081CB7C /* SDZstring2ArrayOfHotelMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDZstring2ArrayOfHotelMap.h; sourceTree = "<group>"; };
-		CE75269D157478570081CB7C /* SDZstring2ArrayOfHotelMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZstring2ArrayOfHotelMap.m; sourceTree = "<group>"; };
-		CE75269E157478570081CB7C /* SDZUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDZUser.h; sourceTree = "<group>"; };
-		CE75269F157478570081CB7C /* SDZUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZUser.m; sourceTree = "<group>"; };
 		CE7526A0157478570081CB7C /* SDZYuDingComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDZYuDingComment.h; sourceTree = "<group>"; };
 		CE7526A1157478570081CB7C /* SDZYuDingComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZYuDingComment.m; sourceTree = "<group>"; };
 		CE7526A2157478570081CB7C /* SDZYuDingCommentList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDZYuDingCommentList.h; sourceTree = "<group>"; };
@@ -228,8 +225,6 @@
 		CE7526E1157478570081CB7C /* CXMLNode_XPathExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLNode_XPathExtensions.h; sourceTree = "<group>"; };
 		CE7526E2157478570081CB7C /* CXMLNode_XPathExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLNode_XPathExtensions.m; sourceTree = "<group>"; };
 		CE7526E3157478570081CB7C /* TouchXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchXML.h; sourceTree = "<group>"; };
-		CE7527101574A30A0081CB7C /* SDZUserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDZUserService.h; sourceTree = "<group>"; };
-		CE7527111574A30A0081CB7C /* SDZUserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZUserService.m; sourceTree = "<group>"; };
 		CE76C06615803DB2006C5320 /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
 		CE76C06715803DB2006C5320 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
 		CE76C06815803DB2006C5320 /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
@@ -261,6 +256,14 @@
 		CE77DAC315872E9100D7D3A5 /* 0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0.png; sourceTree = "<group>"; };
 		CE77DAC715872EF900D7D3A5 /* RatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RatingView.h; sourceTree = "<group>"; };
 		CE77DAC815872EF900D7D3A5 /* RatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RatingView.m; sourceTree = "<group>"; };
+		CE78C0F91589EDFB00D6C267 /* SDZstring2UserMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDZstring2UserMap.h; sourceTree = "<group>"; };
+		CE78C0FA1589EDFB00D6C267 /* SDZstring2UserMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZstring2UserMap.m; sourceTree = "<group>"; };
+		CE78C0FB1589EDFB00D6C267 /* SDZUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDZUser.h; sourceTree = "<group>"; };
+		CE78C0FC1589EDFB00D6C267 /* SDZUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZUser.m; sourceTree = "<group>"; };
+		CE78C0FD1589EDFB00D6C267 /* SDZUserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDZUserService.h; sourceTree = "<group>"; };
+		CE78C0FE1589EDFB00D6C267 /* SDZUserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZUserService.m; sourceTree = "<group>"; };
+		CE78C1061589EEC000D6C267 /* SDZstring2ArrayOfHotelMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDZstring2ArrayOfHotelMap.h; sourceTree = "<group>"; };
+		CE78C1071589EEC000D6C267 /* SDZstring2ArrayOfHotelMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZstring2ArrayOfHotelMap.m; sourceTree = "<group>"; };
 		CE79124D156F1C7300EF29B8 /* button_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_nor.png; sourceTree = "<group>"; };
 		CE79124E156F1C7300EF29B8 /* button_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_pressed.png; sourceTree = "<group>"; };
 		CE791256156F73CC00EF29B8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -358,6 +361,14 @@
 		CE75268F157478570081CB7C /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				CE78C1061589EEC000D6C267 /* SDZstring2ArrayOfHotelMap.h */,
+				CE78C1071589EEC000D6C267 /* SDZstring2ArrayOfHotelMap.m */,
+				CE78C0F91589EDFB00D6C267 /* SDZstring2UserMap.h */,
+				CE78C0FA1589EDFB00D6C267 /* SDZstring2UserMap.m */,
+				CE78C0FB1589EDFB00D6C267 /* SDZUser.h */,
+				CE78C0FC1589EDFB00D6C267 /* SDZUser.m */,
+				CE78C0FD1589EDFB00D6C267 /* SDZUserService.h */,
+				CE78C0FE1589EDFB00D6C267 /* SDZUserService.m */,
 				CE752690157478570081CB7C /* SDZArrayOfHotel.h */,
 				CE752691157478570081CB7C /* SDZArrayOfHotel.m */,
 				CE752692157478570081CB7C /* SDZcityHotelList.h */,
@@ -370,10 +381,6 @@
 				CE752699157478570081CB7C /* SDZhotelDengJiList.m */,
 				CE75269A157478570081CB7C /* SDZServices.h */,
 				CE75269B157478570081CB7C /* SDZServices.m */,
-				CE75269C157478570081CB7C /* SDZstring2ArrayOfHotelMap.h */,
-				CE75269D157478570081CB7C /* SDZstring2ArrayOfHotelMap.m */,
-				CE75269E157478570081CB7C /* SDZUser.h */,
-				CE75269F157478570081CB7C /* SDZUser.m */,
 				CE7526A0157478570081CB7C /* SDZYuDingComment.h */,
 				CE7526A1157478570081CB7C /* SDZYuDingComment.m */,
 				CE7526A2157478570081CB7C /* SDZYuDingCommentList.h */,
@@ -386,8 +393,6 @@
 				CE7526A9157478570081CB7C /* SDZYuDingRoomService.m */,
 				CE7526AA157478570081CB7C /* Soap+Prefix.h */,
 				CE7526AB157478570081CB7C /* Soap+Prefix.m */,
-				CE7527101574A30A0081CB7C /* SDZUserService.h */,
-				CE7527111574A30A0081CB7C /* SDZUserService.m */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -713,8 +718,6 @@
 				CE7526E7157478580081CB7C /* SDZHotel.m in Sources */,
 				CE7526E8157478580081CB7C /* SDZhotelDengJiList.m in Sources */,
 				CE7526E9157478580081CB7C /* SDZServices.m in Sources */,
-				CE7526EA157478580081CB7C /* SDZstring2ArrayOfHotelMap.m in Sources */,
-				CE7526EB157478580081CB7C /* SDZUser.m in Sources */,
 				CE7526EC157478580081CB7C /* SDZYuDingComment.m in Sources */,
 				CE7526ED157478580081CB7C /* SDZYuDingCommentList.m in Sources */,
 				CE7526EE157478580081CB7C /* SDZYuDingRoom.m in Sources */,
@@ -747,7 +750,6 @@
 				CE752709157478580081CB7C /* CXMLNode_CreationExtensions.m in Sources */,
 				CE75270A157478580081CB7C /* CXMLNode_PrivateExtensions.m in Sources */,
 				CE75270B157478580081CB7C /* CXMLNode_XPathExtensions.m in Sources */,
-				CE7527121574A30A0081CB7C /* SDZUserService.m in Sources */,
 				CE7B713E15785F9F0059F635 /* cityListViewController.m in Sources */,
 				CE76C07C158048D5006C5320 /* EGORefreshTableHeaderView.m in Sources */,
 				CE774E8E15819C9500D46012 /* IntroTabViewController.m in Sources */,
@@ -762,6 +764,10 @@
 				CE3DF6D51585EF62008A638A /* UIImageView+WebCache.m in Sources */,
 				CE77DAC915872EF900D7D3A5 /* RatingView.m in Sources */,
 				CE1878A9158857C80002DDB5 /* CommentViewController.m in Sources */,
+				CE78C0FF1589EDFB00D6C267 /* SDZstring2UserMap.m in Sources */,
+				CE78C1001589EDFB00D6C267 /* SDZUser.m in Sources */,
+				CE78C1011589EDFB00D6C267 /* SDZUserService.m in Sources */,
+				CE78C1081589EEC000D6C267 /* SDZstring2ArrayOfHotelMap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
