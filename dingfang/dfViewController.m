@@ -7,49 +7,82 @@
 //
 
 #import "dfViewController.h"
+#import "loginViewController.h"
+#import "DingDanViewController.h"
 
-@interface dfViewController ()
-
-@end
 
 @implementation dfViewController
 
-@synthesize loginBtn,hotelOrderBtn;
+@synthesize loginBtn,hotelOrderBtn,userBtn;
+
+
+- (void)passValue:(NSString *)valueOne
+{
+    userBtn = [[UIBarButtonItem alloc] initWithTitle:valueOne style:UIBarButtonItemStylePlain target:self action:@selector(gotoDingDanView)];
+    
+    self.navigationItem.rightBarButtonItem = nil;
+    [self.navigationItem setRightBarButtonItem:userBtn];
+    
+    NSLog(@"the get value is %@", userBtn.title);
+}
+
+- (void)colseUserBtn
+{
+
+    self.navigationItem.rightBarButtonItem = nil;
+    [self.navigationItem setRightBarButtonItem:loginBtn];
+
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     
-    SDZUserService *userService = [SDZUserService service];
-    userService.logging = YES;
-    [userService createSession:self action:@selector(createSessionHandler:)];
+
+    
+    
+    loginBtn = [[UIBarButtonItem alloc] initWithTitle:@"登录" style:UIBarButtonItemStyleDone target:self action:@selector(gotoLoginView)];
+    
+   [[self navigationItem] setRightBarButtonItem:loginBtn];
+    self.navigationItem.title = @"考";
 }
 
-- (void) createSessionHandler:(id)value {
+
+-(void)gotoLoginView
+{
     
-	// Handle errors
-	if([value isKindOfClass:[NSError class]]) {
-		NSLog(@"error:%@", value);
-		return;
-	}
-	// Handle faults
-	if([value isKindOfClass:[SoapFault class]]) {
-		NSLog(@"fault:%@", value);
-		return;
-	}
-    NSString *userSession = (NSString *)value;
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"MainStoryboard"
+                                                  bundle:nil];
+    loginViewController *loginVC = [sb instantiateViewControllerWithIdentifier:@"loginViewController"];
     
-    NSLog(@"%@",userSession);
+    loginVC.delegate = self;
     
-    NSUserDefaults *SaveDefaults = [NSUserDefaults standardUserDefaults];
-    [SaveDefaults setObject:userSession forKey:@"userSessionKey"];
+    [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    [self presentModalViewController:loginVC animated:NO];
+    NSLog(@"111 the get value is %@", loginBtn.title);
+    
+    
+}
+-(void)gotoDingDanView
+{
+    
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"MainStoryboard"
+                                                  bundle:nil];
+    DingDanViewController *dingDanVC = [sb instantiateViewControllerWithIdentifier:@"DingDanView"];
+    
+    dingDanVC.delegate = self;
+    
+    [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    [self presentModalViewController:dingDanVC animated:YES];
+    
     
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    
     // Release any retained subviews of the main view.
 }
 

@@ -46,7 +46,7 @@
         
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
     service.logging = YES;  
-    [service findYuDingCommentByHotel:self action:@selector(findYuDingCommentByHotelHandler:) sessionId:mySession hotelId:myHotelLong pageNo:1 perPageNum:10];
+    [service findYuDingCommentByHotel:self action:@selector(findYuDingCommentByHotelHandler:) sessionId:mySession hotelId:myHotelLong pingJi:0 pageNo:1 perPageNum:10];
     
     
     commTableView.delegate = self;

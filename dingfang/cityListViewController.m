@@ -37,7 +37,9 @@
     [super viewDidLoad];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    mySession = [userDefaults objectForKey:@"mySessionKey"];
+    mySession = [userDefaults objectForKey:@"userSessionKey"];
+    
+    
     
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
     service.logging = YES;        

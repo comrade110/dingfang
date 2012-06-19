@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SDZUserService.h"
 
 @interface dfAppDelegate : UIResponder <UIApplicationDelegate>
 

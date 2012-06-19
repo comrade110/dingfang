@@ -8,14 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "SDZUserService.h"
+#import "dfLoginBtnDelegate.h"
 
 
-@interface dfViewController : UIViewController{
-    IBOutlet UIBarButtonItem *loginBtn;
+@interface dfViewController : UIViewController<dfLoginBtnDelegate>{
+    IBOutlet UINavigationItem *navigationItem;
+    UIBarButtonItem *loginBtn;
     IBOutlet UIButton *hotelOrderBtn;
+    UIBarButtonItem *userBtn;
 
 }
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *loginBtn;
+@property(nonatomic,retain) UIBarButtonItem *loginBtn;
 @property(nonatomic,retain) IBOutlet UIButton *hotelOrderBtn;
+@property(nonatomic,retain) UIBarButtonItem *userBtn;
+
+
 
 @end

@@ -57,8 +57,8 @@
 	- (SoapRequest*) countYuDingCommmentByHotel: (id) target action: (SEL) action sessionId: (NSString*) sessionId hotelId: (long) hotelId;
 
 	/* Returns NSMutableArray*.  */
-	- (SoapRequest*) findYuDingCommentByHotel: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId hotelId: (long) hotelId pageNo: (int) pageNo perPageNum: (int) perPageNum;
-	- (SoapRequest*) findYuDingCommentByHotel: (id) target action: (SEL) action sessionId: (NSString*) sessionId hotelId: (long) hotelId pageNo: (int) pageNo perPageNum: (int) perPageNum;
+	- (SoapRequest*) findYuDingCommentByHotel: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId hotelId: (long) hotelId pingJi: (int)pingJi pageNo: (int) pageNo perPageNum: (int) perPageNum;
+- (SoapRequest*) findYuDingCommentByHotel: (id) target action: (SEL) action sessionId: (NSString*) sessionId hotelId: (long) hotelId pingJi: (int)pingJi pageNo: (int) pageNo perPageNum: (int) perPageNum;
 
 	/* Returns BOOL.  */
 	- (SoapRequest*) bookRoom: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId roomId: (NSString*) roomId userId: (NSString*) userId;

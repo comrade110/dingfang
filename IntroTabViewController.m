@@ -27,15 +27,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    UIButton *commentBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 70, 31)];
-    
-    [commentBtn setBackgroundImage:[UIImage imageNamed:@"pay1@2x.png"] forState:UIControlStateNormal];
-    
-    UIBarButtonItem *commentItem = [[UIBarButtonItem alloc] initWithCustomView:commentBtn];
-    
-    
-    
-    self.navigationItem.rightBarButtonItem = commentItem;
 
 }
 

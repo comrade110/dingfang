@@ -19,7 +19,7 @@
 	{
 		if(self = [super init])
 		{
-			self.serviceUrl = @"http://192.168.3.1:9001/idc/services/UserService";
+			self.serviceUrl = @"http://192.168.3.3:9001/idc/services/UserService";
 			self.namespace = @"http://soap.user/";
 			self.headers = nil;
 			self.logging = NO;
@@ -72,7 +72,7 @@
 		[_params addObject: [[SoapParameter alloc] initWithValue: sessionId forName: @"sessionId"]];
 		[_params addObject: [[SoapParameter alloc] initWithValue: mobileCode forName: @"mobileCode"]];
 		NSString* _envelope = [Soap createEnvelope: @"validateCode" forNamespace: self.namespace withParameters: _params withHeaders: self.headers];
-		SoapRequest* _request = [SoapRequest create: _target action: _action service: self soapAction: @"" postData: _envelope deserializeTo: @"BOOL"];
+		SoapRequest* _request = [SoapRequest create: _target action: _action service: self soapAction: @"" postData: _envelope deserializeTo: @"NSString"];
 		[_request send];
 		return _request;
 	}
@@ -107,7 +107,7 @@
 		[_params addObject: [[SoapParameter alloc] initWithValue: userId forName: @"userId"]];
 		[_params addObject: [[SoapParameter alloc] initWithValue: nickName forName: @"nickName"]];
 		NSString* _envelope = [Soap createEnvelope: @"findNickNameIsUsed" forNamespace: self.namespace withParameters: _params withHeaders: self.headers];
-		SoapRequest* _request = [SoapRequest create: _target action: _action service: self soapAction: @"" postData: _envelope deserializeTo: @"BOOL"];
+		SoapRequest* _request = [SoapRequest create: _target action: _action service: self soapAction: @"" postData: _envelope deserializeTo: @"NSString"];
 		[_request send];
 		return _request;
 	}

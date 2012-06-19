@@ -15,7 +15,43 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    SDZUserService *userService = [SDZUserService service];
+    userService.logging = YES;
+    [userService createSession:self action:@selector(createSessionHandler:)];
+    
+    // 判断用户是否登录的常量  0为未登录  1为登录
+    NSUserDefaults *SaveDefaults = [NSUserDefaults standardUserDefaults];
+    
+    int  isLogin = 0;
+    [SaveDefaults setInteger:isLogin forKey:@"isLogin"];
+    
+    
     return YES;
+}
+
+- (void) createSessionHandler:(id)value {
+    
+	// Handle errors
+	if([value isKindOfClass:[NSError class]]) {
+		NSLog(@"error:%@", value);
+		return;
+	}
+	// Handle faults
+	if([value isKindOfClass:[SoapFault class]]) {
+		NSLog(@"fault:%@", value);
+		return;
+	}
+    NSString *userSession = (NSString *)value;
+    
+    NSLog(@"%@",userSession);
+    SDZUserService *userService = [SDZUserService service];
+    userService.logging = YES;
+    
+    [userService noOperation:self action:nil sessionId:userSession];
+    
+    NSUserDefaults *SaveDefaults = [NSUserDefaults standardUserDefaults];
+    [SaveDefaults setObject:userSession forKey:@"userSessionKey"];
+    
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

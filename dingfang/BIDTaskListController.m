@@ -63,6 +63,8 @@
     
     mySession = [SaveDefaults objectForKey:@"userSessionKey"];
     
+    NSLog(@"----------%@-----------",mySession);
+    
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
     service.logging = YES;        
     [service findAllCity:self action:@selector(findAllCityHandle:) sessionId:mySession];  

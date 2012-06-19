@@ -89,6 +89,9 @@
 		CE791250156F1C7300EF29B8 /* button_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79124E156F1C7300EF29B8 /* button_pressed.png */; };
 		CE791258156F73DB00EF29B8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE791256156F73CC00EF29B8 /* QuartzCore.framework */; };
 		CE791268156F8F6200EF29B8 /* navigation_bar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE791267156F8F6200EF29B8 /* navigation_bar_bg@2x.png */; };
+		CE79C3B515900E1C0083F378 /* DingDanNaviController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79C3B415900E1C0083F378 /* DingDanNaviController.m */; };
+		CE79C3B9159013020083F378 /* MainTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79C3B8159013020083F378 /* MainTabViewController.m */; };
+		CE79D69E158F13C70039FAFA /* DingDanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79D69D158F13C70039FAFA /* DingDanViewController.m */; };
 		CE79E02D1585983900722D4F /* HotelIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79E02C1585983900722D4F /* HotelIntroViewController.m */; };
 		CE79E03115859B9800722D4F /* HotelIntroImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79E03015859B9800722D4F /* HotelIntroImageViewController.m */; };
 		CE7B29B3156A1E930055CCDD /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7B29B2156A1E930055CCDD /* IntroViewController.m */; };
@@ -268,6 +271,13 @@
 		CE79124E156F1C7300EF29B8 /* button_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_pressed.png; sourceTree = "<group>"; };
 		CE791256156F73CC00EF29B8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE791267156F8F6200EF29B8 /* navigation_bar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_bar_bg@2x.png"; sourceTree = "<group>"; };
+		CE79C3B315900E1C0083F378 /* DingDanNaviController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DingDanNaviController.h; sourceTree = "<group>"; };
+		CE79C3B415900E1C0083F378 /* DingDanNaviController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DingDanNaviController.m; sourceTree = "<group>"; };
+		CE79C3B7159013020083F378 /* MainTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabViewController.h; sourceTree = "<group>"; };
+		CE79C3B8159013020083F378 /* MainTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabViewController.m; sourceTree = "<group>"; };
+		CE79D69A158EEFD30039FAFA /* dfLoginBtnDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfLoginBtnDelegate.h; sourceTree = "<group>"; };
+		CE79D69C158F13C70039FAFA /* DingDanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DingDanViewController.h; sourceTree = "<group>"; };
+		CE79D69D158F13C70039FAFA /* DingDanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DingDanViewController.m; sourceTree = "<group>"; };
 		CE79E02B1585983900722D4F /* HotelIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotelIntroViewController.h; sourceTree = "<group>"; };
 		CE79E02C1585983900722D4F /* HotelIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotelIntroViewController.m; sourceTree = "<group>"; };
 		CE79E02F15859B9800722D4F /* HotelIntroImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotelIntroImageViewController.h; sourceTree = "<group>"; };
@@ -512,9 +522,14 @@
 				CE79E03015859B9800722D4F /* HotelIntroImageViewController.m */,
 				CE7F502715625A18007AD4A5 /* dfAppDelegate.h */,
 				CE7F502815625A18007AD4A5 /* dfAppDelegate.m */,
+				CE79C3B315900E1C0083F378 /* DingDanNaviController.h */,
+				CE79C3B415900E1C0083F378 /* DingDanNaviController.m */,
 				CE7F502A15625A18007AD4A5 /* MainStoryboard.storyboard */,
 				CE7F502D15625A18007AD4A5 /* dfViewController.h */,
 				CE7F502E15625A18007AD4A5 /* dfViewController.m */,
+				CE79D69A158EEFD30039FAFA /* dfLoginBtnDelegate.h */,
+				CE79D69C158F13C70039FAFA /* DingDanViewController.h */,
+				CE79D69D158F13C70039FAFA /* DingDanViewController.m */,
 				CEEC378A15638A0400B888A0 /* BIDTaskListController.h */,
 				CEEC378B15638A0400B888A0 /* BIDTaskListController.m */,
 				CE77DA991586DA6300D7D3A5 /* CommentViewController.h */,
@@ -536,6 +551,8 @@
 				CE7B713C15785F9F0059F635 /* cityListViewController.h */,
 				CE7B713D15785F9F0059F635 /* cityListViewController.m */,
 				CE7F501F15625A18007AD4A5 /* Supporting Files */,
+				CE79C3B7159013020083F378 /* MainTabViewController.h */,
+				CE79C3B8159013020083F378 /* MainTabViewController.m */,
 			);
 			path = dingfang;
 			sourceTree = "<group>";
@@ -768,6 +785,9 @@
 				CE78C1001589EDFB00D6C267 /* SDZUser.m in Sources */,
 				CE78C1011589EDFB00D6C267 /* SDZUserService.m in Sources */,
 				CE78C1081589EEC000D6C267 /* SDZstring2ArrayOfHotelMap.m in Sources */,
+				CE79D69E158F13C70039FAFA /* DingDanViewController.m in Sources */,
+				CE79C3B515900E1C0083F378 /* DingDanNaviController.m in Sources */,
+				CE79C3B9159013020083F378 /* MainTabViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

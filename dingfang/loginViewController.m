@@ -15,6 +15,7 @@
 @implementation loginViewController
 
 @synthesize userPhoneID, userPW, ruserPhoneID, ruserID, ruserPWCheck,ruserPW, mobileVerify,loginBtn, registerBtn, loginView,registerView;
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,8 +38,8 @@
     [self.view addGestureRecognizer: tapGestureRecognizer]; 
     [tapGestureRecognizer setCancelsTouchesInView:NO];   // avoid UITapGestureRecognizer in button
     
-    
     userService = [SDZUserService service];
+    
     userService.logging = YES;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -79,13 +80,29 @@
 // 注册提交按钮点击后事件
 -(IBAction)submitBtnPress:(id)sender
 {        
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
-//验证手机号码是否存在
+    NSString *yanzhengma = [userDefaults objectForKey:@"yanzhengma"];
+    
+    NSLog(@"%@",mobileVerify.text);
+    
+    NSLog(@"%@",yanzhengma);
+    
+//  忽略大小写 全转为小写    
+
+    if (yanzhengma == nil || [[mobileVerify.text lowercaseString] isEqualToString:[yanzhengma lowercaseString]] == NO ) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"验证码不正确。请重新输入" 
+                                                       delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
+        [alert show];
+        return;
+    }
     
     if ([self isAllFieldOk]) {
         [userService findMobileIsUsed:self action:@selector(findMobileIsUsedHandler:) sessionId:mySession userId:nil mobile:ruserPhoneID.text];  
         
-//        [userService findNickNameIsUsed:self action:@selector(findNickNameIsUsedHandler:) sessionId:mySession userId:nil nickName:ruserID.text];
+        [userService findNickNameIsUsed:self action:@selector(findNickNameIsUsedHandler:) sessionId:mySession userId:nil nickName:ruserID.text];
+
+        [userService saveRegisterUser:self action:@selector(saveRegisterUserHandler:) sessionId:mySession nickName:ruserID.text mobile:ruserPhoneID.text password:ruserPW.text identityNo:@"" autoLogin:@"false"];
     }
         
    
@@ -262,20 +279,44 @@
     
 	// Handle errors
 	if([value isKindOfClass:[NSError class]]) {
-		NSLog(@"123321 %@", value);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"账号密码不对吧！" 
+                                                       delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
+        [alert show];
 		return;
 	}
     
 	// Handle faults
 	if([value isKindOfClass:[SoapFault class]]) {
-		NSLog(@"543345 %@", value);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"账号密码不对吧" 
+                                                       delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
+        [alert show];
 		return;
 	}				
     
     
 	// Do something with the SDZUser* result
     SDZUser* result = (SDZUser*)value;
-	NSLog(@"userLogin returned the value: %@", result);
+
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setInteger:result.grade forKey:@"grade"];
+    [userDefaults setObject:result.nickName forKey:@"nickName"];
+    [userDefaults setDouble:result.score forKey:@"score"];
+    [userDefaults setDouble:result.money forKey:@"money"];
+    [userDefaults setObject:result.lastLoginTime forKey:@"lastLoginTime"];
+    
+    int  isLogin = 1;
+    
+     [userDefaults setInteger:isLogin forKey:@"isLogin"];
+    
+    
+    
+    [delegate passValue:result.nickName];
+    NSLog(@"self.value.text is%@", result.nickName);
+    
+    
+    [self dismissModalViewControllerAnimated:YES];   
+    
     
 }
 
@@ -294,7 +335,7 @@
     if ( [value isEqualToString:@"false"]) {
         NSLog(@"手机号码可以使用");
         
-    }else {
+    }else if([value isEqualToString:@"true"]){
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"该手机号码已被使用。" 
                                                        delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
@@ -304,22 +345,20 @@
    
 }
 
-- (void) findNickNameIsUsedHandler: (BOOL) value {
+- (void) findNickNameIsUsedHandler: (NSString*) value {
+    
+    NSString *result = value;
     
     
-    NSLog(@"caca %@",[NSNumber numberWithBool:value]);
-    
-    NSString *isUsed = [NSString stringWithFormat:@"%@",[NSNumber numberWithBool:value]];
-    
-    if ( [isUsed isEqualToString:@"0"]) {
+    if ( [result isEqualToString:@"false"]) {
+        NSLog(@"用户名可以使用");   
         
-//        [userService validateCode:self action:@selector(validateCodeHandler:) sessionId:mySession 
-//                       mobileCode:mobileVerify.text];
-        
-    }else{
+    }else if ( [result isEqualToString:@"true"]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"用户名已经存在。" 
                                                        delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
         [alert show];
+        
+        NSLog(@"为什么执行2次！！！！");
         return;
     }
     
@@ -331,7 +370,7 @@
     NSString *result = (NSString*) value;
     // Handle errors
 	if([value isKindOfClass:[NSError class]]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"注册失败。" 
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"验证信息出错。" 
                                                        delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
         [alert show];
         NSLog(@"123 %@", value);
@@ -340,7 +379,7 @@
     
 	// Handle faults
 	if([value isKindOfClass:[SoapFault class]]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"注册失败鸟。" 
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"验证出错。" 
                                                        delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
         [alert show];
         NSLog(@"543345 %@", value);
@@ -352,21 +391,9 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"短息验证码已发送，请注意查收。" 
                                                        delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
         [alert show];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setValue:result forKey:@"yanzhengma"];
     
-    
-}
-
-- (void) validateCodeHandler: (BOOL) value {
-                                                            
-                                                            
-    if (value) {
-//        [userService saveRegisterUser:self action:@selector(saveRegisterUserHandler:) sessionId:mySession nickName:ruserID.text mobile:ruserPhoneID.text password:ruserPW.text identityNo:@"" autoLogin:@""];
-    }else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"验证码错误，请重新输入。" 
-                                                       delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
-        [alert show];
-    }
-                                                            
 }
 
 
@@ -397,8 +424,8 @@
         [alert show];
         
         NSLog(@"%@",result);
-//        [registerView removeFromSuperview];
-//        [self.view addSubview:loginView];
+        [registerView removeFromSuperview];
+        [self.view addSubview:loginView];
     }
 
 }

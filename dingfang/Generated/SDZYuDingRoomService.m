@@ -28,7 +28,7 @@
 	{
 		if(self = [super init])
 		{
-			self.serviceUrl = @"http://192.168.3.1:9001/idc/services/YuDingRoomService";
+			self.serviceUrl = @"http://192.168.3.3:9001/idc/services/YuDingRoomService";
 			self.namespace = @"http://soap.additional/";
 			self.headers = nil;
 			self.logging = NO;
@@ -217,17 +217,18 @@
 	}
 
 	/* Returns NSMutableArray*.  */
-	- (SoapRequest*) findYuDingCommentByHotel: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId hotelId: (long) hotelId pageNo: (int) pageNo perPageNum: (int) perPageNum
+- (SoapRequest*) findYuDingCommentByHotel: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId hotelId: (long) hotelId pingJi:(int)pingJi pageNo: (int) pageNo perPageNum: (int) perPageNum
 	{
-		return [self findYuDingCommentByHotel: handler action: nil sessionId: sessionId hotelId: hotelId pageNo: pageNo perPageNum: perPageNum];
+		return [self findYuDingCommentByHotel: handler action: nil sessionId: sessionId hotelId: hotelId pingJi: pingJi pageNo: pageNo perPageNum: perPageNum];
 	}
 
-	- (SoapRequest*) findYuDingCommentByHotel: (id) _target action: (SEL) _action sessionId: (NSString*) sessionId hotelId: (long) hotelId pageNo: (int) pageNo perPageNum: (int) perPageNum
+- (SoapRequest*) findYuDingCommentByHotel: (id) _target action: (SEL) _action sessionId: (NSString*) sessionId hotelId: (long) hotelId pingJi: (int)pingJi pageNo: (int) pageNo perPageNum: (int) perPageNum
 		{
 		NSMutableArray* _params = [NSMutableArray array];
 		
-		[_params addObject: [[SoapParameter alloc] initWithValue: sessionId forName: @"sessionId"]];
-		[_params addObject: [[SoapParameter alloc] initWithValue: [NSNumber numberWithLong: hotelId] forName: @"hotelId"]];
+        [_params addObject: [[SoapParameter alloc] initWithValue: sessionId forName: @"sessionId"]];
+        [_params addObject: [[SoapParameter alloc] initWithValue: [NSNumber numberWithLong: hotelId] forName: @"hotelId"]];
+        [_params addObject: [[SoapParameter alloc] initWithValue: [NSNumber numberWithInt: pingJi] forName: @"pingJi"]];
 		[_params addObject: [[SoapParameter alloc] initWithValue: [NSNumber numberWithInt: pageNo] forName: @"pageNo"]];
 		[_params addObject: [[SoapParameter alloc] initWithValue: [NSNumber numberWithInt: perPageNum] forName: @"perPageNum"]];
 		NSString* _envelope = [Soap createEnvelope: @"findYuDingCommentByHotel" forNamespace: self.namespace withParameters: _params withHeaders: self.headers];
