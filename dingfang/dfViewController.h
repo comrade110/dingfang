@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "SDZUserService.h"
 #import "dfLoginBtnDelegate.h"
+#import "GTMBase64.h"
+#include <CommonCrypto/CommonCryptor.h>
 
 
 @interface dfViewController : UIViewController<dfLoginBtnDelegate>{
@@ -22,6 +24,7 @@
 @property(nonatomic,retain) IBOutlet UIButton *hotelOrderBtn;
 @property(nonatomic,retain) UIBarButtonItem *userBtn;
 
+- (NSString*)TripleDES:(NSString*)plainText encryptOrDecrypt:(CCOperation)encryptOrDecrypt key:(NSString*)key;
 
 
 @end

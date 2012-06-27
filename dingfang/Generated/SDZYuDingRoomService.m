@@ -28,7 +28,7 @@
 	{
 		if(self = [super init])
 		{
-			self.serviceUrl = @"http://192.168.3.3:9001/idc/services/YuDingRoomService";
+			self.serviceUrl = @"http://192.168.3.1:9001/idc/services/YuDingRoomService";
 			self.namespace = @"http://soap.additional/";
 			self.headers = nil;
 			self.logging = NO;
@@ -152,6 +152,22 @@
 		return _request;
 	}
 
+    /* Returns NSMutableArray*.  */
+    - (SoapRequest*) getZhiFuConfig: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId
+    {
+        return [self getZhiFuConfig: handler action: nil sessionId: sessionId];
+    }
+
+    - (SoapRequest*) getZhiFuConfig: (id) _target action: (SEL) _action sessionId: (NSString*) sessionId
+    {
+        NSMutableArray* _params = [NSMutableArray array];
+    
+        [_params addObject: [[SoapParameter alloc] initWithValue: sessionId forName: @"sessionId"]];
+        NSString* _envelope = [Soap createEnvelope: @"getZhiFuConfig" forNamespace: self.namespace withParameters: _params withHeaders: self.headers];
+        SoapRequest* _request = [SoapRequest create: _target action: _action service: self soapAction: @"" postData: _envelope deserializeTo: [SDZstring2stringMap alloc]];
+        [_request send];
+        return _request;
+    }
 	/* Returns NSString*.  */
 	- (SoapRequest*) findYuDingRoomLogInfo: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId hotelId: (NSString*) hotelId cityName: (NSString*) cityName startTime: (NSString*) startTime endTime: (NSString*) endTime pageNo: (int) pageNo perPageNum: (int) perPageNum
 	{
@@ -237,24 +253,24 @@
 		return _request;
 	}
 
-	/* Returns BOOL.  */
-	- (SoapRequest*) bookRoom: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId roomId: (NSString*) roomId userId: (NSString*) userId
-	{
-		return [self bookRoom: handler action: nil sessionId: sessionId roomId: roomId userId: userId];
-	}
+/* Returns NSString*.  */
+- (SoapRequest*) bookRoom: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId roomId: (NSString*) roomId orderNum: (NSString*) orderNum
+{
+    return [self bookRoom: handler action: nil sessionId: sessionId roomId: roomId orderNum: orderNum];
+}
 
-	- (SoapRequest*) bookRoom: (id) _target action: (SEL) _action sessionId: (NSString*) sessionId roomId: (NSString*) roomId userId: (NSString*) userId
-		{
-		NSMutableArray* _params = [NSMutableArray array];
-		
-		[_params addObject: [[SoapParameter alloc] initWithValue: sessionId forName: @"sessionId"]];
-		[_params addObject: [[SoapParameter alloc] initWithValue: roomId forName: @"roomId"]];
-		[_params addObject: [[SoapParameter alloc] initWithValue: userId forName: @"userId"]];
-		NSString* _envelope = [Soap createEnvelope: @"bookRoom" forNamespace: self.namespace withParameters: _params withHeaders: self.headers];
-		SoapRequest* _request = [SoapRequest create: _target action: _action service: self soapAction: @"" postData: _envelope deserializeTo: @"BOOL"];
-		[_request send];
-		return _request;
-	}
+- (SoapRequest*) bookRoom: (id) _target action: (SEL) _action sessionId: (NSString*) sessionId roomId: (NSString*) roomId orderNum: (NSString*) orderNum
+{
+    NSMutableArray* _params = [NSMutableArray array];
+    
+    [_params addObject: [[SoapParameter alloc] initWithValue: sessionId forName: @"sessionId"]];
+    [_params addObject: [[SoapParameter alloc] initWithValue: roomId forName: @"roomId"]];
+    [_params addObject: [[SoapParameter alloc] initWithValue: orderNum forName: @"orderNum"]];
+    NSString* _envelope = [Soap createEnvelope: @"bookRoom" forNamespace: self.namespace withParameters: _params withHeaders: self.headers];
+    SoapRequest* _request = [SoapRequest create: _target action: _action service: self soapAction: @"" postData: _envelope deserializeTo: @"NSString"];
+    [_request send];
+    return _request;
+}
 
 	/* Returns NSMutableArray*.  */
 	- (SoapRequest*) findAllCity: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId

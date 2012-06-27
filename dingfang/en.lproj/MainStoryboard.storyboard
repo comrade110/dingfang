@@ -397,7 +397,7 @@
                     </navigationBar>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="1106" y="-167"/>
+            <point key="canvasLocation" x="1086" y="-165"/>
         </scene>
         <!--Ding Dan View Controller-->
         <scene sceneID="gtb-pZ-HMd">
@@ -476,11 +476,11 @@
             </objects>
             <point key="canvasLocation" x="1781" y="-1559"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Intro Navi View Controller-->
         <scene sceneID="9YS-J3-ayT">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aHg-Le-KEz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="QGQ-Oz-PK7" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="IntroNaviViewController" definesPresentationContext="YES" navigationBarHidden="YES" id="QGQ-Oz-PK7" customClass="IntroNaviViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="RM6-ek-CfQ"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="YFL-tO-D45">
                         <rect key="frame" x="0.0" y="-44" width="0.0" height="44"/>
@@ -491,13 +491,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="vcF-XZ-ZWt" kind="relationship" relationship="rootViewController" id="zhg-kr-JdU"/>
+                        <segue destination="vcF-XZ-ZWt" kind="relationship" relationship="rootViewController" id="ORb-8V-Yrc"/>
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="2783" y="-861"/>
+            <point key="canvasLocation" x="2777" y="-831"/>
         </scene>
-        <!--Intro View Controller-->
+        <!--Intro View Controller - asdsada-->
         <scene sceneID="8FN-JS-dOk">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AVk-IP-V3d" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -529,7 +529,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="o3r-Sy-Rd2"/>
-                    <navigationItem key="navigationItem" id="WMh-MW-ZnR"/>
+                    <navigationItem key="navigationItem" title="asdsada" id="WMh-MW-ZnR"/>
                     <connections>
                         <outlet property="imageScrollView" destination="tTc-dp-zAT" id="Gx9-LZ-30i"/>
                         <outlet property="pageControl" destination="ffS-Ze-5BU" id="Pry-xg-fYv"/>
@@ -537,7 +537,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="3256" y="-861"/>
+            <point key="canvasLocation" x="3256" y="-831"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MNd-Q6-4ok">
@@ -727,13 +727,14 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1708" y="-832"/>
+            <point key="canvasLocation" x="1690" y="-841"/>
         </scene>
         <!--Intro Tab View Controller-->
         <scene sceneID="3G2-kc-Dqd">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w9j-9m-QFC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController storyboardIdentifier="IntroTabViewController" definesPresentationContext="YES" hidesBottomBarWhenPushed="YES" id="pIt-qN-pPf" customClass="IntroTabViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="7gt-oo-LP0"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="0uh-LY-Zfz">
@@ -748,7 +749,7 @@
                     </connections>
                 </tabBarController>
             </objects>
-            <point key="canvasLocation" x="2267" y="-861"/>
+            <point key="canvasLocation" x="2231" y="-831"/>
         </scene>
         <!--Intro Image View Controller-->
         <scene sceneID="uQY-mV-fXe">
@@ -844,6 +845,9 @@
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
             </relationships>
         </class>
+        <class className="IntroNaviViewController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IntroNaviViewController.h"/>
+        </class>
         <class className="IntroTabViewController" superclassName="UITabBarController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/IntroTabViewController.h"/>
         </class>
@@ -851,9 +855,13 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/IntroViewController.h"/>
             <relationships>
                 <relationship kind="action" name="changePage:"/>
+                <relationship kind="outlet" name="firstTabBarItem" candidateClass="UITabBarItem"/>
                 <relationship kind="outlet" name="imageScrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="secondTabBarItem" candidateClass="UITabBarItem"/>
+                <relationship kind="outlet" name="tabBar" candidateClass="UITabBar"/>
+                <relationship kind="outlet" name="thirdTabBarItem" candidateClass="UITabBarItem"/>
             </relationships>
         </class>
         <class className="cityListViewController" superclassName="UITableViewController">

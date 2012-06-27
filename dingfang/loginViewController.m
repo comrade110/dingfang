@@ -299,11 +299,15 @@
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
+    NSString *userID;
+    userID = [NSString stringWithFormat:@"%lld",result._id];
+    
     [userDefaults setInteger:result.grade forKey:@"grade"];
     [userDefaults setObject:result.nickName forKey:@"nickName"];
     [userDefaults setDouble:result.score forKey:@"score"];
     [userDefaults setDouble:result.money forKey:@"money"];
     [userDefaults setObject:result.lastLoginTime forKey:@"lastLoginTime"];
+    [userDefaults setObject:userID forKey:@"userID"];
     
     int  isLogin = 1;
     

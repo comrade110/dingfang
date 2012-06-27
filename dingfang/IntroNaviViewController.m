@@ -1,15 +1,15 @@
 //
-//  IntroTabViewController.m
+//  IntroNaviViewController.m
 //  dingfang
 //
-//  Created by user on 12-6-8.
+//  Created by user on 12-6-20.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "IntroTabViewController.h"
+#import "IntroNaviViewController.h"
 
 
-@implementation IntroTabViewController
+@implementation IntroNaviViewController
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -24,13 +24,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *goodsTitle = [userDefaults objectForKey:@"goodsTitle"];
-    self.navigationItem.title =goodsTitle;
 
+    
 	// Do any additional setup after loading the view.
-
 }
 
 - (void)viewDidUnload

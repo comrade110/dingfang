@@ -36,7 +36,6 @@
 {
     [super viewDidLoad];
     
-    
     listView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, 320, 340) style:UITableViewStylePlain];
     listView.delegate = self;
     listView.dataSource = self;
@@ -441,6 +440,12 @@
         [self parseDire2:document2]; 
         
     }  
+
+// 获取预定房间剩余数量    
+    
+    SDZYuDingRoomService *service = [SDZYuDingRoomService service];
+    service.logging = YES; 
+    
     
     
     // Configure the cell...
@@ -448,9 +453,15 @@
     identifier = @"plainCell";
     UITableViewCell *cell;
     
+    NSString *cityname = [item2 valueForKey:@"city"];
     NSString *hotelname = [item2 valueForKey:@"name"];
     NSString *roomType = [item valueForKey:@"roomType"];
-    NSString *releaseTime = [item valueForKey:@"releaseTime"];
+    
+    
+    float pricefloat = [[item valueForKey:@"price"] floatValue];
+    
+    NSString *price = [NSString stringWithFormat:@"%.3f元",pricefloat];
+    
     cell = [listView dequeueReusableCellWithIdentifier:identifier];
     
     if (cell == nil) {
@@ -463,16 +474,13 @@
         } 
     } 
     
-    UILabel *cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 220, 30)];
+    cellLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 220, 30)];
     
-    cellLabel.text = [NSString stringWithFormat:@"%@%@%@",hotelname,roomType,releaseTime];
+    cellLabel.text = [NSString stringWithFormat:@"[%@]%@%@仅售%@",cityname,hotelname,roomType,price];
     cellLabel.font = [UIFont systemFontOfSize:12.0f];
     
     UILabel *priceLable = [[UILabel alloc] initWithFrame:CGRectMake(220, 10, 140, 30)];
     
-    float pricefloat = [[item valueForKey:@"price"] floatValue];
-    
-    NSString *price = [NSString stringWithFormat:@"%.3f元",pricefloat];
     
     priceLable.text = price;
     
@@ -540,15 +548,14 @@
     NSString *hotelDesc = [hotelArr objectAtIndex:indexPath.row];
     
     [userDefaults setObject:hotelDesc forKey:@"descKey"];
-    
-    
+    [userDefaults setObject:cellLabel.text forKey:@"goodsTitle"];
     
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"MainStoryboard"
                                                   bundle:nil];
-        IntroTabViewController *introTabViewController = [sb instantiateViewControllerWithIdentifier:@"IntroTabViewController"];
+        IntroTabViewController *introViewController = [sb instantiateViewControllerWithIdentifier:@"IntroTabViewController"];
      // ...
      // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:introTabViewController animated:YES];
+     [self.navigationController pushViewController:introViewController animated:YES];
     
 
 }

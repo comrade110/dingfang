@@ -8,6 +8,10 @@
 
 #import "IntroViewController.h"
 #import "introImageViewController.h"
+#import "loginViewController.h"
+#import "CommentViewController.h"
+#import "HotelIntroViewController.h"
+#include <CommonCrypto/CommonCryptor.h>
 
 static NSUInteger kNumberOfPages = 3;
 
@@ -15,6 +19,7 @@ static NSUInteger kNumberOfPages = 3;
 @implementation IntroViewController
 
 @synthesize scrollView,imageScrollView, pageControl, viewControllers;
+@synthesize tabBar,firstTabBarItem,secondTabBarItem,thirdTabBarItem;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -94,23 +99,32 @@ static NSUInteger kNumberOfPages = 3;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     mySession = [userDefaults objectForKey:@"userSessionKey"];
     NSString *myHotelArr = [userDefaults objectForKey:@"descKey"];
+    myUserID = [userDefaults objectForKey:@"userID"];
     
     CXMLDocument *document = [[CXMLDocument alloc] initWithXMLString:myHotelArr options:0 error:nil];
     
     [self parseDire:document];
     [self parseDire2:document];
     
-    NSString *myDesc = [item valueForKey:@"desc"];
+    myDesc = [item valueForKey:@"desc"];
     
-    NSString *myAddress = [item2 valueForKey:@"address"];
+    myAddress = [item2 valueForKey:@"address"];
     
-    NSString *myFax = [item2 valueForKey:@"fax"];
+    myHotelName = [item2 valueForKey:@"name"];
     
-    NSString *myPhone = [item2 valueForKey:@"phone"];
+    myRoomType = [item valueForKey:@"roomType"];
     
-    NSString *myPrice = [item valueForKey:@"price"];
+    myFax = [item2 valueForKey:@"fax"];
     
-    NSString *myHotelID = [item2 valueForKey:@"id"];
+    myPhone = [item2 valueForKey:@"phone"];
+    
+    myPrice = [item valueForKey:@"price"];
+    
+    myNum = [item valueForKey:@"num"];
+    
+    myHotelID = [item2 valueForKey:@"id"];
+    
+    myRoomID = [item valueForKey:@"id"];
     
     [userDefaults setObject:myHotelID forKey:@"hotelID"];
     
@@ -140,10 +154,25 @@ static NSUInteger kNumberOfPages = 3;
     [self loadScrollViewWithPage:0];
     [self loadScrollViewWithPage:1];
     
+    
+    
     UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 105, 120, 30)]; 
     priceLabel.text = myPrice;
     priceLabel.font = [UIFont fontWithName:@"Arial" size:16];
     priceLabel.textColor = [UIColor orangeColor];
+    
+    UILabel *numLabel = [[UILabel alloc] initWithFrame:CGRectMake(140, 105, 80, 30)];
+    numLabel.text = [NSString stringWithFormat:@"剩余数量：%@间",myNum];
+    numLabel.font = [UIFont fontWithName:@"Arial" size:12];
+    
+    UIButton *orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(235, 105, 70, 30)];
+    [orderBtn setTitle:@"立即抢购" forState:UIControlStateNormal];
+    orderBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    [orderBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [orderBtn setBackgroundImage:[UIImage imageNamed:@"xiadan.png"] forState:UIControlStateNormal];
+    [orderBtn addTarget:self action:@selector(orderBtnPress) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     
     
     
@@ -195,8 +224,9 @@ static NSUInteger kNumberOfPages = 3;
     
     
     
-    
+    [scrollView addSubview:orderBtn];
     [scrollView addSubview:priceLabel];
+    [scrollView addSubview:numLabel];
     [scrollView addSubview:nav];    
     [scrollView addSubview:descLable];
     [scrollView addSubview:contact];
@@ -206,10 +236,9 @@ static NSUInteger kNumberOfPages = 3;
     [scrollView sendSubviewToBack:imageScrollView];
     [scrollView setContentSize:CGSizeMake(320,1000)];
     
-
-    
-    
 }
+
+
 
 - (void)viewDidUnload
 {
@@ -217,6 +246,140 @@ static NSUInteger kNumberOfPages = 3;
     // Release any retained subviews of the main view.
 }
 
+
+
+// 点击下单按钮
+
+- (void)orderBtnPress
+{
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"MainStoryboard"
+                                                  bundle:nil];
+    loginViewController *loginVC = [sb instantiateViewControllerWithIdentifier:@"loginViewController"];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    int isLogin = [userDefaults integerForKey:@"isLogin"];
+    
+    if (isLogin == 1) {
+        if ([myNum integerValue] > 0) {
+            orderView = [[UIView alloc] initWithFrame:CGRectMake(160, 240, 0, 0)];
+            
+            NSArray *subviews = orderView.subviews;
+            
+            for (UIView *view in subviews) {
+                if ([view isKindOfClass:[UILabel class]]) {
+                    UILabel *label = (UILabel*)view;
+                    
+                    label.font = [UIFont systemFontOfSize:12];
+                    
+                }
+            }
+            
+            [UIView beginAnimations:@"comeOut" context:nil];
+            [UIView setAnimationDuration:0.3];
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+            orderView.frame = CGRectMake(30, 40, 260, 300);
+            orderView.backgroundColor = [UIColor whiteColor];
+            [UIView commitAnimations];
+            
+            
+            UILabel *hotelNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, 210, 30)];
+            hotelNameLabel.text = [NSString stringWithFormat:@"酒店名称：%@",myHotelName];
+            
+            UILabel *roomTypeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, hotelNameLabel.frame.origin.y +hotelNameLabel.frame.size.height +10, 210, 30)];
+            roomTypeLabel.text = [NSString stringWithFormat:@"酒店房型：%@",myRoomType];
+            
+            UILabel *payNum = [[UILabel alloc] initWithFrame:CGRectMake(20, roomTypeLabel.frame.origin.y +roomTypeLabel.frame.size.height +20, 50, 30)];
+            payNum.text = @"购买数量：";
+            
+            payNumField = [[UITextField alloc] initWithFrame:CGRectMake(80, roomTypeLabel.frame.origin.y +roomTypeLabel.frame.size.height +20, 60, 30)];
+            
+            payNumField.placeholder = [NSString stringWithFormat:@"最多购买%@件",myNum];
+            
+            payNumField.borderStyle = UITextBorderStyleRoundedRect;
+            
+            payNumField.keyboardType = UIKeyboardTypeNumberPad;
+            
+            int payCount = 1;
+            
+//      付款按钮
+            
+            payNumField.text =[NSString stringWithFormat:@"%d",payCount];
+            
+            UIButton *payButton = [[UIButton alloc] initWithFrame:CGRectMake(60, payNumField.frame.origin.y +payNumField.frame.size.height +20, 71, 30)];
+            
+            [payButton setImage:[UIImage imageNamed:@"pay1@2x.png"] forState:UIControlStateNormal];
+            [payButton addTarget:self action:@selector(payBtnPress) forControlEvents:UIControlEventTouchUpInside];
+            
+            
+            
+                        
+            [orderView addSubview:hotelNameLabel];
+            [orderView addSubview:roomTypeLabel];
+            [orderView addSubview:payNum];
+            [orderView addSubview:payNumField];
+            [orderView addSubview:payButton];
+            [self.view addSubview:orderView];
+        }
+    }else if(isLogin == 0) {
+        
+        [self presentModalViewController:loginVC animated:YES];
+    }
+
+}
+
+
+- (void)payBtnPress
+{
+    if ([payNumField.text intValue] < [myNum intValue]) {
+        SDZYuDingRoomService *service = [SDZYuDingRoomService service];
+        
+        [service bookRoom:self action:@selector(bookRoomHandler:) sessionId:mySession roomId:myRoomID orderNum:payNumField.text];
+        
+    }
+    
+    
+}
+
+-(void)bookRoomHandler:(id)value
+{
+    if ([value isKindOfClass:[NSError class]]) {
+        NSLog(@"Error: %@", value);
+        return;
+    }
+    if ([value isKindOfClass:[SoapFault class]]) {
+        NSLog(@"Fault: %@", value);
+        return;
+    }
+    NSString *result = (NSString*)value;
+    NSLog(@"%@",result);
+
+    SDZYuDingRoomService *service = [SDZYuDingRoomService service];
+    [service getZhiFuConfig:self action:@selector(getZhiFuConfigHandle:) sessionId:mySession];
+
+
+}
+//  获取支付宝信息
+
+-(void)getZhiFuConfigHandle:(id)value
+{
+    if ([value isKindOfClass:[NSError class]]) {
+        NSLog(@"Error: %@", value);
+        return;
+    }
+    if ([value isKindOfClass:[SoapFault class]]) {
+        NSLog(@"Fault: %@", value);
+        return;
+    }
+    NSMutableArray *result = (NSMutableArray*)value;
+    
+    for (SDZYuDingRoom *items in result) {
+        NSLog(@"%@",items);
+    }
+    
+    
+
+}
 
 
 

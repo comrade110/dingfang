@@ -16,6 +16,7 @@
 #import "SDZArrayOfHotel.h"
 #import "SDZYuDingRoom.h"
 #import "SDZUser.h"
+#import "SDZstring2stringMap.h"
 #import "SDZstring2ArrayOfHotelMap.h"
 #import "SDZHotel.h"
 #import "SDZYuDingComment.h"
@@ -56,13 +57,19 @@
 	- (SoapRequest*) countYuDingCommmentByHotel: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId hotelId: (long) hotelId;
 	- (SoapRequest*) countYuDingCommmentByHotel: (id) target action: (SEL) action sessionId: (NSString*) sessionId hotelId: (long) hotelId;
 
+    /* Returns NSMutableArray*.  */
+    - (SoapRequest*) getZhiFuConfig: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId;
+    - (SoapRequest*) getZhiFuConfig: (id) target action: (SEL) action sessionId: (NSString*) sessionId;
+
+
 	/* Returns NSMutableArray*.  */
 	- (SoapRequest*) findYuDingCommentByHotel: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId hotelId: (long) hotelId pingJi: (int)pingJi pageNo: (int) pageNo perPageNum: (int) perPageNum;
 - (SoapRequest*) findYuDingCommentByHotel: (id) target action: (SEL) action sessionId: (NSString*) sessionId hotelId: (long) hotelId pingJi: (int)pingJi pageNo: (int) pageNo perPageNum: (int) perPageNum;
 
-	/* Returns BOOL.  */
-	- (SoapRequest*) bookRoom: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId roomId: (NSString*) roomId userId: (NSString*) userId;
-	- (SoapRequest*) bookRoom: (id) target action: (SEL) action sessionId: (NSString*) sessionId roomId: (NSString*) roomId userId: (NSString*) userId;
+    /* Returns NSString*.  */
+    - (SoapRequest*) bookRoom: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId roomId: (NSString*) roomId orderNum: (NSString*) orderNum;
+    - (SoapRequest*) bookRoom: (id) target action: (SEL) action sessionId: (NSString*) sessionId roomId: (NSString*) roomId orderNum: (NSString*) orderNum;
+
 
 	/* Returns NSMutableArray*.  */
 	- (SoapRequest*) findAllCity: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId;

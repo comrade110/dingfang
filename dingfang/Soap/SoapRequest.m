@@ -153,7 +153,7 @@
 	if(self.logging == YES) {
 		NSString* response = [[NSString alloc] initWithData: self.receivedData encoding: NSUTF8StringEncoding];
 //     输出
-		NSLog(@"%@", response);
+//		NSLog(@"%@", response);
 	}
 	
 	CXMLDocument* doc = [[CXMLDocument alloc] initWithData: self.receivedData options: 0 error: &error];

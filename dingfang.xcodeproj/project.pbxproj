@@ -56,6 +56,10 @@
 		CE752709157478580081CB7C /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7526DE157478570081CB7C /* CXMLNode_CreationExtensions.m */; };
 		CE75270A157478580081CB7C /* CXMLNode_PrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7526E0157478570081CB7C /* CXMLNode_PrivateExtensions.m */; };
 		CE75270B157478580081CB7C /* CXMLNode_XPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7526E2157478570081CB7C /* CXMLNode_XPathExtensions.m */; };
+		CE760E94159312DC00AA321D /* SDZstring2ArrayOfHotelMap.m in Sources */ = {isa = PBXBuildFile; fileRef = CE760E93159312DC00AA321D /* SDZstring2ArrayOfHotelMap.m */; };
+		CE760E971593139300AA321D /* SDZstring2stringMap.m in Sources */ = {isa = PBXBuildFile; fileRef = CE760E961593139300AA321D /* SDZstring2stringMap.m */; };
+		CE760E9915931AFB00AA321D /* libSystem.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE760E9815931AFB00AA321D /* libSystem.dylib */; };
+		CE7620E315919BD300503C69 /* IntroNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7620E215919BD300503C69 /* IntroNaviViewController.m */; };
 		CE76C06E15803DB2006C5320 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE76C06615803DB2006C5320 /* whiteArrow.png */; };
 		CE76C06F15803DB2006C5320 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE76C06715803DB2006C5320 /* whiteArrow@2x.png */; };
 		CE76C07015803DB2006C5320 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE76C06815803DB2006C5320 /* grayArrow.png */; };
@@ -84,13 +88,13 @@
 		CE78C0FF1589EDFB00D6C267 /* SDZstring2UserMap.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78C0FA1589EDFB00D6C267 /* SDZstring2UserMap.m */; };
 		CE78C1001589EDFB00D6C267 /* SDZUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78C0FC1589EDFB00D6C267 /* SDZUser.m */; };
 		CE78C1011589EDFB00D6C267 /* SDZUserService.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78C0FE1589EDFB00D6C267 /* SDZUserService.m */; };
-		CE78C1081589EEC000D6C267 /* SDZstring2ArrayOfHotelMap.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78C1071589EEC000D6C267 /* SDZstring2ArrayOfHotelMap.m */; };
 		CE79124F156F1C7300EF29B8 /* button_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79124D156F1C7300EF29B8 /* button_nor.png */; };
 		CE791250156F1C7300EF29B8 /* button_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79124E156F1C7300EF29B8 /* button_pressed.png */; };
 		CE791258156F73DB00EF29B8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE791256156F73CC00EF29B8 /* QuartzCore.framework */; };
 		CE791268156F8F6200EF29B8 /* navigation_bar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE791267156F8F6200EF29B8 /* navigation_bar_bg@2x.png */; };
 		CE79C3B515900E1C0083F378 /* DingDanNaviController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79C3B415900E1C0083F378 /* DingDanNaviController.m */; };
 		CE79C3B9159013020083F378 /* MainTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79C3B8159013020083F378 /* MainTabViewController.m */; };
+		CE79C3BF1590778F0083F378 /* xiadan.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79C3BE1590778F0083F378 /* xiadan.png */; };
 		CE79D69E158F13C70039FAFA /* DingDanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79D69D158F13C70039FAFA /* DingDanViewController.m */; };
 		CE79E02D1585983900722D4F /* HotelIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79E02C1585983900722D4F /* HotelIntroViewController.m */; };
 		CE79E03115859B9800722D4F /* HotelIntroImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79E03015859B9800722D4F /* HotelIntroImageViewController.m */; };
@@ -98,6 +102,7 @@
 		CE7B29BA156A3A290055CCDD /* introImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7B29B9156A3A290055CCDD /* introImageViewController.m */; };
 		CE7B377B15738400001BC002 /* wsdltest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7B377A15738400001BC002 /* wsdltest.m */; };
 		CE7B713E15785F9F0059F635 /* cityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7B713D15785F9F0059F635 /* cityListViewController.m */; };
+		CE7B8F66159AED3100BDA703 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7B8F64159AED3100BDA703 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE7C2B5C156CB83900B09B7F /* h1.Jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C2B54156CB83900B09B7F /* h1.Jpg */; };
 		CE7C2B5D156CB83900B09B7F /* h2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C2B55156CB83900B09B7F /* h2.jpg */; };
 		CE7C2B5E156CB83900B09B7F /* h3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE7C2B56156CB83900B09B7F /* h3.jpg */; };
@@ -228,6 +233,13 @@
 		CE7526E1157478570081CB7C /* CXMLNode_XPathExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLNode_XPathExtensions.h; sourceTree = "<group>"; };
 		CE7526E2157478570081CB7C /* CXMLNode_XPathExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLNode_XPathExtensions.m; sourceTree = "<group>"; };
 		CE7526E3157478570081CB7C /* TouchXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchXML.h; sourceTree = "<group>"; };
+		CE760E92159312DC00AA321D /* SDZstring2ArrayOfHotelMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDZstring2ArrayOfHotelMap.h; sourceTree = "<group>"; };
+		CE760E93159312DC00AA321D /* SDZstring2ArrayOfHotelMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZstring2ArrayOfHotelMap.m; sourceTree = "<group>"; };
+		CE760E951593139300AA321D /* SDZstring2stringMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDZstring2stringMap.h; sourceTree = "<group>"; };
+		CE760E961593139300AA321D /* SDZstring2stringMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZstring2stringMap.m; sourceTree = "<group>"; };
+		CE760E9815931AFB00AA321D /* libSystem.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.dylib; path = usr/lib/libSystem.dylib; sourceTree = SDKROOT; };
+		CE7620E115919BD300503C69 /* IntroNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroNaviViewController.h; sourceTree = "<group>"; };
+		CE7620E215919BD300503C69 /* IntroNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroNaviViewController.m; sourceTree = "<group>"; };
 		CE76C06615803DB2006C5320 /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
 		CE76C06715803DB2006C5320 /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
 		CE76C06815803DB2006C5320 /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
@@ -265,8 +277,6 @@
 		CE78C0FC1589EDFB00D6C267 /* SDZUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZUser.m; sourceTree = "<group>"; };
 		CE78C0FD1589EDFB00D6C267 /* SDZUserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDZUserService.h; sourceTree = "<group>"; };
 		CE78C0FE1589EDFB00D6C267 /* SDZUserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZUserService.m; sourceTree = "<group>"; };
-		CE78C1061589EEC000D6C267 /* SDZstring2ArrayOfHotelMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDZstring2ArrayOfHotelMap.h; sourceTree = "<group>"; };
-		CE78C1071589EEC000D6C267 /* SDZstring2ArrayOfHotelMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZstring2ArrayOfHotelMap.m; sourceTree = "<group>"; };
 		CE79124D156F1C7300EF29B8 /* button_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_nor.png; sourceTree = "<group>"; };
 		CE79124E156F1C7300EF29B8 /* button_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_pressed.png; sourceTree = "<group>"; };
 		CE791256156F73CC00EF29B8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -275,6 +285,7 @@
 		CE79C3B415900E1C0083F378 /* DingDanNaviController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DingDanNaviController.m; sourceTree = "<group>"; };
 		CE79C3B7159013020083F378 /* MainTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabViewController.h; sourceTree = "<group>"; };
 		CE79C3B8159013020083F378 /* MainTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabViewController.m; sourceTree = "<group>"; };
+		CE79C3BE1590778F0083F378 /* xiadan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xiadan.png; sourceTree = "<group>"; };
 		CE79D69A158EEFD30039FAFA /* dfLoginBtnDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfLoginBtnDelegate.h; sourceTree = "<group>"; };
 		CE79D69C158F13C70039FAFA /* DingDanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DingDanViewController.h; sourceTree = "<group>"; };
 		CE79D69D158F13C70039FAFA /* DingDanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DingDanViewController.m; sourceTree = "<group>"; };
@@ -290,6 +301,9 @@
 		CE7B377A15738400001BC002 /* wsdltest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wsdltest.m; sourceTree = "<group>"; };
 		CE7B713C15785F9F0059F635 /* cityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cityListViewController.h; sourceTree = "<group>"; };
 		CE7B713D15785F9F0059F635 /* cityListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cityListViewController.m; sourceTree = "<group>"; };
+		CE7B8F63159AED3100BDA703 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		CE7B8F64159AED3100BDA703 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
+		CE7B8F65159AED3100BDA703 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		CE7C2B54156CB83900B09B7F /* h1.Jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = h1.Jpg; sourceTree = "<group>"; };
 		CE7C2B55156CB83900B09B7F /* h2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = h2.jpg; sourceTree = "<group>"; };
 		CE7C2B56156CB83900B09B7F /* h3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = h3.jpg; sourceTree = "<group>"; };
@@ -330,6 +344,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE760E9915931AFB00AA321D /* libSystem.dylib in Frameworks */,
 				CE3DF69C1585D9F4008A638A /* ImageIO.framework in Frameworks */,
 				CE75268E157477300081CB7C /* SystemConfiguration.framework in Frameworks */,
 				CE75267F15745A6B0081CB7C /* libxml2.dylib in Frameworks */,
@@ -371,8 +386,6 @@
 		CE75268F157478570081CB7C /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				CE78C1061589EEC000D6C267 /* SDZstring2ArrayOfHotelMap.h */,
-				CE78C1071589EEC000D6C267 /* SDZstring2ArrayOfHotelMap.m */,
 				CE78C0F91589EDFB00D6C267 /* SDZstring2UserMap.h */,
 				CE78C0FA1589EDFB00D6C267 /* SDZstring2UserMap.m */,
 				CE78C0FB1589EDFB00D6C267 /* SDZUser.h */,
@@ -403,6 +416,10 @@
 				CE7526A9157478570081CB7C /* SDZYuDingRoomService.m */,
 				CE7526AA157478570081CB7C /* Soap+Prefix.h */,
 				CE7526AB157478570081CB7C /* Soap+Prefix.m */,
+				CE760E92159312DC00AA321D /* SDZstring2ArrayOfHotelMap.h */,
+				CE760E93159312DC00AA321D /* SDZstring2ArrayOfHotelMap.m */,
+				CE760E951593139300AA321D /* SDZstring2stringMap.h */,
+				CE760E961593139300AA321D /* SDZstring2stringMap.m */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -478,6 +495,7 @@
 		CE7F500915625A18007AD4A5 = {
 			isa = PBXGroup;
 			children = (
+				CE760E9815931AFB00AA321D /* libSystem.dylib */,
 				CE3DF69B1585D9F4008A638A /* ImageIO.framework */,
 				CE75268D157477300081CB7C /* SystemConfiguration.framework */,
 				CE75267E15745A6B0081CB7C /* libxml2.dylib */,
@@ -510,6 +528,9 @@
 		CE7F501E15625A18007AD4A5 /* dingfang */ = {
 			isa = PBXGroup;
 			children = (
+				CE7B8F63159AED3100BDA703 /* GTMDefines.h */,
+				CE7B8F64159AED3100BDA703 /* GTMBase64.m */,
+				CE7B8F65159AED3100BDA703 /* GTMBase64.h */,
 				CE77DAC715872EF900D7D3A5 /* RatingView.h */,
 				CE77DAC815872EF900D7D3A5 /* RatingView.m */,
 				CE3DF6B91585EF62008A638A /* SDWebImage */,
@@ -540,6 +561,8 @@
 				CE774E8D15819C9500D46012 /* IntroTabViewController.m */,
 				CE7B29B1156A1E930055CCDD /* IntroViewController.h */,
 				CE7B29B2156A1E930055CCDD /* IntroViewController.m */,
+				CE7620E115919BD300503C69 /* IntroNaviViewController.h */,
+				CE7620E215919BD300503C69 /* IntroNaviViewController.m */,
 				CE79E02B1585983900722D4F /* HotelIntroViewController.h */,
 				CE79E02C1585983900722D4F /* HotelIntroViewController.m */,
 				CE77476E156DD05D00BE3B05 /* loginViewController.h */,
@@ -571,6 +594,7 @@
 		CEEC373A1563456000B888A0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE79C3BE1590778F0083F378 /* xiadan.png */,
 				CE77DAC115872E9100D7D3A5 /* 2.png */,
 				CE77DAC215872E9100D7D3A5 /* 1.png */,
 				CE77DAC315872E9100D7D3A5 /* 0.png */,
@@ -710,6 +734,7 @@
 				CE77DAC415872E9100D7D3A5 /* 2.png in Resources */,
 				CE77DAC515872E9100D7D3A5 /* 1.png in Resources */,
 				CE77DAC615872E9100D7D3A5 /* 0.png in Resources */,
+				CE79C3BF1590778F0083F378 /* xiadan.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,10 +809,13 @@
 				CE78C0FF1589EDFB00D6C267 /* SDZstring2UserMap.m in Sources */,
 				CE78C1001589EDFB00D6C267 /* SDZUser.m in Sources */,
 				CE78C1011589EDFB00D6C267 /* SDZUserService.m in Sources */,
-				CE78C1081589EEC000D6C267 /* SDZstring2ArrayOfHotelMap.m in Sources */,
 				CE79D69E158F13C70039FAFA /* DingDanViewController.m in Sources */,
 				CE79C3B515900E1C0083F378 /* DingDanNaviController.m in Sources */,
 				CE79C3B9159013020083F378 /* MainTabViewController.m in Sources */,
+				CE7620E315919BD300503C69 /* IntroNaviViewController.m in Sources */,
+				CE760E94159312DC00AA321D /* SDZstring2ArrayOfHotelMap.m in Sources */,
+				CE760E971593139300AA321D /* SDZstring2stringMap.m in Sources */,
+				CE7B8F66159AED3100BDA703 /* GTMBase64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

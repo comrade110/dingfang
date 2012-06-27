@@ -25,6 +25,7 @@
 	BOOL _reloading;
     
     IBOutlet UITableView *listView;
+    UILabel *cellLabel;
 }
 
 
