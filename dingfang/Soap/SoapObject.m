@@ -19,8 +19,9 @@
 //  Authors:
 //    Jason Kichline, andCulture - Harrisburg, Pennsylvania USA
 //    Karl Schulenburg, UMAI Development - Shoreditch, London UK
-#import "SoapObject.h"
+
 #import "Soap.h"
+#import "SoapObject.h"
 
 @implementation SoapObject
 

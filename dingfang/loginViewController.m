@@ -7,6 +7,8 @@
 //
 
 #import "loginViewController.h"
+#import "iToast.h"
+#import "dfViewController.h"
 
 @interface loginViewController ()
 
@@ -29,8 +31,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view.
     userPhoneID.delegate =self;
+    
+    
 //    [userPhoneID becomeFirstResponder];
     [registerView removeFromSuperview];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard:)];
@@ -46,8 +51,28 @@
     mySession = [userDefaults objectForKey:@"userSessionKey"];
     
     
+    // 默认记住密码
+	rememberUsernamePassword = YES;
+	
+	// 设置记住密码的图片
+	[btnRemeberUsernamePassword setBackgroundImage:[UIImage imageNamed:@"checkbox_nor.png"] forState:UIControlStateNormal];
+	[btnRemeberUsernamePassword setBackgroundImage:[UIImage imageNamed:@"checkbox_checked.png"] forState:UIControlStateSelected];
+	[btnRemeberUsernamePassword setBackgroundImage:[UIImage imageNamed:@"checkbox_checked.png"] forState:UIControlStateHighlighted];
+	btnRemeberUsernamePassword.adjustsImageWhenHighlighted = YES;
+	btnRemeberUsernamePassword.selected = rememberUsernamePassword;
+    
+    
+    NSMutableDictionary *usernamepasswordKVPairs = (NSMutableDictionary *)[CHKeychain load:KEY_USERNAME_PASSWORD];
+	userPhoneID.text = [usernamepasswordKVPairs objectForKey:KEY_USERNAME];
+	userPW.text = [usernamepasswordKVPairs objectForKey:KEY_PASSWORD];
+    
 }
+-(IBAction) remeberUsernamePassword: (id)sender
+{
+	rememberUsernamePassword = (!rememberUsernamePassword);
+    [btnRemeberUsernamePassword setSelected:rememberUsernamePassword];
 
+}
 - (void)hideKeyBoard:(id)sender
 {
     [userPhoneID  resignFirstResponder];
@@ -279,17 +304,13 @@
     
 	// Handle errors
 	if([value isKindOfClass:[NSError class]]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"账号密码不对吧！" 
-                                                       delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
-        [alert show];
+        [[iToast makeText:@"网络出错，请重新尝试"] show];
 		return;
 	}
     
 	// Handle faults
 	if([value isKindOfClass:[SoapFault class]]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"账号密码不对吧" 
-                                                       delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
-        [alert show];
+       [[iToast makeText:@"登录失败"] show];
 		return;
 	}				
     
@@ -314,13 +335,24 @@
      [userDefaults setInteger:isLogin forKey:@"isLogin"];
     
     
-    
     [delegate passValue:result.nickName];
     NSLog(@"self.value.text is%@", result.nickName);
     
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"MainStoryboard"
+                                                  bundle:nil];
+    dfViewController *dfView = [sb instantiateViewControllerWithIdentifier:@"dfViewController"];
+    [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    [self presentModalViewController:dfView animated:YES];   
     
-    [self dismissModalViewControllerAnimated:YES];   
-    
+	// TODO 登录成功之后记录密码
+	if (rememberUsernamePassword) {
+		NSMutableDictionary *usernamepasswordKVPairs = [NSMutableDictionary dictionary];
+		[usernamepasswordKVPairs setObject:userPhoneID.text forKey:KEY_USERNAME];
+		[usernamepasswordKVPairs setObject:userPW.text forKey:KEY_PASSWORD];
+		[CHKeychain save:KEY_USERNAME_PASSWORD data:usernamepasswordKVPairs];
+	}else {
+		[CHKeychain delete:KEY_USERNAME_PASSWORD];
+	}
     
 }
 
@@ -423,9 +455,7 @@
     NSMutableArray *result = (NSMutableArray*)value;
     
     if (result != nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"" message: @"注册成功。" 
-                                                       delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL];
-        [alert show];
+        [[iToast makeText:@"注册成功"] show];
         
         NSLog(@"%@",result);
         [registerView removeFromSuperview];

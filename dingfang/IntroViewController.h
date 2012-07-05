@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SDZYuDingRoomService.h"
+#import "NSString.h"
+#include <CommonCrypto/CommonCryptor.h>
 
 
 
@@ -31,6 +33,7 @@
     NSString *myHotelID; 
     NSString *myRoomID;
     NSString *myUserID;
+    NSString *orderNumber;
     
     NSString *mySession;
     

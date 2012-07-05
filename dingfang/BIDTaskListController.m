@@ -66,7 +66,7 @@
     
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
     service.logging = YES;        
-    [service findAllCity:self action:@selector(findAllCityHandle:) sessionId:mySession];  
+    [service findAllCity:self action:@selector(findAllCityHandler:) sessionId:mySession];  
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -84,7 +84,7 @@
 
 //    获取城市列表
 
-- (void)findAllCityHandle:(id)value
+- (void)findAllCityHandler:(id)value
 {
     if ([value isKindOfClass:[NSError class]]) {
         NSLog(@"Error: %@", value);
@@ -103,6 +103,8 @@
     
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
     service.logging = YES;        
+    
+	NSLog(@"11star11");
     [service findYuDingRoomByCondition:self action:@selector(findYuDingRoomByConditionHandle:) sessionId:mySession hotelId:nil hotelName:nil cityName:cityV hotelDengJi:nil minPrice:nil maxPrice:nil orderByCondition:orderParameter pageNo:1 perPageNum:7];
     
     [self.listView reloadData];
@@ -130,6 +132,8 @@
         SDZYuDingRoom *myObj = [result objectAtIndex:i];
         
         [hotelArr addObject:[myObj serialize]];   // [myObj serialize]序列化数组元素，否则不能解析
+
+//        NSLog(@"%@",[hotelArr objectAtIndex:i]);
         
     }
     
@@ -159,7 +163,7 @@
         [hotelArr addObject:[myObj serialize]];   // [myObj serialize]序列化数组元素，否则不能解析
     }
     
-    NSLog(@"--%d==",[hotelArr count]);
+//    NSLog(@"--%d==",[hotelArr count]);
     
 	int count=[hotelArr count];
     

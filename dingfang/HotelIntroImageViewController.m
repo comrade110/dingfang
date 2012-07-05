@@ -27,51 +27,25 @@ static NSArray *__pageControlImageList = nil;
 
 +(NSString *)pageControlImageWithIndex:(NSUInteger)index
 {   
-
+    
+    NSArray *myArr =[[NSArray alloc] init];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    myArr = [userDefaults objectForKey:@"imgArr"];
+    
+    NSLog(@"%@",myArr);
+    
 	if (__pageControlImageList==nil) {
-		__pageControlImageList = [[NSArray alloc] initWithObjects:
-        @"http://192.168.3.2:9001/idc/additional/getSmallImage.action?imageRef=2&amp;width=200&amp;height=100%22",
-        @"http://192.168.3.2:9001/idc/additional/getSmallImage.action?imageRef=3&amp;width=200&amp;height=100%22",
-        @"http://192.168.3.2:9001/idc/additional/getSmallImage.action?imageRef=4&amp;width=200&amp;height=100%22",nil];
+		__pageControlImageList = [[NSArray alloc] initWithArray:myArr];
 	}
 	return [__pageControlImageList objectAtIndex:index %[__pageControlImageList count]];
 }
 
-- (void)findHotelInfoHandle:(id)value
-{
-    
-    // Handle errors
-	if([value isKindOfClass:[NSError class]]) {
-		NSLog(@"error:%@", value);
-		return;
-	}
-	// Handle faults
-	if([value isKindOfClass:[SoapFault class]]) {
-		NSLog(@"fault:%@", value);
-		return;
-	}
-    
-    NSString *hotelInfo = (NSString*)value;
-    
-    
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *mySession = [userDefaults objectForKey:@"userSessionKey"];
-    
-    NSString *myHotelIDString = [userDefaults objectForKey:@"hotelID"];
-    
-    SDZYuDingRoomService *service = [SDZYuDingRoomService service];
-    service.logging = YES; 
-    
-    long myHotelID = [myHotelIDString longLongValue];
-    
-    [service findHotelInfo:self action:@selector(findHotelInfoHandle:) sessionId:mySession hotelId:myHotelID];
     
     
     [imageView setImageWithURL:[NSURL URLWithString:[HotelIntroImageViewController pageControlImageWithIndex:pageNumber]]];

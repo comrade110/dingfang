@@ -87,7 +87,6 @@
 		[request addValue: @"text/xml; charset=utf-8" forHTTPHeaderField: @"Content-Type"];
 		[request setHTTPBody: [postData dataUsingEncoding: NSUTF8StringEncoding]];
 		if(self.logging) {
-//        输出data
 //			NSLog(@"%@", postData);
 		}
 	}
@@ -152,7 +151,6 @@
 	NSError* error;
 	if(self.logging == YES) {
 		NSString* response = [[NSString alloc] initWithData: self.receivedData encoding: NSUTF8StringEncoding];
-//     输出
 //		NSLog(@"%@", response);
 	}
 	
@@ -176,7 +174,7 @@
 			}
 		}
 	} else {
-		CXMLNode* element = [[Soap getNode: [doc rootElement] withName: @"soap:Body"] childAtIndex:0];
+		CXMLNode* element = [[Soap getNode: [doc rootElement] withName: @"Body"] childAtIndex:0];
 		if(deserializeTo == nil) {
 			output = [Soap deserialize:element];
 		} else {

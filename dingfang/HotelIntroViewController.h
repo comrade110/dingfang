@@ -16,8 +16,10 @@
     IBOutlet UIPageControl *pageControl;
 	NSMutableArray *viewControllers;
     BOOL pageControlUsed;
-   
+    NSMutableArray *imgArr;
     NSString *mySession;
+    
+    NSTimer *timer;
 }
 
 @property (nonatomic, retain) UIScrollView *scrollView;

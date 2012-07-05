@@ -7,6 +7,7 @@
 //
 
 #import "CommentViewController.h"
+#import "iToast.h"
 
 @interface CommentViewController ()
 
@@ -41,8 +42,6 @@
     mySession = [userDefaults objectForKey:@"userSessionKey"];
     NSString *myHotelID = [userDefaults objectForKey:@"hotelID"];    
     myHotelLong = [myHotelID longLongValue];
-    
-    NSLog(@"%ld",myHotelLong);
         
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
     service.logging = YES;  
@@ -183,8 +182,14 @@
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
     service.logging = YES;        
     
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *myUserID = [userDefaults objectForKey:@"userID"];
+        
+    long userID = [myUserID longLongValue];
+    
     submitComment = commTextView.text;
-    [service saveYuDingComment:self action:@selector(saveYuDingCommentHandler:) sessionId:mySession hotelId:myHotelLong userId:2 evaluate:submitZP environment:submitHJ service:submitFW comment:submitComment];
+    [service saveYuDingComment:self action:@selector(saveYuDingCommentHandler:) sessionId:mySession hotelId:myHotelLong userId:userID evaluate:submitZP environment:submitHJ service:submitFW comment:submitComment];
     
     [self closeCommView];
     
@@ -219,12 +224,20 @@
 }
 
 
-- (void) saveYuDingCommentHandler: (BOOL) value {
+- (void) saveYuDingCommentHandler: (id) value {
     
     
 	// Do something with the BOOL result
     
-	NSLog(@"saveYuDingComment returned the value: %@", [NSNumber numberWithBool:value]);
+    NSString *result = (NSString *)value;
+    
+	NSLog(@"saveYuDingComment returned the value: %@", result);
+    
+    if ([result isEqualToString:@"true"]) {
+        [[iToast makeText:@"评论成功"] show];
+    }else {
+        [[iToast makeText:@"评论失败"] show];
+    }
     
 }
 

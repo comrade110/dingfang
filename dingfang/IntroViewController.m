@@ -11,7 +11,11 @@
 #import "loginViewController.h"
 #import "CommentViewController.h"
 #import "HotelIntroViewController.h"
-#include <CommonCrypto/CommonCryptor.h>
+#import "AlixPayOrder.h"
+#import "AlixPayResult.h"
+#import "AlixPay.h"
+#import "DataSigner.h"
+#import "NSDataEx.h"
 
 static NSUInteger kNumberOfPages = 3;
 
@@ -243,6 +247,8 @@ static NSUInteger kNumberOfPages = 3;
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    
+    [orderView removeFromSuperview];
     // Release any retained subviews of the main view.
 }
 
@@ -262,7 +268,7 @@ static NSUInteger kNumberOfPages = 3;
     
     if (isLogin == 1) {
         if ([myNum integerValue] > 0) {
-            orderView = [[UIView alloc] initWithFrame:CGRectMake(160, 240, 0, 0)];
+            orderView = [[UIView alloc] initWithFrame:CGRectMake(260, 80, 0, 0)];
             
             NSArray *subviews = orderView.subviews;
             
@@ -279,20 +285,26 @@ static NSUInteger kNumberOfPages = 3;
             [UIView setAnimationDuration:0.3];
             [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
             orderView.frame = CGRectMake(30, 40, 260, 300);
-            orderView.backgroundColor = [UIColor whiteColor];
+            orderView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
             [UIView commitAnimations];
             
             
             UILabel *hotelNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, 210, 30)];
             hotelNameLabel.text = [NSString stringWithFormat:@"酒店名称：%@",myHotelName];
+            hotelNameLabel.backgroundColor = [UIColor clearColor];
+            hotelNameLabel.textColor =[UIColor whiteColor];
             
             UILabel *roomTypeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, hotelNameLabel.frame.origin.y +hotelNameLabel.frame.size.height +10, 210, 30)];
             roomTypeLabel.text = [NSString stringWithFormat:@"酒店房型：%@",myRoomType];
+            roomTypeLabel.backgroundColor = [UIColor clearColor];
+            roomTypeLabel.textColor =[UIColor whiteColor];
             
-            UILabel *payNum = [[UILabel alloc] initWithFrame:CGRectMake(20, roomTypeLabel.frame.origin.y +roomTypeLabel.frame.size.height +20, 50, 30)];
+            UILabel *payNum = [[UILabel alloc] initWithFrame:CGRectMake(20, roomTypeLabel.frame.origin.y +roomTypeLabel.frame.size.height +20, 100, 30)];
             payNum.text = @"购买数量：";
+            payNum.backgroundColor = [UIColor clearColor];
+            payNum.textColor =[UIColor whiteColor];
             
-            payNumField = [[UITextField alloc] initWithFrame:CGRectMake(80, roomTypeLabel.frame.origin.y +roomTypeLabel.frame.size.height +20, 60, 30)];
+            payNumField = [[UITextField alloc] initWithFrame:CGRectMake(110, roomTypeLabel.frame.origin.y +roomTypeLabel.frame.size.height +20, 80, 30)];
             
             payNumField.placeholder = [NSString stringWithFormat:@"最多购买%@件",myNum];
             
@@ -301,6 +313,13 @@ static NSUInteger kNumberOfPages = 3;
             payNumField.keyboardType = UIKeyboardTypeNumberPad;
             
             int payCount = 1;
+
+//      关闭按钮
+            UIButton *closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(225, 3, 32, 32)];
+            
+            [closeViewButton setImage:[UIImage imageNamed:@"close.png"] forState:UIControlStateNormal];
+            
+            [closeViewButton addTarget:self action:@selector(closeOrderView) forControlEvents:UIControlEventTouchUpInside];
             
 //      付款按钮
             
@@ -318,6 +337,7 @@ static NSUInteger kNumberOfPages = 3;
             [orderView addSubview:roomTypeLabel];
             [orderView addSubview:payNum];
             [orderView addSubview:payNumField];
+            [orderView addSubview:closeViewButton];
             [orderView addSubview:payButton];
             [self.view addSubview:orderView];
         }
@@ -327,12 +347,17 @@ static NSUInteger kNumberOfPages = 3;
     }
 
 }
-
+-(void)closeOrderView
+{
+    [orderView removeFromSuperview];
+}
 
 - (void)payBtnPress
 {
     if ([payNumField.text intValue] < [myNum intValue]) {
         SDZYuDingRoomService *service = [SDZYuDingRoomService service];
+        
+        service.logging = YES;
         
         [service bookRoom:self action:@selector(bookRoomHandler:) sessionId:mySession roomId:myRoomID orderNum:payNumField.text];
         
@@ -352,10 +377,18 @@ static NSUInteger kNumberOfPages = 3;
         return;
     }
     NSString *result = (NSString*)value;
-    NSLog(@"%@",result);
-
+    
+    NSArray *orderArray = [result componentsSeparatedByString:@","];
+    
+    NSLog(@"数字是：%@",result);
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
-    [service getZhiFuConfig:self action:@selector(getZhiFuConfigHandle:) sessionId:mySession];
+    
+    orderNumber = [orderArray objectAtIndex:0];
+    
+    if ([[orderArray objectAtIndex:1] intValue] == 2) {
+        [service getZhiFuConfig:self action:@selector(getZhiFuConfigHandle:) sessionId:mySession];
+    }
+    
 
 
 }
@@ -371,16 +404,180 @@ static NSUInteger kNumberOfPages = 3;
         NSLog(@"Fault: %@", value);
         return;
     }
-    NSMutableArray *result = (NSMutableArray*)value;
+    SDZMobileZhiFuConfig *result = (SDZMobileZhiFuConfig*)value;
     
-    for (SDZYuDingRoom *items in result) {
-        NSLog(@"%@",items);
-    }
+    NSString *keyVal = @"cn.com.winghall.EncryptUtil.whadmin";
     
+
+    NSString *zhifubao_notify_url_ava = [self TripleDES:result.zhifubao_notify_url encryptOrDecrypt:kCCDecrypt key:keyVal];
+    NSString *partner = [self TripleDES:result.zhifubao_partner encryptOrDecrypt:kCCDecrypt key:keyVal];
+//    NSString *zhifubao_return_url_shouji_ava = [self TripleDES:result.zhifubao_return_url_shouji encryptOrDecrypt:kCCDecrypt key:keyVal];
+    NSString *zhifubao_rsa_alipay_public_ava = [self TripleDES:result.zhifubao_rsa_alipay_public encryptOrDecrypt:kCCDecrypt key:keyVal];
+    NSString *zhifubao_rsa_private_ava = [self TripleDES:result.zhifubao_rsa_private encryptOrDecrypt:kCCDecrypt key:keyVal];
+    NSString *seller = result.zhifubao_seller_email;
     
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:zhifubao_rsa_alipay_public_ava forKey:@"zhifubao_rsa_alipay_public"];
+    
+    //partner和seller获取失败,提示
+	if ([partner length] == 0 || [seller length] == 0)
+	{
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+														message:@"缺少partner或者seller。" 
+													   delegate:self 
+											  cancelButtonTitle:@"确定" 
+											  otherButtonTitles:nil];
+		[alert show];
+		return;
+	}
+    /*生成订单信息及签名
+    *由于demo的局限性，本demo中的公私钥存放在AlixPayDemo-Info.plist中,外部商户可以存放在服务端或本地其他地方。
+    */
+	//将商品信息赋予AlixPayOrder的成员变量
+    
+	AlixPayOrder *order = [[AlixPayOrder alloc] init];
+	order.partner = partner;
+	order.seller = seller;
+	order.tradeNO = orderNumber; //订单ID（由商家自行制定）
+	order.productName = myHotelName; //商品标题
+	order.productDescription = myDesc; //商品描述
+	order.amount = [NSString stringWithFormat:@"%.2f",[myPrice floatValue]]; //商品价格
+	order.notifyURL =  zhifubao_notify_url_ava; //回调URL
+	
+	//应用注册scheme,在AlixPayDemo-Info.plist定义URL types,用于安全支付成功后重新唤起商户应用
+	NSString *appScheme = @"dingfang"; 
+	
+	//将商品信息拼接成字符串
+	NSString *orderSpec = [order description];
+	NSLog(@"orderSpec = %@",orderSpec);
+    
+	//获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
+
+	id<DataSigner> signer = CreateRSADataSigner(zhifubao_rsa_private_ava);
+	NSString *signedString = [signer signString:orderSpec];
+	
+	//将签名成功字符串格式化为订单字符串,请严格按照该格式
+	NSString *orderString = nil;
+	if (signedString != nil) {
+		orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
+                       orderSpec, signedString, @"RSA"];
+	}
+	//获取安全支付单例并调用安全支付接口
+	AlixPay * alixpay = [AlixPay shared];
+	int ret = [alixpay pay:orderString applicationScheme:appScheme];
+	
+	if (ret == kSPErrorAlipayClientNotInstalled) {
+		UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" 
+															 message:@"您还没有安装支付宝的客户端，请先装。" 
+															delegate:self 
+												   cancelButtonTitle:@"确定" 
+												   otherButtonTitles:nil];
+		[alertView setTag:123];
+		[alertView show];
+	}
+	else if (ret == kSPErrorSignError) {
+		NSLog(@"签名错误！");
+	}    
 
 }
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (alertView.tag == 123) {
+		NSString * URLString = [NSString stringWithString:@"http://itunes.apple.com/cn/app/id333206289?mt=8"];
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
+	}
+}
 
+- (NSString*)TripleDES:(NSString*)plainText encryptOrDecrypt:(CCOperation)encryptOrDecrypt key:(NSString*)key {
+    
+    
+    const void *vplainText;
+    size_t plainTextBufferSize;
+    
+    if (encryptOrDecrypt == kCCDecrypt)
+    {
+        //        NSData *EncryptData = [GTMBase64 decodeData:[plainText dataUsingEncoding:NSUTF8StringEncoding]];
+        NSData *EncryptData = [plainText hexToBytes];   // 收到的十六进制转为byte存入NSData
+        plainTextBufferSize = [EncryptData length];
+        vplainText = [EncryptData bytes];
+    }
+    else
+    {
+        NSData* data = [plainText dataUsingEncoding:NSUTF8StringEncoding];
+        plainTextBufferSize = [data length];
+        vplainText = (const void *)[data bytes];
+    }
+    
+    CCCryptorStatus ccStatus;
+    uint8_t *bufferPtr = NULL;
+    size_t bufferPtrSize = 0;
+    size_t movedBytes = 0;
+    // uint8_t ivkCCBlockSize3DES;
+    
+    bufferPtrSize = (plainTextBufferSize + kCCBlockSizeDES);
+    bufferPtr = malloc( bufferPtrSize * sizeof(uint8_t));
+    memset((void *)bufferPtr, 0x0, bufferPtrSize);
+    // memset((void *) iv, 0x0, (size_t) sizeof(iv));
+    
+    //    NSString *key = @"123456789012345678901234";
+    const void *vkey = (const void *) [key UTF8String];
+    
+    ccStatus = CCCrypt(encryptOrDecrypt,
+                       kCCAlgorithmDES,
+                       kCCOptionPKCS7Padding|kCCOptionECBMode,
+                       vkey,  //key
+                       kCCKeySizeDES,
+                       NULL, //"init Vec", //iv,
+                       vplainText, //"Your Name", //plainText,
+                       plainTextBufferSize,
+                       (void *)bufferPtr,
+                       bufferPtrSize,
+                       &movedBytes);
+    //if (ccStatus == kCCSuccess) NSLog(@"SUCCESS");
+    /*else if (ccStatus == kCC ParamError) return @"PARAM ERROR";
+     else if (ccStatus == kCCBufferTooSmall) return @"BUFFER TOO SMALL";
+     else if (ccStatus == kCCMemoryFailure) return @"MEMORY FAILURE";
+     else if (ccStatus == kCCAlignmentError) return @"ALIGNMENT";
+     else if (ccStatus == kCCDecodeError) return @"DECODE ERROR";
+     else if (ccStatus == kCCUnimplemented) return @"UNIMPLEMENTED"; */
+    
+    NSString *result;
+    
+    if (encryptOrDecrypt == kCCDecrypt)
+    {
+        result = [[NSString alloc] initWithData:[NSData dataWithBytes:(const void *)bufferPtr 
+                                                               length:(NSUInteger)movedBytes] 
+                                       encoding:NSUTF8StringEncoding];
+    }
+    else
+    {      
+        
+        result = [self parseByte2HexString:bufferPtr ];
+        
+        
+    }
+    
+    return result;
+    
+} 
+-(NSString *) parseByte2HexString:(Byte *) bytes
+{
+    NSMutableString *hexStr = [[NSMutableString alloc]init];
+    int i = 0;
+    if(bytes)
+    {
+        while (bytes[i] != '\0') 
+        {
+            NSString *hexByte = [NSString stringWithFormat:@"%X",bytes[i] & 0xff];///16进制数
+            if([hexByte length]==1)
+                [hexStr appendFormat:@"0%@", hexByte];
+            else 
+                [hexStr appendFormat:@"%@", hexByte];
+            
+            i++;
+        }
+    }
+    return hexStr;
+} 
 
 
 //方式二:按节点查找

@@ -18,6 +18,9 @@
 #import "SDZUser.h"
 #import "SDZstring2stringMap.h"
 #import "SDZstring2ArrayOfHotelMap.h"
+#import "SDZMobileZhiFuConfig.h"
+#import "SDZconfigList.h"
+#import "SDZOperLog.h"
 #import "SDZHotel.h"
 #import "SDZYuDingComment.h"
 

@@ -317,9 +317,8 @@
 		
 		// Return as boolean
 		if([type isEqualToString:@"boolean"]) {
-		//	return [NSNumber numberWithBool:[value boolValue]];
+            //	return [NSNumber numberWithBool:[value boolValue]];
 			return value;
-
 		}
 		
 		// Return as a date

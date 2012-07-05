@@ -7,24 +7,67 @@
 //
 
 #import "dfAppDelegate.h"
+#import "IntroViewController.h"
+#import "AlixPay.h"
+#import "AlixPayResult.h"
+#import "DataVerifier.h"
+#import <sys/utsname.h>
+
+@interface dfAppDelegate ()
+
+- (BOOL)isSingleTask;
+- (void)parseURL:(NSURL *)url application:(UIApplication *)application;
+
+@end
 
 @implementation dfAppDelegate
 
 @synthesize window = _window;
 
+- (BOOL)isSingleTask{
+	struct utsname name;
+	uname(&name);
+	float version = [[UIDevice currentDevice].systemVersion floatValue];//判定系统版本。
+	if (version < 4.0 || strstr(name.machine, "iPod1,1") != 0 || strstr(name.machine, "iPod2,1") != 0) {
+		return YES;
+	}
+	else {
+		return NO;
+	}
+}
+
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    
     SDZUserService *userService = [SDZUserService service];
     userService.logging = YES;
     [userService createSession:self action:@selector(createSessionHandler:)];
     
-    // 判断用户是否登录的常量  0为未登录  1为登录
+    
+
+    
+    // 判断用户是否登录  0为未登录  1为登录
     NSUserDefaults *SaveDefaults = [NSUserDefaults standardUserDefaults];
     
     int  isLogin = 0;
     [SaveDefaults setInteger:isLogin forKey:@"isLogin"];
     
+    
+    /*
+	 *单任务handleURL处理
+	 */
+	if ([self isSingleTask]) {
+		NSURL *url = [launchOptions objectForKey:@"UIApplicationLaunchOptionsURLKey"];
+		
+		if (nil != url) {
+			[self parseURL:url application:application];
+		}
+	}
+
     
     return YES;
 }
@@ -53,6 +96,57 @@
     [SaveDefaults setObject:userSession forKey:@"userSessionKey"];
     
 }
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+	
+	[self parseURL:url application:application];
+	return YES;
+}
+
+
+- (void)parseURL:(NSURL *)url application:(UIApplication *)application {
+	AlixPay *alixpay = [AlixPay shared];
+	AlixPayResult *result = [alixpay handleOpenURL:url];
+	if (result) {
+		//是否支付成功
+		if (9000 == result.statusCode) {
+			/*
+			 *用公钥验证签名
+			 */
+//            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//            NSString *zhifubao_rsa_alipay_public_ava = [userDefaults objectForKey:@"zhifubao_rsa_alipay_public"];
+            NSString *zhifubao_rsa_alipay_public_ava = @"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDakzhBhAAtvWxuohOzfbRBwIQCkgH95ac1gkMLzrDPO7RLumxoyvENtaKJVq4ZEfamqY+LhbrDAkAq+iNWe4T+0ya7JA2PhqAxUDaX1NIMhGL7pRPg9ctNIkmdTyw2iOM6G2FqC4Tbz3YNjhhLym7+0+2+djq34qnYh8IKCbQQtQIDAQAB";
+			id<DataVerifier> verifier = CreateRSADataVerifier(zhifubao_rsa_alipay_public_ava);
+			if ([verifier verifyString:result.resultString withSign:result.signString]) {
+				UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" 
+																	 message:result.statusMessage 
+																	delegate:nil 
+														   cancelButtonTitle:@"确定" 
+														   otherButtonTitles:nil];
+				[alertView show];
+			}//验签错误
+			else {
+				UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" 
+																	 message:@"签名错误@@" 
+																	delegate:nil 
+														   cancelButtonTitle:@"确定" 
+														   otherButtonTitles:nil];
+				[alertView show];
+			}
+		}
+		//如果支付失败,可以通过result.statusCode查询错误码
+		else {
+			UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" 
+																 message:result.statusMessage 
+																delegate:nil 
+													   cancelButtonTitle:@"确定" 
+													   otherButtonTitles:nil];
+			[alertView show];
+		}
+		
+	}	
+}
+
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
