@@ -113,9 +113,8 @@
 			/*
 			 *用公钥验证签名
 			 */
-//            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//            NSString *zhifubao_rsa_alipay_public_ava = [userDefaults objectForKey:@"zhifubao_rsa_alipay_public"];
-            NSString *zhifubao_rsa_alipay_public_ava = @"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDakzhBhAAtvWxuohOzfbRBwIQCkgH95ac1gkMLzrDPO7RLumxoyvENtaKJVq4ZEfamqY+LhbrDAkAq+iNWe4T+0ya7JA2PhqAxUDaX1NIMhGL7pRPg9ctNIkmdTyw2iOM6G2FqC4Tbz3YNjhhLym7+0+2+djq34qnYh8IKCbQQtQIDAQAB";
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            NSString *zhifubao_rsa_alipay_public_ava = [userDefaults objectForKey:@"zhifubao_rsa_alipay_public"];
 			id<DataVerifier> verifier = CreateRSADataVerifier(zhifubao_rsa_alipay_public_ava);
 			if ([verifier verifyString:result.resultString withSign:result.signString]) {
 				UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" 

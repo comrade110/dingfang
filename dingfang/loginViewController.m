@@ -127,7 +127,7 @@
         
         [userService findNickNameIsUsed:self action:@selector(findNickNameIsUsedHandler:) sessionId:mySession userId:nil nickName:ruserID.text];
 
-        [userService saveRegisterUser:self action:@selector(saveRegisterUserHandler:) sessionId:mySession nickName:ruserID.text mobile:ruserPhoneID.text password:ruserPW.text identityNo:@"" autoLogin:@"false"];
+        [userService saveRegisterUser:self action:@selector(saveRegisterUserHandler:) sessionId:mySession nickName:ruserID.text mobile:ruserPhoneID.text password:ruserPW.text identityNo:@""];
     }
         
    

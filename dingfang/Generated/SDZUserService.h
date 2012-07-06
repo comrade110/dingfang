@@ -44,8 +44,8 @@
 	- (SoapRequest*) setLanguage: (id) target action: (SEL) action sessionId: (NSString*) sessionId language: (NSString*) language country: (NSString*) country;
 
 	/* Returns NSMutableArray*.  */
-	- (SoapRequest*) saveRegisterUser: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId nickName: (NSString*) nickName mobile: (NSString*) mobile password: (NSString*) password identityNo: (NSString*) identityNo autoLogin: (NSString*) autoLogin;
-	- (SoapRequest*) saveRegisterUser: (id) target action: (SEL) action sessionId: (NSString*) sessionId nickName: (NSString*) nickName mobile: (NSString*) mobile password: (NSString*) password identityNo: (NSString*) identityNo autoLogin: (NSString*) autoLogin;
+	- (SoapRequest*) saveRegisterUser: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId nickName: (NSString*) nickName mobile: (NSString*) mobile password: (NSString*) password identityNo: (NSString*) identityNo;
+	- (SoapRequest*) saveRegisterUser: (id) target action: (SEL) action sessionId: (NSString*) sessionId nickName: (NSString*) nickName mobile: (NSString*) mobile password: (NSString*) password identityNo: (NSString*) identityNo;
 
 	/* Returns BOOL.  */
 	- (SoapRequest*) findMobileIsUsed: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId userId: (NSString*) userId mobile: (NSString*) mobile;

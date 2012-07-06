@@ -393,7 +393,37 @@ static NSUInteger kNumberOfPages = 3;
 
 }
 //  获取支付宝信息
-
+- (NSString*)URLencode:(NSString *)originalString
+        stringEncoding:(NSStringEncoding)stringEncoding {
+    //!  @  $  &  (  )  =  +  ~  `  ;  '  :  ,  /  ?
+    //%21%40%24%26%28%29%3D%2B%7E%60%3B%27%3A%2C%2F%3F
+    NSArray *escapeChars = [NSArray arrayWithObjects:@";" , @"/" , @"?" , @":" ,
+                            @"@" , @"&" , @"=" , @"+" ,    @"$" , @"," ,
+                            @"!", @"'", @"(", @")", @"*", nil];
+    
+    NSArray *replaceChars = [NSArray arrayWithObjects:@"%3B" , @"%2F", @"%3F" , @"%3A" ,
+                             @"%40" , @"%26" , @"%3D" , @"%2B" , @"%24" , @"%2C" ,
+                             @"%21", @"%27", @"%28", @"%29", @"%2A", nil];
+    
+    int len = [escapeChars count];
+    
+    NSMutableString *temp = [[originalString
+                              stringByAddingPercentEscapesUsingEncoding:stringEncoding]
+                             mutableCopy];
+    
+    int i;
+    for (i = 0; i < len; i++) {
+        
+        [temp replaceOccurrencesOfString:[escapeChars objectAtIndex:i]
+                              withString:[replaceChars objectAtIndex:i]
+         options:NSLiteralSearch
+                                   range:NSMakeRange(0, [temp length])];
+    }
+    
+    NSString *outStr = [NSString stringWithString: temp];
+    
+    return outStr;
+}
 -(void)getZhiFuConfigHandle:(id)value
 {
     if ([value isKindOfClass:[NSError class]]) {
@@ -410,11 +440,21 @@ static NSUInteger kNumberOfPages = 3;
     
 
     NSString *zhifubao_notify_url_ava = [self TripleDES:result.zhifubao_notify_url encryptOrDecrypt:kCCDecrypt key:keyVal];
+    
+    
+    NSLog(@"%@",zhifubao_notify_url_ava);
+    
+    zhifubao_notify_url_ava = [self URLencode:zhifubao_notify_url_ava stringEncoding:NSUTF8StringEncoding];
+    
+    NSLog(@"%@",zhifubao_notify_url_ava);
+    
     NSString *partner = [self TripleDES:result.zhifubao_partner encryptOrDecrypt:kCCDecrypt key:keyVal];
 //    NSString *zhifubao_return_url_shouji_ava = [self TripleDES:result.zhifubao_return_url_shouji encryptOrDecrypt:kCCDecrypt key:keyVal];
     NSString *zhifubao_rsa_alipay_public_ava = [self TripleDES:result.zhifubao_rsa_alipay_public encryptOrDecrypt:kCCDecrypt key:keyVal];
+    
     NSString *zhifubao_rsa_private_ava = [self TripleDES:result.zhifubao_rsa_private encryptOrDecrypt:kCCDecrypt key:keyVal];
     NSString *seller = result.zhifubao_seller_email;
+    
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:zhifubao_rsa_alipay_public_ava forKey:@"zhifubao_rsa_alipay_public"];

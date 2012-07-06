@@ -169,12 +169,12 @@
 	}
 
 	/* Returns NSMutableArray*.  */
-	- (SoapRequest*) saveRegisterUser: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId nickName: (NSString*) nickName mobile: (NSString*) mobile password: (NSString*) password identityNo: (NSString*) identityNo autoLogin: (NSString*) autoLogin
+	- (SoapRequest*) saveRegisterUser: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId nickName: (NSString*) nickName mobile: (NSString*) mobile password: (NSString*) password identityNo: (NSString*) identityNo 
 	{
-		return [self saveRegisterUser: handler action: nil sessionId: sessionId nickName: nickName mobile: mobile password: password identityNo: identityNo autoLogin: autoLogin];
+		return [self saveRegisterUser: handler action: nil sessionId: sessionId nickName: nickName mobile: mobile password: password identityNo: identityNo];
 	}
 
-	- (SoapRequest*) saveRegisterUser: (id) _target action: (SEL) _action sessionId: (NSString*) sessionId nickName: (NSString*) nickName mobile: (NSString*) mobile password: (NSString*) password identityNo: (NSString*) identityNo autoLogin: (NSString*) autoLogin
+	- (SoapRequest*) saveRegisterUser: (id) _target action: (SEL) _action sessionId: (NSString*) sessionId nickName: (NSString*) nickName mobile: (NSString*) mobile password: (NSString*) password identityNo: (NSString*) identityNo
 		{
 		NSMutableArray* _params = [NSMutableArray array];
 		
@@ -183,7 +183,6 @@
 		[_params addObject: [[SoapParameter alloc] initWithValue: mobile forName: @"mobile"]];
 		[_params addObject: [[SoapParameter alloc] initWithValue: password forName: @"password"]];
 		[_params addObject: [[SoapParameter alloc] initWithValue: identityNo forName: @"identityNo"]];
-		[_params addObject: [[SoapParameter alloc] initWithValue: autoLogin forName: @"autoLogin"]];
 		NSString* _envelope = [Soap createEnvelope: @"saveRegisterUser" forNamespace: self.namespace withParameters: _params withHeaders: self.headers];
 		SoapRequest* _request = [SoapRequest create: _target action: _action service: self soapAction: @"" postData: _envelope deserializeTo: [SDZstring2UserMap alloc]];
 		[_request send];
