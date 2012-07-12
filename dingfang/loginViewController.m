@@ -16,7 +16,7 @@
 
 @implementation loginViewController
 
-@synthesize userPhoneID, userPW, ruserPhoneID, ruserID, ruserPWCheck,ruserPW, mobileVerify,loginBtn, registerBtn, loginView,registerView;
+@synthesize nav,userPhoneID, userPW, ruserPhoneID, ruserID, ruserPWCheck,ruserPW, mobileVerify,loginBtn, registerBtn, loginView,registerView;
 @synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -31,7 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+      
 	// Do any additional setup after loading the view.
     userPhoneID.delegate =self;
     

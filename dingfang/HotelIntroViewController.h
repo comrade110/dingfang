@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SDZYuDingRoomService.h"
 
+
 @interface HotelIntroViewController : UIViewController<UIScrollViewDelegate>{
 
     IBOutlet UIScrollView *scrollView;
@@ -16,8 +17,8 @@
     IBOutlet UIPageControl *pageControl;
 	NSMutableArray *viewControllers;
     BOOL pageControlUsed;
-    NSMutableArray *imgArr;
     NSString *mySession;
+    NSMutableArray *imgArr;
     
     NSTimer *timer;
 }

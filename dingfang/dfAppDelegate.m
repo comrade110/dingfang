@@ -7,11 +7,14 @@
 //
 
 #import "dfAppDelegate.h"
-#import "IntroViewController.h"
+#import "SDZYuDingRoomService.h"
+#import "iToast.h"
 #import "AlixPay.h"
 #import "AlixPayResult.h"
+#import "AlixPayOrder.h"
 #import "DataVerifier.h"
 #import <sys/utsname.h>
+#import "NSDataEx.h"
 
 @interface dfAppDelegate ()
 
@@ -22,7 +25,7 @@
 
 @implementation dfAppDelegate
 
-@synthesize window = _window;
+@synthesize window = _window,resultEncrypt,orderNumber;
 
 - (BOOL)isSingleTask{
 	struct utsname name;
@@ -84,7 +87,7 @@
 		NSLog(@"fault:%@", value);
 		return;
 	}
-    NSString *userSession = (NSString *)value;
+    userSession = (NSString *)value;
     
     NSLog(@"%@",userSession);
     SDZUserService *userService = [SDZUserService service];
@@ -95,11 +98,14 @@
     NSUserDefaults *SaveDefaults = [NSUserDefaults standardUserDefaults];
     [SaveDefaults setObject:userSession forKey:@"userSessionKey"];
     
+    [userService noOperation:nil sessionId:userSession];
+    
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
 	
 	[self parseURL:url application:application];
+
 	return YES;
 }
 
@@ -117,12 +123,24 @@
             NSString *zhifubao_rsa_alipay_public_ava = [userDefaults objectForKey:@"zhifubao_rsa_alipay_public"];
 			id<DataVerifier> verifier = CreateRSADataVerifier(zhifubao_rsa_alipay_public_ava);
 			if ([verifier verifyString:result.resultString withSign:result.signString]) {
-				UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" 
-																	 message:result.statusMessage 
-																	delegate:nil 
-														   cancelButtonTitle:@"确定" 
-														   otherButtonTitles:nil];
-				[alertView show];
+                
+                
+                NSLog(@"!!~~~~%@~~~~!!",resultEncrypt);
+                NSLog(@"result.signString:%@~~~~!!",result.signString);
+                
+                SDZYuDingRoomService *service = [SDZYuDingRoomService service];
+                
+                [service returnUrl:self action:@selector(returnUrlHandler:) sessionId:userSession operId:orderNumber trade_no:nil buyer_email:nil buyer_id:nil cost:nil common:resultEncrypt];
+                
+                
+                
+                
+//				UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" 
+//																	 message:result.statusMessage 
+//																	delegate:nil 
+//														   cancelButtonTitle:@"确定" 
+//														   otherButtonTitles:nil];
+//				[alertView show];
 			}//验签错误
 			else {
 				UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" 
@@ -144,6 +162,51 @@
 		}
 		
 	}	
+}
+
+
+-(void)returnUrlHandler:(id)value
+{
+    if ([value isKindOfClass:[NSError class]]) {
+        NSLog(@"Error: %@", value);
+        return;
+    }
+    if ([value isKindOfClass:[SoapFault class]]) {
+        NSLog(@"Fault!!: %@", value);
+        return;
+    }
+    
+    NSString *result = (NSString *)value;
+    
+    NSLog(@"~~~%@~~~~~",result);
+    
+    //    NSArray *resultArr = [result componentsSeparatedByString:@","];
+    
+    if ([result isEqualToString:@"true,true"]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+														message:@"支付宝付款成功！短信已发送至您手机，请妥善保存" 
+													   delegate:self 
+											  cancelButtonTitle:@"确定" 
+											  otherButtonTitles:nil];
+		[alert show];
+    }else if([result isEqualToString:@"true,false"]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+														message:@"支付宝付款成功,短信发送失败，请及时联系云和客服中心" 
+													   delegate:self 
+											  cancelButtonTitle:@"确定" 
+											  otherButtonTitles:nil];
+        [[iToast makeText:@""] show];
+        [alert show];
+    }else if([result isEqualToString:@"false,false"]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+														message:@"可能由于网络原因，服务器接受失败，请及时联系云和客服中心" 
+													   delegate:self 
+											  cancelButtonTitle:@"确定" 
+											  otherButtonTitles:nil];
+        [alert show];
+    }
+    
+    
 }
 
 							

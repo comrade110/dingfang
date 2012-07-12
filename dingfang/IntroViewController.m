@@ -23,7 +23,7 @@ static NSUInteger kNumberOfPages = 3;
 @implementation IntroViewController
 
 @synthesize scrollView,imageScrollView, pageControl, viewControllers;
-@synthesize tabBar,firstTabBarItem,secondTabBarItem,thirdTabBarItem;
+@synthesize tabBar,firstTabBarItem,secondTabBarItem,thirdTabBarItem,resultEncrypt,orderNumber,apd;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -98,7 +98,8 @@ static NSUInteger kNumberOfPages = 3;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    keyVal = @"cn.com.winghall.EncryptUtil.whadmin";
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     mySession = [userDefaults objectForKey:@"userSessionKey"];
@@ -354,17 +355,21 @@ static NSUInteger kNumberOfPages = 3;
 
 - (void)payBtnPress
 {
-    if ([payNumField.text intValue] < [myNum intValue]) {
+    if ([payNumField.text intValue] < [myNum intValue] || [payNumField.text intValue] == [myNum intValue]) {
         SDZYuDingRoomService *service = [SDZYuDingRoomService service];
         
         service.logging = YES;
         
         [service bookRoom:self action:@selector(bookRoomHandler:) sessionId:mySession roomId:myRoomID orderNum:payNumField.text];
         
+    }else {
+        [iToast makeText:@"预定出错！"];
     }
     
     
 }
+
+//  预定房间
 
 -(void)bookRoomHandler:(id)value
 {
@@ -378,20 +383,62 @@ static NSUInteger kNumberOfPages = 3;
     }
     NSString *result = (NSString*)value;
     
-    NSArray *orderArray = [result componentsSeparatedByString:@","];
+//    NSArray *orderArray = [result componentsSeparatedByString:@","];
     
-    NSLog(@"数字是：%@",result);
+    result = [self TripleDES:result encryptOrDecrypt:kCCDecrypt key:keyVal];
+    
+    
+    NSDictionary *bookRoomReturnDic = [result objectFromJSONString];
+    
+    
+    NSDictionary *commonDic = [bookRoomReturnDic objectForKey:@"common"];
+    
+    NSLog(@"%@",bookRoomReturnDic);
+    
+    NSString *payType = [bookRoomReturnDic objectForKey:@"payType"];
+    
+    orderNumber = [bookRoomReturnDic objectForKey:@"logId"];
+    
+    orderNumber = [self TripleDES:orderNumber encryptOrDecrypt:kCCEncrypt key:keyVal];
+    
+    resultEncrypt = [commonDic JSONString];
+    
+    
+    
+        NSLog(@"%@",resultEncrypt);
+    
+    resultEncrypt = [self TripleDES:resultEncrypt encryptOrDecrypt:kCCEncrypt key:keyVal];
+    
+    
+    self.apd = (dfAppDelegate*) [[UIApplication sharedApplication] delegate];
+    
+    
+    self.apd.resultEncrypt =self.resultEncrypt;
+    
+    self.apd.orderNumber =self.orderNumber;
+    
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
     
-    orderNumber = [orderArray objectAtIndex:0];
+
     
-    if ([[orderArray objectAtIndex:1] intValue] == 2) {
+    if ([payType intValue] == 2) {
         [service getZhiFuConfig:self action:@selector(getZhiFuConfigHandle:) sessionId:mySession];
+    }else if([payType intValue] == 1){
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+														message:@"云和币支付成功！" 
+													   delegate:self 
+											  cancelButtonTitle:@"确定" 
+											  otherButtonTitles:nil];
+		[alert show];
     }
     
 
 
 }
+
+
+
+
 //  获取支付宝信息
 - (NSString*)URLencode:(NSString *)originalString
         stringEncoding:(NSStringEncoding)stringEncoding {
@@ -435,8 +482,7 @@ static NSUInteger kNumberOfPages = 3;
         return;
     }
     SDZMobileZhiFuConfig *result = (SDZMobileZhiFuConfig*)value;
-    
-    NSString *keyVal = @"cn.com.winghall.EncryptUtil.whadmin";
+
     
 
     NSString *zhifubao_notify_url_ava = [self TripleDES:result.zhifubao_notify_url encryptOrDecrypt:kCCDecrypt key:keyVal];
@@ -526,6 +572,9 @@ static NSUInteger kNumberOfPages = 3;
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
 	}
 }
+
+
+// 加密解密方法
 
 - (NSString*)TripleDES:(NSString*)plainText encryptOrDecrypt:(CCOperation)encryptOrDecrypt key:(NSString*)key {
     

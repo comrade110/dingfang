@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HotelIntroViewController.h"
 
 @interface HotelIntroImageViewController : UIViewController{
     

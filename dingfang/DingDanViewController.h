@@ -7,17 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SDZUserService.h"
 #import "dfLoginBtnDelegate.h"
 
-@interface DingDanViewController : UIViewController{
+@interface DingDanViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
 
 
     NSObject<dfLoginBtnDelegate> * delegate;
+    UITableView *orderTableView;
+    NSArray *ddArr;
+    UITableViewCell *cell;
 }
 
 @property (strong, nonatomic) NSObject<dfLoginBtnDelegate> * delegate;
-
 - (IBAction)colseView:(id)sender;
 - (IBAction)logoutAction:(id)sender;
 

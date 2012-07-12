@@ -27,6 +27,10 @@
 /* Interface for the service */
 				
 @interface SDZYuDingRoomService : SoapService
+
+    /* Returns NSString.  */
+    - (SoapRequest*) returnUrl: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId operId: (NSString*) operId trade_no: (NSString*) trade_no buyer_email: (NSString*) buyer_email buyer_id: (NSString*) buyer_id cost: (NSString*) cost common: (NSString*) common;
+    - (SoapRequest*) returnUrl: (id) target action: (SEL) action sessionId: (NSString*) sessionId operId: (NSString*) operId trade_no: (NSString*) trade_no buyer_email: (NSString*) buyer_email buyer_id: (NSString*) buyer_id cost: (NSString*) cost common: (NSString*) common;
 		
 	/* Returns long.  */
 	- (SoapRequest*) countYuDingRoomLogInfo: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId hotelId: (NSString*) hotelId cityName: (NSString*) cityName startTime: (NSString*) startTime endTime: (NSString*) endTime;
@@ -48,9 +52,9 @@
 	- (SoapRequest*) findHotelByCity: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId city: (NSString*) city;
 	- (SoapRequest*) findHotelByCity: (id) target action: (SEL) action sessionId: (NSString*) sessionId city: (NSString*) city;
 
-	/* Returns NSString*.  */
-	- (SoapRequest*) findYuDingRoomLogInfo: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId hotelId: (NSString*) hotelId cityName: (NSString*) cityName startTime: (NSString*) startTime endTime: (NSString*) endTime pageNo: (int) pageNo perPageNum: (int) perPageNum;
-	- (SoapRequest*) findYuDingRoomLogInfo: (id) target action: (SEL) action sessionId: (NSString*) sessionId hotelId: (NSString*) hotelId cityName: (NSString*) cityName startTime: (NSString*) startTime endTime: (NSString*) endTime pageNo: (int) pageNo perPageNum: (int) perPageNum;
+/* Returns NSMutableArray*.  */
+- (SoapRequest*) findYuDingRoomLogInfo: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId hotelId: (NSString*) hotelId cityName: (NSString*) cityName startTime: (NSString*) startTime endTime: (NSString*) endTime pageNo: (int) pageNo perPageNum: (int) perPageNum;
+- (SoapRequest*) findYuDingRoomLogInfo: (id) target action: (SEL) action sessionId: (NSString*) sessionId hotelId: (NSString*) hotelId cityName: (NSString*) cityName startTime: (NSString*) startTime endTime: (NSString*) endTime pageNo: (int) pageNo perPageNum: (int) perPageNum;
 
 	/* Returns BOOL.  */
 	- (SoapRequest*) saveYuDingComment: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId hotelId: (long) hotelId userId: (long) userId evaluate: (int) evaluate environment: (int) environment service: (int) service comment: (NSString*) comment;

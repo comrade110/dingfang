@@ -9,10 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "SDZUserService.h"
 
+@class IntroViewController;
 
+@interface dfAppDelegate : UIResponder <UIApplicationDelegate>{
 
-@interface dfAppDelegate : UIResponder <UIApplicationDelegate>
+    NSString *userSession;
+    
+    NSString *resultEncrypt;
+    
+    NSString *orderNumber;
+    
+    
+}
 
+@property (strong, nonatomic) NSString *resultEncrypt;;
+@property (strong, nonatomic) NSString *orderNumber;;
 @property (strong, nonatomic) UIWindow *window;
 
 @end

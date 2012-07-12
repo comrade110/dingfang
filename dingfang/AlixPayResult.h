@@ -13,7 +13,7 @@
 	int		  _statusCode;
 	NSString *_statusMessage;
 	NSString *_resultString;
-	NSString *_signString;
+    NSString *_signString;
 	NSString *_signType;
 }
 

@@ -13,7 +13,7 @@
 
 @implementation dfViewController
 
-@synthesize loginBtn,hotelOrderBtn,userBtn;
+@synthesize loginBtn,hotelOrderBtn,userBtn,nav;
 
 
 - (void)passValue:(NSString *)valueOne
@@ -38,6 +38,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav_bg.png"] forBarMetrics:UIBarMetricsDefault];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     

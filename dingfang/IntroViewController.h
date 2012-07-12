@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "SDZYuDingRoomService.h"
 #import "NSString.h"
+#import "JSONKit.h"
 #include <CommonCrypto/CommonCryptor.h>
+#import "iToast.h"
+#import "dfAppDelegate.h"
 
 
 
@@ -21,6 +24,8 @@
 	NSMutableArray *viewControllers;
     BOOL pageControlUsed;
     UIView *orderView;
+    
+    NSString *keyVal;
     
     NSString *myDesc;    
     NSString *myAddress; 
@@ -37,6 +42,9 @@
     
     NSString *mySession;
     
+    NSString *resultEncrypt;
+    dfAppDelegate *apd;
+    
     NSMutableDictionary *item;
     NSMutableDictionary *item2;
     
@@ -52,6 +60,9 @@
 @property (nonatomic, retain) IBOutlet UITabBarItem *firstTabBarItem;
 @property (nonatomic, retain) IBOutlet UITabBarItem *secondTabBarItem;
 @property (nonatomic, retain) IBOutlet UITabBarItem *thirdTabBarItem;
+@property (nonatomic, retain) NSString *resultEncrypt;
+@property (nonatomic, retain) NSString *orderNumber;
+@property (nonatomic, retain) dfAppDelegate *apd;
 
 - (IBAction)changePage:(id)sender;
 - (void)loadScrollViewWithPage:(int)page;

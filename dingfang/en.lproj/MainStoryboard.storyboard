@@ -58,6 +58,7 @@
                     </view>
                     <connections>
                         <outlet property="hotelOrderBtn" destination="UqB-qo-Lgb" id="kjo-FV-kqd"/>
+                        <outlet property="nav" destination="x7n-qm-oyc" id="HKq-3p-mEj"/>
                         <outlet property="navigationItem" destination="rtI-n5-z9J" id="7I4-sh-3Zt"/>
                     </connections>
                 </viewController>
@@ -225,7 +226,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="W0q-jz-0fm">
-                                        <rect key="frame" x="111" y="197" width="98" height="37"/>
+                                        <rect key="frame" x="52" y="198" width="98" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="登录" backgroundImage="button_nor.png">
@@ -279,7 +280,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Rdb-Qx-VRc">
-                                        <rect key="frame" x="32" y="261" width="97" height="29"/>
+                                        <rect key="frame" x="185" y="202" width="97" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                         <state key="normal" title="新用户注册">
@@ -292,18 +293,6 @@
                                         <connections>
                                             <action selector="regBtnPress:" destination="Sqg-SW-3ai" eventType="touchUpInside" id="MCI-51-yKC"/>
                                         </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cmQ-11-odA">
-                                        <rect key="frame" x="186" y="261" width="97" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" size="button"/>
-                                        <state key="normal" title="忘记密码">
-                                            <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dS2-Rn-A81">
                                         <rect key="frame" x="102" y="151" width="32" height="32"/>
@@ -340,6 +329,7 @@
                         <outlet property="loginBtn" destination="W0q-jz-0fm" id="btr-fa-Vzy"/>
                         <outlet property="loginView" destination="c8U-31-bzt" id="NcP-wg-sAo"/>
                         <outlet property="mobileVerify" destination="ZRy-CG-wp7" id="iCQ-gw-Svy"/>
+                        <outlet property="nav" destination="KVc-6p-PUK" id="Hm7-1n-Ln2"/>
                         <outlet property="registerBtn" destination="UZ6-QQ-1bw" id="zHn-7A-URp"/>
                         <outlet property="registerView" destination="LoS-ig-oYn" id="CdJ-H1-XVr"/>
                         <outlet property="ruserID" destination="7tr-DF-n5c" id="07q-De-bv0"/>
@@ -775,106 +765,6 @@
         <image name="coffee_cup.png" width="32" height="32"/>
         <image name="user.png" width="32" height="32"/>
     </resources>
-    <classes>
-        <class className="BIDTaskListController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BIDTaskListController.h"/>
-            <relationships>
-                <relationship kind="action" name="orderByPrice:"/>
-                <relationship kind="action" name="orderByTime:"/>
-                <relationship kind="outlet" name="areaButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="listView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="CommentViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CommentViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="commTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="DingDanNaviController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DingDanNaviController.h"/>
-        </class>
-        <class className="DingDanViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DingDanViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="colseView:"/>
-                <relationship kind="action" name="logoutAction:"/>
-            </relationships>
-        </class>
-        <class className="HotelIntroImageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HotelIntroImageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="HotelIntroViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HotelIntroViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="changePage:"/>
-                <relationship kind="outlet" name="imageScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="IntroNaviViewController" superclassName="UINavigationController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IntroNaviViewController.h"/>
-        </class>
-        <class className="IntroTabViewController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IntroTabViewController.h"/>
-        </class>
-        <class className="IntroViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IntroViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="changePage:"/>
-                <relationship kind="outlet" name="firstTabBarItem" candidateClass="UITabBarItem"/>
-                <relationship kind="outlet" name="imageScrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="secondTabBarItem" candidateClass="UITabBarItem"/>
-                <relationship kind="outlet" name="tabBar" candidateClass="UITabBar"/>
-                <relationship kind="outlet" name="thirdTabBarItem" candidateClass="UITabBarItem"/>
-            </relationships>
-        </class>
-        <class className="cityListViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/cityListViewController.h"/>
-        </class>
-        <class className="dfViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/dfViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="hotelOrderBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="navigationItem" candidateClass="UINavigationItem"/>
-            </relationships>
-        </class>
-        <class className="introImageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/introImageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="loginViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/loginViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnPress:"/>
-                <relationship kind="action" name="regBackBtnPress:"/>
-                <relationship kind="action" name="regBtnPress:"/>
-                <relationship kind="action" name="regValidatekBtnPress:"/>
-                <relationship kind="action" name="remeberUsernamePassword:"/>
-                <relationship kind="action" name="submitBtnPress:"/>
-                <relationship kind="outlet" name="btnRemeberUsernamePassword" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="loginBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="loginView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="mobileVerify" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="registerBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="registerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="ruserID" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="ruserPW" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="ruserPWCheck" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="ruserPhoneID" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="userPW" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="userPhoneID" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

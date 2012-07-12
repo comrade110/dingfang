@@ -19,6 +19,8 @@
 #import "SDZstring2ArrayOfHotelMap.h"
 #import "SDZHotel.h"
 #import "SDZYuDingComment.h"
+#import "SDZOperLog.h"
+#import "SDZoperLogList.h"
 
 /* Implementation of the service */
 				
@@ -28,7 +30,7 @@
 	{
 		if(self = [super init])
 		{
-			self.serviceUrl = @"http://192.168.3.4:9001/idc/services/YuDingRoomService";
+			self.serviceUrl = @"http://192.168.3.5:9001/idc/services/YuDingRoomService";
 			self.namespace = @"http://soap.additional/";
 			self.headers = nil;
 			self.logging = NO;
@@ -50,6 +52,28 @@
 		return [[SDZYuDingRoomService alloc] initWithUsername:username andPassword:password];
 	}
 
+    /* Returns NSString.  */
+    - (SoapRequest*) returnUrl: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId operId: (NSString*) operId trade_no: (NSString*) trade_no buyer_email: (NSString*) buyer_email buyer_id: (NSString*) buyer_id cost: (NSString*) cost common: (NSString*) common
+    {
+    return [self returnUrl: handler action: nil sessionId: sessionId operId: operId trade_no: trade_no buyer_email: buyer_email buyer_id: buyer_id cost: cost common: common];
+    }
+
+    - (SoapRequest*) returnUrl: (id) _target action: (SEL) _action sessionId: (NSString*) sessionId operId: (NSString*) operId trade_no: (NSString*) trade_no buyer_email: (NSString*) buyer_email buyer_id: (NSString*) buyer_id cost: (NSString*) cost common: (NSString*) common
+    {
+        NSMutableArray* _params = [NSMutableArray array];
+    
+        [_params addObject: [[SoapParameter alloc] initWithValue: sessionId forName: @"sessionId"]];
+        [_params addObject: [[SoapParameter alloc] initWithValue: operId forName: @"operId"]];
+        [_params addObject: [[SoapParameter alloc] initWithValue: trade_no forName: @"trade_no"]];
+        [_params addObject: [[SoapParameter alloc] initWithValue: buyer_email forName: @"buyer_email"]];
+        [_params addObject: [[SoapParameter alloc] initWithValue: buyer_id forName: @"buyer_id"]];
+        [_params addObject: [[SoapParameter alloc] initWithValue: cost forName: @"cost"]];
+        [_params addObject: [[SoapParameter alloc] initWithValue: common forName: @"common"]];
+        NSString* _envelope = [Soap createEnvelope: @"returnUrl" forNamespace: self.namespace withParameters: _params withHeaders: self.headers];
+        SoapRequest* _request = [SoapRequest create: _target action: _action service: self soapAction: @"" postData: _envelope deserializeTo: @"NSString"];
+        [_request send];
+        return _request;
+    }
 		
 	/* Returns long.  */
 	- (SoapRequest*) countYuDingRoomLogInfo: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId hotelId: (NSString*) hotelId cityName: (NSString*) cityName startTime: (NSString*) startTime endTime: (NSString*) endTime
@@ -168,28 +192,28 @@
     [_request send];
     return _request;
 }
-	/* Returns NSString*.  */
-	- (SoapRequest*) findYuDingRoomLogInfo: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId hotelId: (NSString*) hotelId cityName: (NSString*) cityName startTime: (NSString*) startTime endTime: (NSString*) endTime pageNo: (int) pageNo perPageNum: (int) perPageNum
-	{
-		return [self findYuDingRoomLogInfo: handler action: nil sessionId: sessionId hotelId: hotelId cityName: cityName startTime: startTime endTime: endTime pageNo: pageNo perPageNum: perPageNum];
-	}
+/* Returns NSMutableArray*.  */
+- (SoapRequest*) findYuDingRoomLogInfo: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId hotelId: (NSString*) hotelId cityName: (NSString*) cityName startTime: (NSString*) startTime endTime: (NSString*) endTime pageNo: (int) pageNo perPageNum: (int) perPageNum
+{
+    return [self findYuDingRoomLogInfo: handler action: nil sessionId: sessionId hotelId: hotelId cityName: cityName startTime: startTime endTime: endTime pageNo: pageNo perPageNum: perPageNum];
+}
 
-	- (SoapRequest*) findYuDingRoomLogInfo: (id) _target action: (SEL) _action sessionId: (NSString*) sessionId hotelId: (NSString*) hotelId cityName: (NSString*) cityName startTime: (NSString*) startTime endTime: (NSString*) endTime pageNo: (int) pageNo perPageNum: (int) perPageNum
-		{
-		NSMutableArray* _params = [NSMutableArray array];
-		
-		[_params addObject: [[SoapParameter alloc] initWithValue: sessionId forName: @"sessionId"]];
-		[_params addObject: [[SoapParameter alloc] initWithValue: hotelId forName: @"hotelId"]];
-		[_params addObject: [[SoapParameter alloc] initWithValue: cityName forName: @"cityName"]];
-		[_params addObject: [[SoapParameter alloc] initWithValue: startTime forName: @"startTime"]];
-		[_params addObject: [[SoapParameter alloc] initWithValue: endTime forName: @"endTime"]];
-		[_params addObject: [[SoapParameter alloc] initWithValue: [NSNumber numberWithInt: pageNo] forName: @"pageNo"]];
-		[_params addObject: [[SoapParameter alloc] initWithValue: [NSNumber numberWithInt: perPageNum] forName: @"perPageNum"]];
-		NSString* _envelope = [Soap createEnvelope: @"findYuDingRoomLogInfo" forNamespace: self.namespace withParameters: _params withHeaders: self.headers];
-		SoapRequest* _request = [SoapRequest create: _target action: _action service: self soapAction: @"" postData: _envelope deserializeTo: @"NSString"];
-		[_request send];
-		return _request;
-	}
+- (SoapRequest*) findYuDingRoomLogInfo: (id) _target action: (SEL) _action sessionId: (NSString*) sessionId hotelId: (NSString*) hotelId cityName: (NSString*) cityName startTime: (NSString*) startTime endTime: (NSString*) endTime pageNo: (int) pageNo perPageNum: (int) perPageNum
+{
+    NSMutableArray* _params = [NSMutableArray array];
+    
+    [_params addObject: [[SoapParameter alloc] initWithValue: sessionId forName: @"sessionId"]];
+    [_params addObject: [[SoapParameter alloc] initWithValue: hotelId forName: @"hotelId"]];
+    [_params addObject: [[SoapParameter alloc] initWithValue: cityName forName: @"cityName"]];
+    [_params addObject: [[SoapParameter alloc] initWithValue: startTime forName: @"startTime"]];
+    [_params addObject: [[SoapParameter alloc] initWithValue: endTime forName: @"endTime"]];
+    [_params addObject: [[SoapParameter alloc] initWithValue: [NSNumber numberWithInt: pageNo] forName: @"pageNo"]];
+    [_params addObject: [[SoapParameter alloc] initWithValue: [NSNumber numberWithInt: perPageNum] forName: @"perPageNum"]];
+    NSString* _envelope = [Soap createEnvelope: @"findYuDingRoomLogInfo" forNamespace: self.namespace withParameters: _params withHeaders: self.headers];
+    SoapRequest* _request = [SoapRequest create: _target action: _action service: self soapAction: @"" postData: _envelope deserializeTo: [SDZoperLogList alloc]];
+    [_request send];
+    return _request;
+}
 
 	/* Returns BOOL.  */
 	- (SoapRequest*) saveYuDingComment: (id <SoapDelegate>) handler sessionId: (NSString*) sessionId hotelId: (long) hotelId userId: (long) userId evaluate: (int) evaluate environment: (int) environment service: (int) service comment: (NSString*) comment

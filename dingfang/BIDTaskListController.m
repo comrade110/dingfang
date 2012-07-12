@@ -468,8 +468,14 @@
     
     cell = [listView dequeueReusableCellWithIdentifier:identifier];
     
+    
+    
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        
+        [cell setBackgroundImageByName:@"cell.png"];
+        cell.frame = CGRectMake(0, 0, 320, 52);
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
     } else{ 
         NSArray *subviews = [[NSArray alloc] initWithArray:cell.contentView.subviews]; 
@@ -482,17 +488,17 @@
     
     cellLabel.text = [NSString stringWithFormat:@"[%@]%@%@仅售%@",cityname,hotelname,roomType,price];
     cellLabel.font = [UIFont systemFontOfSize:12.0f];
-    
+    cellLabel.backgroundColor = [UIColor clearColor];
     UILabel *priceLable = [[UILabel alloc] initWithFrame:CGRectMake(220, 10, 140, 30)];
     
     
     priceLable.text = price;
     
-    cellLabel.font = [UIFont systemFontOfSize:12.0f];
     priceLable.textColor = [UIColor orangeColor];
-    
+    priceLable.backgroundColor = [UIColor clearColor];
     [cell.contentView addSubview:cellLabel];
     [cell.contentView addSubview:priceLable];
+    
     
     return cell;
 }
@@ -550,6 +556,8 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     NSString *hotelDesc = [hotelArr objectAtIndex:indexPath.row];
+    
+    NSLog(@"%@",hotelDesc);
     
     [userDefaults setObject:hotelDesc forKey:@"descKey"];
     [userDefaults setObject:cellLabel.text forKey:@"goodsTitle"];

@@ -7,6 +7,8 @@
 //
 
 #import "DingDanViewController.h"
+#import "SDZUserService.h"
+#import "SDZYuDingRoomService.h"
 
 
 
@@ -29,6 +31,24 @@
     
 
     [self labelAdd];
+    
+//   tableview add
+    
+    ddArr = [NSArray arrayWithObjects:@"最近3天订单",@"最近30天订单",@"所有订单", nil];
+    
+    orderTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 200, 320, 180) style:UITableViewStyleGrouped];
+    
+    orderTableView.backgroundColor = [UIColor clearColor];
+    
+    orderTableView.delegate = self;
+    
+    orderTableView.dataSource = self;
+    
+    orderTableView.scrollEnabled = NO;
+    
+    
+    [self.view addSubview:orderTableView];
+    
 	// Do any additional setup after loading the view.
 }
 
@@ -67,6 +87,9 @@
     [self.view addSubview:moneyL];
     [self.view addSubview:lastLoginTimeL];
     
+//  tableView
+    
+    
 
 }
 - (IBAction)colseView:(id)sender
@@ -97,6 +120,89 @@
 
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return [ddArr count];
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    cell = [orderTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] init];
+        
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; 
+    }  
+    
+    // Configure the cell...
+    UILabel *ddLable = [[UILabel alloc] initWithFrame:CGRectMake(5, 10, 200, 30)];
+    
+    ddLable.text =[ddArr objectAtIndex:indexPath.row];
+    ddLable.backgroundColor = [UIColor clearColor];
+    ddLable.font = [UIFont systemFontOfSize:12];
+    
+    
+    
+    [cell.contentView addSubview:ddLable];
+    
+    
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Navigation logic may go here. Create and push another view controller.
+    /*
+     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+     // ...
+     // Pass the selected object to the new view controller.
+     [self.navigationController pushViewController:detailViewController animated:YES];
+     */
+    
+    SDZYuDingRoomService *service = [SDZYuDingRoomService service];
+    
+    NSUserDefaults *SaveDefaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *mySession = [SaveDefaults objectForKey:@"userSessionKey"];
+    
+    [service findYuDingRoomLogInfo:self action:@selector(findYuDingRoomLogInfoHandler:) sessionId:mySession hotelId:nil cityName:nil startTime:@"20120710000000000" endTime:@"20120712000000000" pageNo:1 perPageNum:10];
+    
+    
+    
+    
+    
+}
+
+
+-(void)findYuDingRoomLogInfoHandler:(id)value
+{
+    NSMutableArray *result = (NSMutableArray*)value;
+    
+    if ([value isKindOfClass:[NSError class]]) {
+    NSLog(@"Error: %@", value);
+    return;
+    }
+    if ([value isKindOfClass:[SoapFault class]]) {
+        NSLog(@"Fault: %@", value);
+        return;
+    }
+    
+    NSLog(@"%@",result); 
+
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

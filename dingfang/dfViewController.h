@@ -18,6 +18,7 @@
     UIBarButtonItem *userBtn;
 
 }
+@property(nonatomic,retain) IBOutlet UINavigationBar *nav;
 @property(nonatomic,retain) UIBarButtonItem *loginBtn;
 @property(nonatomic,retain) IBOutlet UIButton *hotelOrderBtn;
 @property(nonatomic,retain) UIBarButtonItem *userBtn;

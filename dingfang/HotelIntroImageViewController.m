@@ -34,7 +34,7 @@ static NSArray *__pageControlImageList = nil;
     
     myArr = [userDefaults objectForKey:@"imgArr"];
     
-    NSLog(@"%@",myArr);
+    NSLog(@"---%@---",myArr);
     
 	if (__pageControlImageList==nil) {
 		__pageControlImageList = [[NSArray alloc] initWithArray:myArr];

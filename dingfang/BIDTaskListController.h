@@ -10,6 +10,7 @@
 #import "EGORefreshTableHeaderView.h"
 #import "IntroViewController.h"
 #import "IntroTabViewController.h"
+#import "UITableViewCellExt.h"
 
 @interface BIDTaskListController : UIViewController<UITableViewDelegate,UITableViewDataSource,EGORefreshTableHeaderDelegate,UIScrollViewDelegate>
 {
