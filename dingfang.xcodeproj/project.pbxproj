@@ -69,6 +69,7 @@
 		CE76C07415803DB2006C5320 /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CE76C06C15803DB2006C5320 /* blueArrow.png */; };
 		CE76C07515803DB2006C5320 /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE76C06D15803DB2006C5320 /* blueArrow@2x.png */; };
 		CE76C07C158048D5006C5320 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE76C07B158048D5006C5320 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CE77274415B3C08B008FC89E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CE77274315B3C08A008FC89E /* MBProgressHUD.m */; };
 		CE774770156DD05D00BE3B05 /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE77476F156DD05D00BE3B05 /* loginViewController.m */; };
 		CE774780156E1FF900BE3B05 /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE77477F156E1FF900BE3B05 /* registerViewController.m */; };
 		CE774E8E15819C9500D46012 /* IntroTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE774E8D15819C9500D46012 /* IntroTabViewController.m */; };
@@ -90,6 +91,7 @@
 		CE78C0FF1589EDFB00D6C267 /* SDZstring2UserMap.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78C0FA1589EDFB00D6C267 /* SDZstring2UserMap.m */; };
 		CE78C1001589EDFB00D6C267 /* SDZUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78C0FC1589EDFB00D6C267 /* SDZUser.m */; };
 		CE78C1011589EDFB00D6C267 /* SDZUserService.m in Sources */ = {isa = PBXBuildFile; fileRef = CE78C0FE1589EDFB00D6C267 /* SDZUserService.m */; };
+		CE790C0915AFFAA4001F9A91 /* DDOrderNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE790C0815AFFAA4001F9A91 /* DDOrderNavViewController.m */; };
 		CE79124F156F1C7300EF29B8 /* button_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79124D156F1C7300EF29B8 /* button_nor.png */; };
 		CE791250156F1C7300EF29B8 /* button_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79124E156F1C7300EF29B8 /* button_pressed.png */; };
 		CE791258156F73DB00EF29B8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE791256156F73CC00EF29B8 /* QuartzCore.framework */; };
@@ -274,6 +276,8 @@
 		CE76C06D15803DB2006C5320 /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
 		CE76C07A158048D5006C5320 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		CE76C07B158048D5006C5320 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		CE77274215B3C08A008FC89E /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		CE77274315B3C08A008FC89E /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		CE77476E156DD05D00BE3B05 /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginViewController.h; sourceTree = "<group>"; };
 		CE77476F156DD05D00BE3B05 /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
 		CE77477E156E1FF900BE3B05 /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = registerViewController.h; sourceTree = "<group>"; };
@@ -305,6 +309,8 @@
 		CE78C0FC1589EDFB00D6C267 /* SDZUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZUser.m; sourceTree = "<group>"; };
 		CE78C0FD1589EDFB00D6C267 /* SDZUserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDZUserService.h; sourceTree = "<group>"; };
 		CE78C0FE1589EDFB00D6C267 /* SDZUserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDZUserService.m; sourceTree = "<group>"; };
+		CE790C0715AFFAA3001F9A91 /* DDOrderNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDOrderNavViewController.h; sourceTree = "<group>"; };
+		CE790C0815AFFAA4001F9A91 /* DDOrderNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDOrderNavViewController.m; sourceTree = "<group>"; };
 		CE79124D156F1C7300EF29B8 /* button_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_nor.png; sourceTree = "<group>"; };
 		CE79124E156F1C7300EF29B8 /* button_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_pressed.png; sourceTree = "<group>"; };
 		CE791256156F73CC00EF29B8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -715,9 +721,13 @@
 				CE7F502815625A18007AD4A5 /* dfAppDelegate.m */,
 				CE79C3B315900E1C0083F378 /* DingDanNaviController.h */,
 				CE79C3B415900E1C0083F378 /* DingDanNaviController.m */,
+				CE790C0715AFFAA3001F9A91 /* DDOrderNavViewController.h */,
+				CE790C0815AFFAA4001F9A91 /* DDOrderNavViewController.m */,
 				CE7F502A15625A18007AD4A5 /* MainStoryboard.storyboard */,
 				CE7F502D15625A18007AD4A5 /* dfViewController.h */,
 				CE7F502E15625A18007AD4A5 /* dfViewController.m */,
+				CE77274215B3C08A008FC89E /* MBProgressHUD.h */,
+				CE77274315B3C08A008FC89E /* MBProgressHUD.m */,
 				CE7F896015A1983300A9E0FE /* AlixPay.h */,
 				CE7F896115A1983400A9E0FE /* AlixPayOrder.h */,
 				CE7F896215A1983500A9E0FE /* AlixPayResult.h */,
@@ -1169,6 +1179,8 @@
 				CE35FC6315AC2490000E2D76 /* UITableViewCellExt.m in Sources */,
 				CE740E7615AE6C83007FF612 /* DDTableViewController.m in Sources */,
 				CE0FFEA915AEC2410034C2FE /* SDZoperLogList.m in Sources */,
+				CE790C0915AFFAA4001F9A91 /* DDOrderNavViewController.m in Sources */,
+				CE77274415B3C08B008FC89E /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

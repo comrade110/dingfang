@@ -39,6 +39,7 @@
 {
     [super viewDidLoad];
     
+    
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav_bg.png"] forBarMetrics:UIBarMetricsDefault];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

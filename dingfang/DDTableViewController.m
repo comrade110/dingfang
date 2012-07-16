@@ -8,17 +8,13 @@
 
 #import "DDTableViewController.h"
 
-@interface DDTableViewController ()
-
-@end
-
 @implementation DDTableViewController
 
 @synthesize ddArr;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithStyle:UITableViewStyleGrouped];
+    self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
         // Custom initialization
     }
@@ -35,12 +31,14 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    ddArr = [NSArray arrayWithObjects:@"最近3天订单",@"最近30天订单",@"所有订单", nil];
-    self.view = [[UITableView alloc] initWithFrame:CGRectMake(0, 200, 300, 180)];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    ddArr = [NSArray array];
+    
+    ddArr = [userDefaults objectForKey:@"itemArr"];
     
     
-    
-    NSLog(@"%@",[ddArr objectAtIndex:0]);
+    NSLog(@"~~~%@",[ddArr objectAtIndex:0]);
 }
 
 - (void)viewDidUnload
@@ -78,23 +76,25 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, 300, 50)];
+        cell = [[UITableViewCell alloc] init];
     }  
     
     // Configure the cell...
     UILabel *ddLable = [[UILabel alloc] initWithFrame:CGRectMake(5, 10, 200, 30)];
     
-    ddLable.text =[ddArr objectAtIndex:indexPath.row];
+    NSDictionary *dic = [ddArr objectAtIndex:indexPath.row];
+    
+    ddLable.text =[dic objectForKey:@"operDesc"];
+    ddLable.backgroundColor = [UIColor clearColor];
     UILabel *addLable = [[UILabel alloc] initWithFrame:CGRectMake(205, 10, 100, 30)];
     
-    addLable.text =@"ganhania";
+    addLable.text = [dic objectForKey:@"status"];;
     
+    addLable.backgroundColor = [UIColor clearColor];
     
     [cell.contentView addSubview:ddLable];
     [cell.contentView addSubview:addLable];
     
-    NSLog(@"%@",ddLable.text);
-    NSLog(@"%@",addLable.text);
     
     
     return cell;

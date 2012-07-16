@@ -14,11 +14,11 @@
 
 @implementation DingDanViewController
 
-@synthesize delegate;
+@synthesize delegate,navBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:nil bundle:nil];
     if (self) {
         // Custom initialization
     }
@@ -46,8 +46,38 @@
     
     orderTableView.scrollEnabled = NO;
     
+    NSDate *date = [NSDate date];
+    
+    int time = [date timeIntervalSince1970];
+    
+    int firstTime = time - 3*24*60*60;
+    
+    int secondTime = time - 30*24*60*60; 
+    
+    NSDate *firstDate = [[NSDate alloc] initWithTimeIntervalSince1970:firstTime];
+    
+    NSDate *secondDate = [[NSDate alloc] initWithTimeIntervalSince1970:secondTime];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    [formatter setDateFormat:@"yyyyMMddHHMMSS000"];
+    
+    nowTime = [formatter stringFromDate:date];
+    
+    firstDateTime = [formatter stringFromDate:firstDate];
+    
+    secondDateTime = [formatter stringFromDate:secondDate];
+    
+    NSLog(@"%@",nowTime);
+    NSLog(@"%@",firstDateTime);
+    NSLog(@"%@",secondDateTime);
+    
     
     [self.view addSubview:orderTableView];
+    
+    
+    
+    
     
 	// Do any additional setup after loading the view.
 }
@@ -178,13 +208,14 @@
     
     NSString *mySession = [SaveDefaults objectForKey:@"userSessionKey"];
     
-    [service findYuDingRoomLogInfo:self action:@selector(findYuDingRoomLogInfoHandler:) sessionId:mySession hotelId:nil cityName:nil startTime:@"20120710000000000" endTime:@"20120712000000000" pageNo:1 perPageNum:10];
-    
+    [service findYuDingRoomLogInfo:self action:@selector(findYuDingRoomLogInfoHandler:) sessionId:mySession hotelId:nil cityName:nil startTime:firstDateTime endTime:nowTime pageNo:1 perPageNum:10];
+
     
     
     
     
 }
+
 
 
 -(void)findYuDingRoomLogInfoHandler:(id)value
@@ -200,10 +231,50 @@
         return;
     }
     
-    NSLog(@"%@",result); 
-
+    itemArr = [NSMutableArray array];
+    
+    for (SDZOperLog *node in result) {
+            CXMLDocument *document = [[CXMLDocument alloc] initWithXMLString:[node serialize] options:0 error:nil];
+        
+        [self parseDire:document];
+        
+        [itemArr addObject:item];
+    }
+    
+    NSUserDefaults *SaveDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [SaveDefaults setObject:itemArr forKey:@"itemArr"];
+    
+    NSLog(@"%@",itemArr);
+    
+    
+    ddTableViewController = [[DDTableViewController alloc] init];
+    [self presentModalViewController:ddTableViewController animated:YES];
 }
-
+//方式二:按节点查找
+- (void) parseDire:(CXMLDocument *) document
+{
+    NSArray *OperLog = NULL;
+    OperLog = [document nodesForXPath:@"//OperLog" error:nil];
+    for (CXMLElement *element in OperLog)
+    {
+        if ([element isKindOfClass:[CXMLElement class]])
+        {
+            item = [[NSMutableDictionary alloc] init];
+            for (int i = 0; i < [element childCount]; i++)
+            {
+                if ([[[element children] objectAtIndex:i] isKindOfClass:[CXMLElement class]])
+                {
+                    [item setObject:[[element childAtIndex:i] stringValue]
+                             forKey:[[element childAtIndex:i] name]
+                     ];
+//                                        NSLog(@"%@", [[element childAtIndex:i] stringValue]);
+                }
+            }
+//            NSLog(@"%@", item);
+        }
+    }
+}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);

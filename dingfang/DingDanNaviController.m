@@ -31,13 +31,12 @@
                                                   bundle:nil];
     loginViewController *loginVC = [sb instantiateViewControllerWithIdentifier:@"loginViewController"];
     DingDanViewController *dingDanVC = [sb instantiateViewControllerWithIdentifier:@"DingDanView"];
-    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     int isLogin = [userDefaults integerForKey:@"isLogin"];
     
     if (isLogin == 1) {
-         [self pushViewController:dingDanVC animated:YES];
+         [self pushViewController:dingDanVC animated:NO];
     }else if(isLogin == 0) {
     
          [self pushViewController:loginVC animated:YES];

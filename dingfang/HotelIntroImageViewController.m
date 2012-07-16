@@ -39,7 +39,12 @@ static NSArray *__pageControlImageList = nil;
 	if (__pageControlImageList==nil) {
 		__pageControlImageList = [[NSArray alloc] initWithArray:myArr];
 	}
-	return [__pageControlImageList objectAtIndex:index %[__pageControlImageList count]];
+    
+    NSString *pageListString = [__pageControlImageList objectAtIndex:index %[__pageControlImageList count]];
+    NSString *ip = @"http://192.168.3.7:9001";
+    NSString *result = [NSString stringWithFormat:@"%@%@",ip,pageListString];
+    
+	return result;
 }
 
 

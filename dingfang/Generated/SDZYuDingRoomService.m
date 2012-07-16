@@ -30,7 +30,7 @@
 	{
 		if(self = [super init])
 		{
-			self.serviceUrl = @"http://192.168.3.5:9001/idc/services/YuDingRoomService";
+			self.serviceUrl = @"http://192.168.3.7:9001/idc/services/YuDingRoomService";
 			self.namespace = @"http://soap.additional/";
 			self.headers = nil;
 			self.logging = NO;

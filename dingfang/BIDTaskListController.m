@@ -9,6 +9,7 @@
 #import "BIDTaskListController.h"
 #import "SDZYuDingRoomService.h"
 #import "SDZUserService.h"
+#import "MBProgressHUD.h"
 
 
 @implementation BIDTaskListController
@@ -65,8 +66,14 @@
     NSLog(@"----------%@-----------",mySession);
     
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
-    service.logging = YES;        
-    [service findAllCity:self action:@selector(findAllCityHandler:) sessionId:mySession];  
+    service.logging = YES;   
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"载入中...";
+    
+    [service findAllCity:self action:@selector(findAllCityHandler:) sessionId:mySession];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -86,6 +93,8 @@
 
 - (void)findAllCityHandler:(id)value
 {
+
+    
     if ([value isKindOfClass:[NSError class]]) {
         NSLog(@"Error: %@", value);
         return;
@@ -107,7 +116,9 @@
 	NSLog(@"11star11");
     [service findYuDingRoomByCondition:self action:@selector(findYuDingRoomByConditionHandle:) sessionId:mySession hotelId:nil hotelName:nil cityName:cityV hotelDengJi:nil minPrice:nil maxPrice:nil orderByCondition:orderParameter pageNo:1 perPageNum:7];
     
+    
     [self.listView reloadData];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     
 }
 

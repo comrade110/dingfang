@@ -8,6 +8,7 @@
 
 #import "HotelIntroViewController.h"
 #import "HotelIntroImageViewController.h"
+#import "MBProgressHUD.h"
 
 static NSUInteger kNumberOfPages = 3;
 
@@ -95,7 +96,9 @@ static NSUInteger kNumberOfPages = 3;
     mySession = [userDefaults objectForKey:@"userSessionKey"];
 
     NSString *myHotelIDString = [userDefaults objectForKey:@"hotelID"];
-    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"载入中...";
     SDZYuDingRoomService *service = [SDZYuDingRoomService service];
     service.logging = YES; 
     
@@ -135,6 +138,7 @@ static NSUInteger kNumberOfPages = 3;
     [scrollView setContentSize:CGSizeMake(320,1000)];
     
     
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     
 }
 

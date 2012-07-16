@@ -10,7 +10,7 @@
 
 @interface DDTableViewController : UITableViewController{
 
-    NSArray *ddArr;
+    NSMutableArray *ddArr;
 
 }
 @property (nonatomic, retain) NSArray *ddArr;;
