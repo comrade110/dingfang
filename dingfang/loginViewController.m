@@ -33,8 +33,11 @@
     [super viewDidLoad];
       
 	// Do any additional setup after loading the view.
-    userPhoneID.delegate =self;
-    
+    ruserPhoneID.delegate = self;
+    ruserID.delegate      = self;
+    ruserPW.delegate      = self;
+    ruserPWCheck.delegate = self;
+    mobileVerify.delegate = self;
     
 //    [userPhoneID becomeFirstResponder];
     [registerView removeFromSuperview];
@@ -75,13 +78,18 @@
 }
 - (void)hideKeyBoard:(id)sender
 {
-    [userPhoneID  resignFirstResponder];
-    [userPW  resignFirstResponder];
+    [userPhoneID resignFirstResponder];
+    [userPW resignFirstResponder];
     [ruserPhoneID  resignFirstResponder];
     [ruserID  resignFirstResponder];
     [ruserPW  resignFirstResponder];
     [ruserPWCheck  resignFirstResponder];
     [mobileVerify  resignFirstResponder];
+    [UIView beginAnimations:@"ani" context:nil];
+    [UIView setAnimationDuration:0.3];
+    self.registerView.frame = CGRectMake(0, 0,320,460);
+    [UIView commitAnimations];
+
 }
 
 
@@ -544,6 +552,26 @@
 //    [plistDict release];
 //}
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (ruserPWCheck == textField) {
+
+        [UIView beginAnimations:@"ani" context:nil];
+        [UIView setAnimationDuration:0.3];
+        self.registerView.frame = CGRectMake(0, -ruserPWCheck.frame.origin.y + 130,320,460);
+        [UIView commitAnimations];
+        
+    }
+    if (mobileVerify == textField) {
+        
+        [UIView beginAnimations:@"ani" context:nil];
+        [UIView setAnimationDuration:0.3];
+        self.registerView.frame = CGRectMake(0, -mobileVerify.frame.origin.y + 80,320,460);
+        [UIView commitAnimations];
+        
+    }
+    
+}
 
 
 

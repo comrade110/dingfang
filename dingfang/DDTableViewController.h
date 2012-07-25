@@ -13,6 +13,7 @@
     NSMutableArray *ddArr;
 
 }
-@property (nonatomic, retain) NSArray *ddArr;;
+@property (nonatomic, retain) NSArray *ddArr;
+
 
 @end

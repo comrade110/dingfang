@@ -9,6 +9,7 @@
 #import "DingDanViewController.h"
 #import "SDZUserService.h"
 #import "SDZYuDingRoomService.h"
+#import "iToast.h"
 
 
 
@@ -207,8 +208,18 @@
     NSUserDefaults *SaveDefaults = [NSUserDefaults standardUserDefaults];
     
     NSString *mySession = [SaveDefaults objectForKey:@"userSessionKey"];
+
+//   查找特定时间的订单信息    
+
+    if (indexPath.row == 0) {
+            [service findYuDingRoomLogInfo:self action:@selector(findYuDingRoomLogInfoHandler:) sessionId:mySession hotelId:nil cityName:nil startTime:firstDateTime endTime:nowTime pageNo:1 perPageNum:10];
+    }else if (indexPath.row == 1) {
+            [service findYuDingRoomLogInfo:self action:@selector(findYuDingRoomLogInfoHandler:) sessionId:mySession hotelId:nil cityName:nil startTime:secondDateTime endTime:nowTime pageNo:1 perPageNum:10];
+    }else if (indexPath.row == 2) {
+            [service findYuDingRoomLogInfo:self action:@selector(findYuDingRoomLogInfoHandler:) sessionId:mySession hotelId:nil cityName:nil startTime:@"19700101000000000" endTime:nowTime pageNo:1 perPageNum:10];
+    }
     
-    [service findYuDingRoomLogInfo:self action:@selector(findYuDingRoomLogInfoHandler:) sessionId:mySession hotelId:nil cityName:nil startTime:firstDateTime endTime:nowTime pageNo:1 perPageNum:10];
+
 
     
     
@@ -231,25 +242,35 @@
         return;
     }
     
-    itemArr = [NSMutableArray array];
+    NSLog(@"%@",result);
     
-    for (SDZOperLog *node in result) {
+    if (result == nil || [result count] == 0) {
+        
+        [[iToast makeText:@"没有记录"] show];
+        return;
+    
+    }else {
+        
+        NSLog(@"?????");
+        itemArr = [NSMutableArray array];
+        
+        for (SDZOperLog *node in result) {
             CXMLDocument *document = [[CXMLDocument alloc] initWithXMLString:[node serialize] options:0 error:nil];
+            
+            [self parseDire:document];
+            
+            [itemArr addObject:item];
+        }
         
-        [self parseDire:document];
+        NSUserDefaults *SaveDefaults = [NSUserDefaults standardUserDefaults];
         
-        [itemArr addObject:item];
+        [SaveDefaults setObject:itemArr forKey:@"itemArr"];
+        
+        NSLog(@"%@",itemArr);
+        
+        ddTableViewController = [[DDTableViewController alloc] init];
+        [self presentModalViewController:ddTableViewController animated:YES];
     }
-    
-    NSUserDefaults *SaveDefaults = [NSUserDefaults standardUserDefaults];
-    
-    [SaveDefaults setObject:itemArr forKey:@"itemArr"];
-    
-    NSLog(@"%@",itemArr);
-    
-    
-    ddTableViewController = [[DDTableViewController alloc] init];
-    [self presentModalViewController:ddTableViewController animated:YES];
 }
 //方式二:按节点查找
 - (void) parseDire:(CXMLDocument *) document

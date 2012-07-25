@@ -806,7 +806,6 @@
                 <relationship kind="action" name="colseView:"/>
                 <relationship kind="action" name="logoutAction:"/>
                 <relationship kind="outlet" name="navBar" candidateClass="UINavigationBar"/>
-                <relationship kind="outlet" name="navcontrol" candidateClass="UINavigationController"/>
             </relationships>
         </class>
         <class className="HotelIntroImageViewController" superclassName="UIViewController">
@@ -890,4 +889,8 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="0Nj-L8-DVT"/>
+        <segue reference="bsN-gW-FSq"/>
+    </inferredMetricsTieBreakers>
 </document>
